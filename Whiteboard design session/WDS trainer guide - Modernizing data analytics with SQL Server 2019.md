@@ -1,7 +1,7 @@
 ![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
-[Insert workshop name here]
+Modernizing data analytics with SQL Server 2019
 </div>
 
 <div class="MCWHeader2">
@@ -9,7 +9,7 @@ Whiteboard design session trainer guide
 </div>
 
 <div class="MCWHeader3">
-[Insert date here Month Year]
+June 2019
 </div>
 
 
@@ -19,7 +19,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2018 Microsoft Corporation. All rights reserved.
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -27,31 +27,31 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- TOC -->
 
-- [Trainer information](#trainer-information)
-    - [Role of the trainer](#role-of-the-trainer)
-    - [Whiteboard design session flow](#whiteboard-design-session-flow)
-    - [Before the whiteboard design session: How to prepare](#before-the-whiteboard-design-session-how-to-prepare)
-    - [During the whiteboard design session: Tips for an effective whiteboard design session](#during-the-whiteboard-design-session-tips-for-an-effective-whiteboard-design-session)
-- [\[insert workshop name here\] whiteboard design session student guide](#\insert-workshop-name-here\-whiteboard-design-session-student-guide)
-    - [Abstract and learning objectives](#abstract-and-learning-objectives)
-    - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
-        - [Customer situation](#customer-situation)
-        - [Customer needs](#customer-needs)
-        - [Customer objections](#customer-objections)
-        - [Infographic for common scenarios](#infographic-for-common-scenarios)
-    - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
-    - [Step 3: Present the solution](#step-3-present-the-solution)
-    - [Wrap-up](#wrap-up)
-    - [Additional references](#additional-references)
-- [\[insert workshop name here\] whiteboard design session trainer guide](#\insert-workshop-name-here\-whiteboard-design-session-trainer-guide)
-    - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study-1)
-    - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution-1)
-    - [Step 3: Present the solution](#step-3-present-the-solution-1)
-    - [Wrap-up](#wrap-up-1)
-    - [Preferred target audience](#preferred-target-audience)
-    - [Preferred solution](#preferred-solution)
-    - [Checklist of preferred objection handling](#checklist-of-preferred-objection-handling)
-    - [Customer quote (to be read back to the attendees at the end)](#customer-quote-to-be-read-back-to-the-attendees-at-the-end)
+- [Trainer information](#Trainer-information)
+  - [Role of the trainer](#Role-of-the-trainer)
+  - [Whiteboard design session flow](#Whiteboard-design-session-flow)
+  - [Before the whiteboard design session: How to prepare](#Before-the-whiteboard-design-session-How-to-prepare)
+  - [During the whiteboard design session: Tips for an effective whiteboard design session](#During-the-whiteboard-design-session-Tips-for-an-effective-whiteboard-design-session)
+- [Modernizing data analytics with SQL Server 2019 whiteboard design session student guide](#Modernizing-data-analytics-with-SQL-Server-2019-whiteboard-design-session-student-guide)
+  - [Abstract and learning objectives](#Abstract-and-learning-objectives)
+  - [Step 1: Review the customer case study](#Step-1-Review-the-customer-case-study)
+    - [Customer situation](#Customer-situation)
+    - [Customer needs](#Customer-needs)
+    - [Customer objections](#Customer-objections)
+    - [Infographic for common scenarios](#Infographic-for-common-scenarios)
+  - [Step 2: Design a proof of concept solution](#Step-2-Design-a-proof-of-concept-solution)
+  - [Step 3: Present the solution](#Step-3-Present-the-solution)
+  - [Wrap-up](#Wrap-up)
+  - [Additional references](#Additional-references)
+- [Modernizing data analytics with SQL Server 2019 whiteboard design session trainer guide](#Modernizing-data-analytics-with-SQL-Server-2019-whiteboard-design-session-trainer-guide)
+  - [Step 1: Review the customer case study](#Step-1-Review-the-customer-case-study-1)
+  - [Step 2: Design a proof of concept solution](#Step-2-Design-a-proof-of-concept-solution-1)
+  - [Step 3: Present the solution](#Step-3-Present-the-solution-1)
+  - [Wrap-up](#Wrap-up-1)
+  - [Preferred target audience](#Preferred-target-audience)
+  - [Preferred solution](#Preferred-solution)
+  - [Checklist of preferred objection handling](#Checklist-of-preferred-objection-handling)
+  - [Customer quote (to be read back to the attendees at the end)](#Customer-quote-to-be-read-back-to-the-attendees-at-the-end)
 
 <!-- /TOC -->
 
@@ -83,7 +83,7 @@ An amazing trainer:
 
 -   Effectively leads the feedback process.
 
-## Whiteboard design session flow 
+## Whiteboard design session flow
 
 Each whiteboard design session uses the following flow:
 
@@ -167,13 +167,13 @@ When participants are doing activities, you can **look ahead to refresh your mem
 
 **Wait for responses**. If you ask a question such as, "What's your experience with (fill in the blank)?" then wait. Do not be afraid of a little silence. If you leap into the silence, your participants will feel you are not serious about involving them and will become passive. Give participants a chance to think, and if no one answers, patiently ask again. You will usually get a response.
 
-#  \[insert workshop name here\] whiteboard design session student guide
+#  Modernizing data analytics with SQL Server 2019 whiteboard design session student guide
 
-## Abstract and learning objectives 
+## Abstract and learning objectives
 
 \[insert what is trying to be solved for by using this workshop. . . \]
 
-## Step 1: Review the customer case study 
+## Step 1: Review the customer case study
 
 **Outcome**
 
@@ -194,14 +194,14 @@ Directions:  With all participants in the session, the facilitator/SME presents 
 \[insert your custom workshop content here . . . \]
 
 
-### Customer needs 
+### Customer needs
 
 1.  \[insert your custom workshop content here . . . \]
 
 2.  
 
 
-### Customer objections 
+### Customer objections
 
 1.  \[insert your custom workshop content here . . . \]
 
@@ -278,7 +278,7 @@ Directions:
 
 7.  Tables switch roles and repeat Steps 2-6.
 
-##  Wrap-up 
+##  Wrap-up
 
 Timeframe: 15 minutes
 
@@ -286,15 +286,15 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 ##  Additional references
 
-|    |            |
-|----------|:-------------:|
+|                 |           |
+| --------------- | :-------: |
 | **Description** | **Links** |
-|   |   |
-|   |   |
-|   |   |
-|   |   |
+|                 |           |
+|                 |           |
+|                 |           |
+|                 |           |
 
-# \[insert workshop name here\] whiteboard design session trainer guide
+# Modernizing data analytics with SQL Server 2019 whiteboard design session trainer guide
 
 ## Step 1: Review the customer case study
 

@@ -1,7 +1,7 @@
 ![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
-[Insert workshop name here]
+Modernizing data analytics with SQL Server 2019
 </div>
 
 <div class="MCWHeader2">
@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-[Insert date here Month Year]
+June 2019
 </div>
 
 
@@ -19,7 +19,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2018 Microsoft Corporation. All rights reserved.
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -27,28 +27,28 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- TOC -->
 
-- [\[insert workshop name here\] hands-on lab step-by-step](#\insert-workshop-name-here\-hands-on-lab-step-by-step)
-    - [Abstract and learning objectives](#abstract-and-learning-objectives)
-    - [Overview](#overview)
-    - [Solution architecture](#solution-architecture)
-    - [Requirements](#requirements)
-    - [Before the hands-on lab](#before-the-hands-on-lab)
-    - [Exercise 1: Exercise name](#exercise-1-exercise-name)
-        - [Task 1: Task name](#task-1-task-name)
-        - [Task 2: Task name](#task-2-task-name)
-    - [Exercise 2: Exercise name](#exercise-2-exercise-name)
-        - [Task 1: Task name](#task-1-task-name-1)
-        - [Task 2: Task name](#task-2-task-name-1)
-    - [Exercise 3: Exercise name](#exercise-3-exercise-name)
-        - [Task 1: Task name](#task-1-task-name-2)
-        - [Task 2: Task name](#task-2-task-name-2)
-    - [After the hands-on lab](#after-the-hands-on-lab)
-        - [Task 1: Task name](#task-1-task-name-3)
-        - [Task 2: Task name](#task-2-task-name-3)
+- [Modernizing data analytics with SQL Server 2019 hands-on lab step-by-step](#Modernizing-data-analytics-with-SQL-Server-2019-hands-on-lab-step-by-step)
+  - [Abstract and learning objectives](#Abstract-and-learning-objectives)
+  - [Overview](#Overview)
+  - [Solution architecture](#Solution-architecture)
+  - [Requirements](#Requirements)
+  - [Before the hands-on lab](#Before-the-hands-on-lab)
+  - [Exercise 1: Exercise name](#Exercise-1-Exercise-name)
+    - [Task 1: Task name](#Task-1-Task-name)
+    - [Task 2: Task name](#Task-2-Task-name)
+  - [Exercise 2: Exercise name](#Exercise-2-Exercise-name)
+    - [Task 1: Task name](#Task-1-Task-name-1)
+    - [Task 2: Task name](#Task-2-Task-name-1)
+  - [Exercise 3: Exercise name](#Exercise-3-Exercise-name)
+    - [Task 1: Task name](#Task-1-Task-name-2)
+    - [Task 2: Task name](#Task-2-Task-name-2)
+  - [After the hands-on lab](#After-the-hands-on-lab)
+    - [Task 1: Task name](#Task-1-Task-name-3)
+    - [Task 2: Task name](#Task-2-Task-name-3)
 
 <!-- /TOC -->
 
-# \[insert workshop name here\] hands-on lab step-by-step 
+# Modernizing data analytics with SQL Server 2019 hands-on lab step-by-step 
 
 ## Abstract and learning objectives 
 
