@@ -48,9 +48,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- /TOC -->
 
-# Modernizing data analytics with SQL Server 2019 hands-on lab step-by-step 
+# Modernizing data analytics with SQL Server 2019 hands-on lab step-by-step
 
-## Abstract and learning objectives 
+## Abstract and learning objectives
 
 \[Insert what is trying to be solved for by using this workshop. . . \]
 
