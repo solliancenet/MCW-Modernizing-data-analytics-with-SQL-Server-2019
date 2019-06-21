@@ -219,12 +219,6 @@ There are two scenarios WWI is considering using AI to help grow their business 
 
 2. Reduce maintenance costs, waste, and maximize fleet availability by predicting battery lifespans. Wide World Importers relies on refrigerated trucks to deliver temperature-sensitive products. A dead or malfunctioning battery could cause the cooling systems to fail, requiring regular battery testing and replacements. WWI would like to use transmitted sensor data from these trucks to predict when a battery will most likely fail to reduce downtime and cut waste resulting from fixed battery replacement schedules.
 
-Workshop objectives:
-
-1. Have students consider options for accessing data that comes from multiple locations. Should they virtualize the data by pushing down the query to the source system (no data ingestion), ingest data into SQL tables via PolyBase, etc., or load data into HDFS? Should they do a combination of these things depending on requirements and constraints? What are the decision points?
-2. Should we plan on installing all BDC components in Azure, or have some combination of components on-premises and in Azure?
-3. Highlight query processing enhancements where possible.
-
 ### Customer needs
 
 1. Need distributed storage available to all nodes of the container: The storage can disappear when the Container is removed, and other Containers and technologies can't access storage easily within a Container.
@@ -255,6 +249,7 @@ Workshop objectives:
 
 ### Infographic for common scenarios
 
+SQL Server big data clusters architecture
 ![SQL Server big data clusters architecture diagram](media/common-scenario-1.png)
 
 ## Step 2: Design a proof of concept solution
