@@ -47,7 +47,6 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Exercise 3: Machine learning](#Exercise-3-Machine-learning)
     - [Task 1: Train a machine learning model](#Task-1-Train-a-machine-learning-model)
     - [Task 2: Score and save data as an external table](#Task-2-Score-and-save-data-as-an-external-table)
-  - [Task 3: Mounting an Azure Data Lake Gen2 Storage Account to SQL Server 2019 Big Data Cluster using HDFS Tiering](#Task-3-Mounting-an-Azure-Data-Lake-Gen2-Storage-Account-to-SQL-Server-2019-Big-Data-Cluster-using-HDFS-Tiering)
   - [Exercise 4: Identify PII and GDPR-related compliance issues using Data Discovery & Classification in SSMS](#Exercise-4-Identify-PII-and-GDPR-related-compliance-issues-using-Data-Discovery--Classification-in-SSMS)
     - [Task 1: Use the Data Discovery & Classification in SSMS](#Task-1-Use-the-Data-Discovery--Classification-in-SSMS)
     - [Task 2: Fix compliance issues with dynamic data masking](#Task-2-Fix-compliance-issues-with-dynamic-data-masking)
@@ -338,8 +337,6 @@ In this task, you will learn how to run standard SQL Server Queries against the 
 
 2. In the folder browser dialog, navigate to the `C:\MCW-Modernizing-data-analytics-with-SQL-Server-2019-master\Hands-on lab\Resources` folder and select **notebook_01.ipynb**.
 
-   ![The Open File dialog is displayed.](media/ads-open-notebook0.png 'Open File')
-
 3. When the notebook opens, you need to select the **Kernel** you would like to use to run the notebook. Locate the **Kernel** dropdown in the toolbar above the notebook, then select **SQL**.
 
 4. Follow the instructions within the notebook.
@@ -355,8 +352,6 @@ Earlier in this lab, you virtualized data using the UI components within Azure D
 1. In Azure Data Studio, click **File**, then **Open File...**.
 
 2. In the folder browser dialog, navigate to the `C:\MCW-Modernizing-data-analytics-with-SQL-Server-2019-master\Hands-on lab\Resources` folder and select **notebook_02.ipynb**.
-
-   ![The Open File dialog is displayed.](media/ads-open-notebook0.png 'Open File')
 
 3. When the notebook opens, you need to select the **Kernel** you would like to use to run the notebook. Locate the **Kernel** dropdown in the toolbar above the notebook, then select **SQL**.
 
@@ -376,8 +371,6 @@ In this Jupyter Notebook you'll create a location to store the log files as a SQ
 
 2. In the folder browser dialog, navigate to the `C:\MCW-Modernizing-data-analytics-with-SQL-Server-2019-master\Hands-on lab\Resources` folder and select **notebook_03.ipynb**.
 
-   ![The Open File dialog is displayed.](media/ads-open-notebook0.png 'Open File')
-
 3. When the notebook opens, you need to select the **Kernel** you would like to use to run the notebook. Locate the **Kernel** dropdown in the toolbar above the notebook, then select **SQL**.
 
 4. Follow the instructions within the notebook.
@@ -394,8 +387,6 @@ Many times Spark is used to do transformations on data at large scale. In this J
 
 2. In the folder browser dialog, navigate to the `C:\MCW-Modernizing-data-analytics-with-SQL-Server-2019-master\Hands-on lab\Resources` folder and select **notebook_04.ipynb**.
 
-   ![The Open File dialog is displayed.](media/ads-open-notebook0.png 'Open File')
-
 3. When the notebook opens, you need to select the **Kernel** you would like to use to run the notebook. Locate the **Kernel** dropdown in the toolbar above the notebook, then select **PySpark3**.
 
 4. Follow the instructions within the notebook.
@@ -404,175 +395,59 @@ Many times Spark is used to do transformations on data at large scale. In this J
 
 In this exercise, you will use Azure Data Studio to execute a notebook that will enable you to train a model to predict the battery lifetime, apply the model to make batch predictions against a set of vehicle telemetry and save the scored telemetry to an external table that you can query using SQL.
 
-<!-- ## Task 2: Train a machine learning model, score and save data as external table -->
+Wide World Importers has refrigerated trucks to deliver temperature-sensitive products. These are high-profit, and high-expense items. In the past, there have been failures in the cooling systems, and the primary culprit has been the deep-cycle batteries used in the system.
+
+WWI began replacing the batters every three months as a preventative measure, but this has a high cost. Recently, the taxes on recycling batteries has increased dramatically. The CEO has asked the Data Science team if they can investigate creating a Predictive Maintenance system to more accurately tell the maintenance staff how long a battery will last, rather than relying on a flat 3 month cycle.
+
+The trucks have sensors that transmit data to a file location. The trips are also logged. In this Jupyter Notebook, you'll create, train and store a Machine Learning model using SciKit-Learn, so that it can be deployed to multiple hosts.
 
 ### Task 1: Train a machine learning model
 
-1. Open Azure Data Studio and select Servers.
+1. In Azure Data Studio, click **File**, then **Open File...**.
 
-2. Right click your Big Data Cluster node select `Manage`.
+2. In the folder browser dialog, navigate to the `C:\MCW-Modernizing-data-analytics-with-SQL-Server-2019-master\Hands-on lab\Resources` folder and select **predict-battery-life-with-sqlbdc.ipynb**.
 
-   ![Manage cluster](media/task02-manage-cluster.png 'Manage cluster')
+3. Browse to **C:\lab-files\data\1**, select **predict-battery-life-with-sqlbdc.ipynb** and select `Open`.
 
-3. In the window, select the `SQL Big Data Cluster` tab and then select the `Open Notebook` tile.
-
-   ![Open notebook](media/task02-sql-bdc-manage.png 'Open notebook')
-
-4. Browse to **C:\lab-files\data\1**, select **predict-battery-life-with-sqlbdc.ipynb** and select `Open`.
-
-5. Follow the instructions in the notebook and return to the next step after you have completed the notebook.
+4. Follow the instructions in the notebook and return to the next step after you have completed the notebook.
 
    > There may be a kernel error pertaining to there not being a valid SQL connection when you open the notebook. If this happens, close the notebook and Azure Data Studio, then re-launch, reconnect, then re-open the notebook.
 
 ### Task 2: Score and save data as an external table
 
-1.  In Azure Data Studio, under Servers, expand your Big Data Cluster, `Data Services`, `HDFS`, `data`.
+1.  In Azure Data Studio, under Servers, expand your connected cluster, `Data Services`, `HDFS`, `data`.
 
 2.  Right click the `data` folder and select `Refresh` to see the newly created folder.
 
-    ![Refresh data](media/task02-refresh-data.png 'Refresh data')
+    ![Refresh data](media/ads-refresh-data.png 'Refresh data')
 
 3.  You should see `battery-life.csv` as a folder, expand it and then right click on the CSV file whose name starts with `part-00000-` and select `Create External Table From CSV Files`.
 
-    ![Create External Table](media/task02-create-external-menu.png 'Create External Table')
+    ![Create External Table](media/ads-battery-create-external-menu.png 'Create External Table')
 
-4.  In Step 1 of the wizard, select your Active SQL Server connection to connect to your Big Data Cluster endpoint and select `Next`.
+4.  In Step 1 of the wizard, select the `sales` database and for the `Name for new external table` field provide **battery-life-predictions**. Click **Next**.
 
-    ![Select endpoint](media/task02-ext-step1.png 'Select endpoint')
+    ![Step 1 of the wizard is displayed.](media/ads-predictions-csv-wizard-step1.png 'Step 1')
 
-5.  In Step 2, select the `sales` database and for the `Name for new external table` field provide `battery-life-predictions`. Select Next.
+5.  On Step 2, Preview Data, click **Next**.
 
-    ![Step 2](media/task02-ext-step2.png 'Step 2')
+6.  On Step 3, for the column `Car_Has_EcoStart` set the Data Type to **char(10)**. Click **Next**.
 
-6.  On Step 3, select `Next`.
+    ![Step 3 of the wizard is displayed.](media/ads-predictions-csv-wizard-step3.png 'Step 3')
 
-7.  On Step 4, for the column `Car_Has_EcoStart` set the Data Type to `char(10)`. Select `Next`.
+7.  On Step, click **Create Table**. Your predictions are now available for SQL querying in the battery-life-predictions table in the sales database.
 
-    ![Step 4](media/task02-ext-step4.png 'Step 4')
+8.  In Azure Data Studio, Servers, expand your Big Data Cluster, `Databases`, `sales_YOUR-UNIQUE-IDENTIFIER`, right click `Tables` and then select `Refresh`.
 
-8.  On Step 5, select `Create Table`. Your predictions are now available for SQL querying in the battery-life-predictions table in the sales database.
+    ![Refresh the sales database tables.](media/ads-refresh-sales.png 'Refresh sales')
 
-9.  In Azure Data Studio, Servers, expand your Big Data Cluster, `Databases`, `sales_YOUR-UNIQUE-IDENTIFIER`, right click `Tables` and then select `Refresh`.
+9.  Expand `tables`, right-click `battery-life-prediction` and select **Select Top 1000** to view the data contained by the external table.
 
-    ![Refresh sales](media/task02-refresh-sales.png 'Refresh sales')
+    ![Select Top 1000 records.](media/ads-predictions-select-top.png 'Select Top 1000')
 
-10. Expand `tables`, right click `battery-life-prediction` and select `query` to view the data contained by the external table.
-
-    ![Select Top 1000](media/task02-select-top.png 'Select Top 1000')
-
-11. The vehicle telemetry along with predictions will appear. These are queried from the external table which is sourced from the CSV you created using the notebook.
+10. The vehicle telemetry along with predictions will appear. These are queried from the external table which is sourced from the CSV you created using the notebook.
 
     ![View data](media/task02-view-data.png 'View data')
-
-## Task 3: Mounting an Azure Data Lake Gen2 Storage Account to SQL Server 2019 Big Data Cluster using HDFS Tiering
-
-With tiering, applications can seamlessly access data in a variety of external stores as though the data resides in the local HDFS. This allows you to interact with the files in Azure Data Lake Store Gen2 as if they were local files. You can either use an Azure Storage access key or an Azure Active Directory User Account to gain permission to the files. For this lab, we will use the access key.
-
-1. In Windows, open PowerShell.
-
-![Search for PowerShell .](media/powershell.png 'SQL Server Management Studio - Connect')
-
-2. In PowerShell, install the mssqlstl package using pip:
-
-   ```powershell
-     pip3 install -r  https://private-repo.microsoft.com/python/ctp3.0/mssqlctl/requirements.txt
-   ```
-
-3. Once mssqlctl installs, connect to your Microsoft SQL Server 2019 Big Data Cluster:
-
-   ```python
-     mssqlctl login -e https://<SQL SERVER Controller IP ADDRESS>:30080
-   ```
-
-   a. You will be prompted for your big data cluster name.
-   b. The user name is admin
-   c. The password is MySQLBigData2019
-
-4. Create an empty text file named filename.creds in your temp folder on the c:\ drive. Add this line as the contents:
-
-fs.azure.abfs.account.name=ikedatabricks.dfs.core.windows.net
-fs.azure.account.key.ikedatabricks.dfs.core.windows.net=HUYPk/VUjdYzkCvrKXTgFBObt5VQcp5DCY7C9KiSHX42lv65mjmBFmKFVTLy7Z7suQ0WV44mncuUOvnE8NkxGg==
-
-5. In PowerShell, type the following command to mount the drive
-
-   ```powershell
-       mssqlctl cluster storage-pool mount create --remote-uri abfs://databricksfiles@ikedatabricks.dfs.core.windows.net/ --mount-path   /mounts/dbfiles --credential-file c:\temp\filename.creds
-   ```
-
-6. Once the storage account has been mounted, you can check the status:
-
-```powershell
-  mssqlctl cluster storage-pool mount status
-```
-
-7. Now you can use Azure Data Studio and view the files from ADLS Gen2 under your HDFS folder in your Servers pane. Look under /HDFS/mounts/dbfiles/
-
-   ![Azure Data Studio server pane for new dbfiles folder](media/data-studio-mounts.png)
-
-8. Now that the drive is mounted, create an external file format for CSV. Open a new query window and paste the following command:
-
-```sql
-  USE Sales;
-  GO
-  CREATE EXTERNAL FILE FORMAT csv_file
-  WITH (
-      FORMAT_TYPE = DELIMITEDTEXT,
-      FORMAT_OPTIONS(
-          FIELD_TERMINATOR = ',',
-          STRING_DELIMITER = '"',
-          FIRST_ROW = 2,
-          USE_TYPE_DEFAULT = TRUE)
-  );
-```
-
-9. Now create an external connection to your HDFS cluster:
-
-```sql
-  IF NOT EXISTS(SELECT * FROM sys.external_data_sources WHERE name = 'SqlStoragePool')
-  BEGIN
-    CREATE EXTERNAL DATA SOURCE SqlStoragePool
-    WITH (LOCATION = 'sqlhdfs://controller-svc:8080/default');
-  END
-```
-
-10. Now let's create two tables to two different files that exist in the storage account:
-
-```sql
-CREATE EXTERNAL TABLE planes
-("tailnum" VARCHAR(100),	"year" VARCHAR(4),	"type" VARCHAR(100)
-,	"manufacturer" VARCHAR(100),	"model" VARCHAR(20),	"engines" BIGINT
-,	"seats" BIGINT,	"speed" VARCHAR(20)
-,	"engine" VARCHAR(20))
-WITH
-(
-    DATA_SOURCE = SqlStoragePool,
-    LOCATION = '/mounts/dbfiles/planes.csv',
-    FILE_FORMAT = csv_file
-);
-GO
-
- CREATE EXTERNAL TABLE flights
-("year" BIGINT, 	"month" BIGINT, 	"day" BIGINT,	"dep_time" BIGINT
-    ,	"dep_delay" BIGINT,	"arr_time" BIGINT,	"arr_delay" BIGINT,	"carrier" VARCHAR(100)
-    ,	"tailnum" VARCHAR(20),	"flight" VARCHAR(20),	"origin" VARCHAR(50)
-    ,	"dest" VARCHAR(50),	"air_time" BIGINT,	"distance" BIGINT,
-    	"hour" BIGINT,	"minute" BIGINT)
-WITH
-(
-    DATA_SOURCE = SqlStoragePool,
-    LOCATION = '/mounts/dbfiles/flights_small.csv',
-    FILE_FORMAT = csv_file
-);
-```
-
-11. Once the tables are created, you can interact with them like normal tables. For instance, you can run a query that joins the two tables like this:
-
-```sql
-SELECT *
-  FROM planes p
-  JOIN flights f
-   on p.tailnum = f.tailnum
-```
 
 ## Exercise 4: Identify PII and GDPR-related compliance issues using Data Discovery & Classification in SSMS
 
