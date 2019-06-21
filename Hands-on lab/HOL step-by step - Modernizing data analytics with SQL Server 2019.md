@@ -326,7 +326,9 @@ Notebooks are made up of one or more of cells that allow for the execution of th
 
    ![The installation status is displayed.](media/ads-configure-python-for-notebooks-running.png 'Tasks')
 
-5. After the Python components are installed, make sure that **Python 3** is your selected **Kernel**, then follow the instructions within the notebook.
+5. After the Python components are installed, make sure that **Python 3** is your selected **Kernel**, then follow the instructions within the notebook. You can execute each code cell by selecting it and pressing **F5** on your keyboard, or by clicking the Run icon to the left of the cell.
+
+   ![The Run icon is highlighted.](media/ads-notebook-run.png 'Notebook cell')
 
 ### Task 2: Querying the SQL Server Master Instance (MI)
 
