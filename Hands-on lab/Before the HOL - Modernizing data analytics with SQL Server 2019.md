@@ -263,7 +263,13 @@ Open PowerShell and execute the following to deploy the clusters in preparation 
    curl -o bootstrap-sample-db.sql "https://raw.githubusercontent.com/Microsoft/sql-server-samples/master/samples/features/sql-big-data-cluster/bootstrap-sample-db.sql"
    ```
 
-4. Run the bootstrap script. Substitute `<CLUSTER_NAMESPACE>`, `<SQL_MASTER_IP>`, `<SQL_MASTER_SA_PASSWORD>`, `<KNOX_IP>`, `<KNOX_PASSWORD>` with values output from the SQL Server 2019 cluster creation script above.
+4. Download the **upload-sample-files.cmd** command script for uploading additional lab files to HDFS on your cluster.
+
+   ```bash
+   curl -o upload-sample-files.cmd "https://github.com/solliancenet/MCW-Modernizing-data-analytics-with-SQL-Server-2019/raw/master/Hands-on%20lab/Resources/upload-sample-files.cmd"
+   ```
+
+5. Run the bootstrap script. Substitute `<CLUSTER_NAMESPACE>`, `<SQL_MASTER_IP>`, `<SQL_MASTER_SA_PASSWORD>`, `<KNOX_IP>`, `<KNOX_PASSWORD>` with values output from the SQL Server 2019 cluster creation script above.
 
    ```bash
    .\bootstrap-sample-db.cmd <CLUSTER_NAMESPACE> <SQL_MASTER_IP> <SQL_MASTER_SA_PASSWORD> <KNOX_IP> <KNOX_PASSWORD> --install-extra-samples
@@ -279,6 +285,17 @@ Open PowerShell and execute the following to deploy the clusters in preparation 
    | --install-extra-samples  | Uploads database backup files for AdventureWorks and Wide World Importers  |
 
    > Use kubectl to find the IP addresses for the SQL Server master instance and Knox. Run `kubectl get svc -n <your-big-data-cluster-name>` and look at the EXTERNAL-IP addresses for the master instance (**master-svc-external**) and Knox (**gateway-svc-external**).
+
+6. Run the file upload script. Substitute `<KNOX_IP>`, `<KNOX_PASSWORD>` with values output from the SQL Server 2019 cluster creation script above.
+
+   ```bash
+   .\upload-sample-files.cmd <KNOX_IP> <KNOX_PASSWORD>
+   ```
+
+   | Parameter       | Description                               |
+   | --------------- | ----------------------------------------- |
+   | <KNOX_IP>       | The IP address of the HDFS/Spark Gateway. |
+   | <KNOX_PASSWORD> | The same as your SA password.             |
 
 ### Task 5: Create sample Azure SQL Database
 
