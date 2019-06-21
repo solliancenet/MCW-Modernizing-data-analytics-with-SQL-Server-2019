@@ -167,7 +167,7 @@ When participants are doing activities, you can **look ahead to refresh your mem
 
 **Wait for responses**. If you ask a question such as, "What's your experience with (fill in the blank)?" then wait. Do not be afraid of a little silence. If you leap into the silence, your participants will feel you are not serious about involving them and will become passive. Give participants a chance to think, and if no one answers, patiently ask again. You will usually get a response.
 
-#  Modernizing data analytics with SQL Server 2019 whiteboard design session student guide
+# Modernizing data analytics with SQL Server 2019 whiteboard design session student guide
 
 ## Abstract and learning objectives
 
@@ -191,26 +191,66 @@ Directions:  With all participants in the session, the facilitator/SME presents 
 
 ### Customer situation
 
-\[insert your custom workshop content here . . . \]
+Wide World Importers (WWI) is a traditional brick and mortar business with a long track record of success, generating profits through strong retail store sales of their unique offering of affordable products from around the world. They have a great training program for new employees, that focuses on connecting with their customers and providing great face-to-face customer service. This strong focus on customer relationships has helped set WWI apart from their competitors.
 
+WWI's evolution of services over the years has helped them expand their reach beyond the walls of their retail stores into the web and mobile space. With this expansion, they have generated a significant amount of additional data, and data formats. These new platforms were added without integrating into the OLTP system data or Business Intelligence infrastructures. As a result, "silos" of data stores have developed.
+
+Due to their continued growth, lending to expansion into the digital space, WWI is prepared to innovate by taking advantage of their omni-channel strategy and increased variety and amount of valuable data. They believe they can foster innovation by building upon their track record of strong customer connections, and engage with their customers through personalized, high-quality application experiences that incorporate data and intelligence.
+
+However, as a first step, WWI's technology team has recognized they must address the fact that they have quickly outgrown their ability to handle data. They anticipate the following solutions needed to reach more customers and grow the business:
+
+- Scale data systems to reach more consumers
+- Unlock business insights from multiple sources of structured and unstructured data
+- Apply deep analytics with high-performance responses
+- Infuse AI into apps to actively engage with customers
+
+Prior to expanding to their current omni-channel strategy, WWI had a simple Point of Sale (POS) application that handled customer orders at each retail store. The back-end was a series of service layers used to process orders and store them in a SQL database. They had designed their systems and tuned them to handle this level of data.
+
+As they added new e-commerce channels to expand the customer base, consumer demand also increased. This increased demand from more customers ordering products through more channels generated more data. Now WWI has new challenges to address:
+
+- Increased consumer demand, leading to increased app data
+- They are unable to determine business trends because of siloed insights
+- They have a rising data management footprint, increasing cost and complexity
+- New development challenges resulting from more deployment targets and duplicated code
+
+There are two scenarios WWI is considering using AI to help grow their business and reduce costs:
+
+1. Sales forecasting. Based on current and historical retail data, could they predict whether retail sales will be on track this month? Being able to meet sales targets while accurately forecasting sales revenue are critical success enablers by helping drive marketing campaigns and scale logistics and staffing accordingly.
+
+2. Reduce maintenance costs, waste, and maximize fleet availability by predicting battery lifespans. Wide World Importers relies on refrigerated trucks to deliver temperature-sensitive products. A dead or malfunctioning battery could cause the cooling systems to fail, requiring regular battery testing and replacements. WWI would like to use transmitted sensor data from these trucks to predict when a battery will most likely fail to reduce downtime and cut waste resulting from fixed battery replacement schedules.
 
 ### Customer needs
 
-1.  \[insert your custom workshop content here . . . \]
+1. Need distributed storage available to all nodes of the container: The storage can disappear when the Container is removed, and other Containers and technologies can't access storage easily within a Container.
 
-2.  
+2. Require a data lake to easily store and access disparate data.
 
+3. Simplified programming surface to prepare data and do data science.
+
+4. Scale data systems to reach more consumers.
+
+5. Unlock business insights from multiple sources of structured and unstructured data.
+
+6. Apply deep analytics with high-performance responses.
+
+7. Enable AI into apps to actively engage with customers.
+
+8. Identify PII and GDPR-related compliance issues for audit reports and take steps to fix these issues.
 
 ### Customer objections
 
-1.  \[insert your custom workshop content here . . . \]
+1. How do we centrally manage and monitor the cluster once deployed?
 
-2.  
+2. Do our workloads require us to use a data warehouse, or will a data mart suffice?
 
+3. Will moving to container-based SQL clusters be complex and too high of an operational and management cost for our IT team?
+
+4. How can SQL Server 2019 help us protect PII data and remain GDPR compliant?
 
 ### Infographic for common scenarios
 
-\[insert your custom workshop content here . . . \]
+SQL Server big data clusters architecture
+![SQL Server big data clusters architecture diagram](media/common-scenario-1.png)
 
 ## Step 2: Design a proof of concept solution
 
@@ -232,23 +272,27 @@ Directions: With all participants at your table, answer the following questions 
 
 Directions: With all participants at your table, respond to the following questions on a flip chart:
 
-*Title*
+*High-level architecture*
 
-1.  Number and insert questions here
+1. Diagram your initial vision for the architecture of the solution.
 
-*Title*
+*Modern data warehouse*
 
-1.  Number and insert questions here
+1. What services and technologies should be used for the big data warehouse?
+
+*Deep analytics and AI*
+
+1.  What would be used to solve the AI requirements?
 
 **Prepare**
 
 Directions: With all participants at your table:
 
-1.  Identify any customer needs that are not addressed with the proposed solution.
+1. Identify any customer needs that are not addressed with the proposed solution.
 
-2.  Identify the benefits of your solution.
+2. Identify the benefits of your solution.
 
-3.  Determine how you will respond to the customer's objections.
+3. Determine how you will respond to the customer's objections.
 
 Prepare a 15-minute chalk-talk style presentation to the customer.
 
@@ -264,79 +308,81 @@ Timeframe: 30 minutes
 
 Directions:
 
-1.  Pair with another table.
+1. Pair with another table.
 
-2.  One table is the Microsoft team and the other table is the customer.
+2. One table is the Microsoft team and the other table is the customer.
 
-3.  The Microsoft team presents their proposed solution to the customer.
+3. The Microsoft team presents their proposed solution to the customer.
 
-4.  The customer makes one of the objections from the list of objections.
+4. The customer makes one of the objections from the list of objections.
 
-5.  The Microsoft team responds to the objection.
+5. The Microsoft team responds to the objection.
 
-6.  The customer team gives feedback to the Microsoft team.
+6. The customer team gives feedback to the Microsoft team.
 
-7.  Tables switch roles and repeat Steps 2-6.
+7. Tables switch roles and repeat Steps 2-6.
 
-##  Wrap-up
+## Wrap-up
 
 Timeframe: 15 minutes
 
 Directions: Tables reconvene with the larger group to hear the facilitator/SME share the preferred solution for the case study.
 
-##  Additional references
+## Additional references
 
 |                 |           |
 | --------------- | :-------: |
 | **Description** | **Links** |
-|                 |           |
-|                 |           |
-|                 |           |
-|                 |           |
+| What are SQL Server big data clusters? | <https://docs.microsoft.com/en-us/sql/big-data-cluster/big-data-cluster-overview?view=sqlallproducts-allversions> |
+| How to use notebooks in SQL Server 2019 | <https://docs.microsoft.com/en-us/sql/big-data-cluster/notebooks-guidance?view=sql-server-ver15> |
+| Dynamic Data Masking | <https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking> |
+| Row-Level Security | <https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security> |
+| Always Encrypted with Secure Enclaves | <https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/always-encrypted-enclaves?view=sqlallproducts-allversions> |
+| SQL Data Discovery and Classification | <https://docs.microsoft.com/en-us/sql/relational-databases/security/sql-data-discovery-and-classification?view=sql-server-ver15> |
 
 # Modernizing data analytics with SQL Server 2019 whiteboard design session trainer guide
 
 ## Step 1: Review the customer case study
 
--   Check in with your table participants to introduce yourself as the trainer.
+- Check in with your table participants to introduce yourself as the trainer.
 
--   Ask, "What questions do you have about the customer case study?"
+- Ask, "What questions do you have about the customer case study?"
 
--   Briefly review the steps and timeframes of the whiteboard design session.
+- Briefly review the steps and timeframes of the whiteboard design session.
 
--   Ready, set, go! Let the table participants begin.
+- Ready, set, go! Let the table participants begin.
 
 ## Step 2: Design a proof of concept solution
 
--   Check in with your tables to ensure that they are transitioning from step to step on time.
+- Check in with your tables to ensure that they are transitioning from step to step on time.
 
--   Provide some feedback on their responses to the business needs and design.
+- Provide some feedback on their responses to the business needs and design.
 
-    -   Try asking questions first that will lead the participants to discover the answers on their own.
+    - Try asking questions first that will lead the participants to discover the answers on their own.
 
--   Provide feedback for their responses to the customer's objections.
+- Provide feedback for their responses to the customer's objections.
 
-    -   Try asking questions first that will lead the participants to discover the answers on their own.
+    - Try asking questions first that will lead the participants to discover the answers on their own.
 
 ## Step 3: Present the solution
 
--   Determine which table will be paired with your table before Step 3 begins.
+- Determine which table will be paired with your table before Step 3 begins.
 
--   For the first round, assign one table as the presenting team and the other table as the customer.
+- For the first round, assign one table as the presenting team and the other table as the customer.
 
--   Have the presenting team present their solution to the customer team.
+- Have the presenting team present their solution to the customer team.
 
-    -   Have the customer team provide one objection for the presenting team to respond to.
+    - Have the customer team provide one objection for the presenting team to respond to.
 
-    -   The presentation, objections, and feedback should take no longer than 15 minutes.
+    - The presentation, objections, and feedback should take no longer than 15 minutes.
 
-    -   If needed, the trainer may also provide feedback.
+    - If needed, the trainer may also provide feedback.
 
 ## Wrap-up
 
 -   Have the table participants reconvene with the larger session group to hear the facilitator/SME share the following preferred solution.
 
-##  Preferred target audience
+## Preferred target audience
 
 \[insert your custom workshop content here . . . \]
 
@@ -344,18 +390,69 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 \[insert your custom workshop content here . . . \]
 
-*Title*
+*High-level architecture*
 
-1.  Number and insert questions and answers here
+1. Diagram your initial vision for the architecture of the solution.
 
-*Title*
+    \[insert preferred solution diagram here . . . \]
 
-1.  Number and insert questions and answers here
+*Modern data warehouse*
+
+1. What services and technologies should be used for the big data warehouse?
+
+    **SQL Server 2019 Big Data Clusters**
+
+    SQL Server Big Data Clusters enable the deployment of scalable clusters of SQL Server, Spark, and HDFS containers running on Kubernetes. These components run side-by-side to enable you to read, write, and process big data from Transact-SQL or Spark. This allows you to easily combine and analyze high-value relational data with high-volume big data.
+
+    **SQL Server 2019 Data Virtualization**
+
+    One of the key new features of SQL Server 2019 is data virtualization. What this means is that you can virtualize external data in a SQL Server instance, regardless of source, location, and format, so that it can be queried like any other table, or sets of tables, within your SQL Server instance. In essence, data virtualization helps you create a single "virtual" layer of data from these disparate sources, providing unified data services to support multiple applications and users. A more familiar term we could use is data lake, or perhaps data hub. Unlike a typical data lake, however, you do not have to move data out from where it lives, yet you can still query that data through a consistent interface. This is a huge advantage over traditional ETL (extract-transform-load) processes where data must be moved from its original source to a new destination, oftentimes with some data transformation or mapping. This causes delays, extra storage, additional security, and a fair amount of engineering in most cases. With data virtualization, no data movement is required, which means the data sets are up-to-date, and it is possible to query and join these different data sources through these new capabilities, thanks to the use of new [PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide?view=sql-server-ver15) connectors. The data sources you can connect to include Cosmos DB, SQL Server (including Azure SQL Database), Oracle, HDFS (for flat files), and DB2.
+
+    ![ETL vs. Data Virtualization](../Hands-on%20lab/media/data-virtualization-vs-etl.png)
+
+    The image to the left represents traditional data movement using ETL. Compare that to data virtualization, which does not require data movement and provides a unified layer over top of existing data sources.
+
+    **SQL Server 2019 Data Lake**
+
+    SQL Server 2019 Big Data Clusters include a scalable HDFS storage pool. This pool can be used to store big data, potentially ingested from multiple external sources. This data can be either structured or unstructured data. once the big data is stored in HDFS in the big data cluster, you can analyze and query the data and combine it with your relational data.
+
+    ![Diagram of SQL Server 2019 Data Lake](media/sql-server-2019-data-lake.png)
+
+*Deep analytics and AI*
+
+1.  What would be used to solve the AI requirements?
+
+    SQL Server 2019 big data clusters **Integrated AI and Machine Learning** would be used. This feature enables AI and machine learning tasks on the data stored in HDFS storage pools and the data pools. Spark can be used as well as built-in AI tools in SQL Server, using R, Python, Scala, or Java.
+
+    ![Diagram of SQL Server 2019 Integrated Ai and Machine Learning](media/sql-server-2019-integrated-ai-ml.png)
 
 ## Checklist of preferred objection handling
 
-\[insert your custom workshop content here . . . \]
- 
+1. How do we centrally manage and monitor the cluster once deployed?
+
+    Kubernetes is responsible for the state of the SQL Server big data cluster. Kubernetes provides the orchestration to build and configure cluster nodes, assign pods to nodes, and monitor the health of the cluster.
+
+    A SQL Server big data cluster is a cluster of Linux containers managed by a control plane that consists of a Kubernetes master, the SQL Server master instance, and other cluster-level services; such as the Hive Metastore and Spark Driver.
+
+2. Do our workloads require us to use a data warehouse, or will a data mart suffice?
+
+    The solution will use a data mart. Data marts are persisted in SQL Server big data clusters using a data pool that consists of pods running SQL Server on Linux.
+
+3. Will moving to container-based SQL clusters be complex and too high of an operational and management cost for our IT team?
+
+    Kubernetes is an open source container orchestrator, which is used to scale container deployments within the cluster according to need. The Kubernetes cluster comprises a set of machines called nodes. One node controls the cluster and is designated the master node, with all remaining nodes are worker nodes. The master is responsible for distributing work between the workers, and for monitoring the health of the cluster.
+
+4. How can SQL Server 2019 help us protect PII data and remain GDPR compliant?
+
+    SQL Server 2019 includes the following security features that can help with PII data security and GDPR compliance:
+
+    - **Dynamic Data Masking** - Limits sensitive data exposure by masking it to non-privileged users.
+
+    - **Row-Level Security** - Used to implement restrictions on which specific rows within database tables are accessible to certain database users; based on either group membership or execution context.
+
+    - **Always Encrypted with Secure Enclaves** - Protects the confidentiality of sensitive data from malware and high-privileged **unauthorized** users of SQL Server. A *high-privileged unauthorized user* is a DBA, admin, or anyone else who has legitimate access to server instances, VMs, etc., but who should not have access to some or all of the actual data.
+
+    - **SQL Data Discovery and Classification tool** - Tool built into SQL Server Management Studio (SSMS) for discovering, classifying, labeling, and reporting the sensitive data in a database.
 
 ## Customer quote (to be read back to the attendees at the end)
 
