@@ -154,8 +154,6 @@ _(You can copy and paste all of the commands that follow in a PowerShell window 
 
 12. Install the [SQL Server 2019 extension](sql-vnext-0.10.2-win-x64.vsix).
 
-13. Download and install [sqlpackage](https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download?view=sql-server-2017).
-
 ### Task 2: Download lab files
 
 Download a starter project that includes a payment data generator that sends real-time payment data for processing by your lab solution, as well as data files used in the lab.
