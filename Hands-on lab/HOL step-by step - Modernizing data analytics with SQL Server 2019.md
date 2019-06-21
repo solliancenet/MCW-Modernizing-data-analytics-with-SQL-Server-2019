@@ -90,27 +90,21 @@ Follow the steps below to connect to your SQL Server 2019 cluster with both Azur
 
 ### Connect with Azure Data Studio
 
-A link to Azure Data Studio should already be on the desktop of the VM. If not, follow the instructions in Step 1 below.
-
-![Azure Data Studio is highlighted on the desktop.](media/ads-desktop.png 'Desktop')
-
 1. On the bottom-left corner of your Windows desktop, locate the search box next to the Start Menu. Type **Azure Data Studio**, then select the Azure Data Studio desktop app in the search results.
 
    ![The search box has "Azure Data Studio" entered into it and the desktop app is highlighted in the results.](media/launch-azure-data-studio.png 'Launch Azure Data Studio')
 
-   > **Please note:** If Azure Data Studio prompts you to update, please **do not apply** the update at this time. The lab has been tested with the software and library versions loaded in the provided environment.
-
-2. Within Azure Data Studio, select **Servers** from the top of the left-hand menu, then select **New Connection** from the top toolbar to the right of the menu.
+2. Within Azure Data Studio, if the Connection dialog isn't automatically displayed, select **Servers** from the top of the left-hand menu, then select **New Connection** from the top toolbar to the right of the menu.
 
    ![The Servers menu icon is selected, as well as the new connection icon.](media/ads-new-connection-link.png 'Azure Data Studio')
 
 3. Within the Connection dialog, configure the following:
 
    - **Connection type:** Select Microsoft SQL Server.
-   - **Server:** Enter the IP address, followed by port number `31433` to the SQL Server 2019 Big Data cluster. Use the value from the `SQL SERVER_2019_CLUSTER URL` for this from the environment documentation. It should have a format of IP separated by a comma from the port, such as: `11.122.133.144,31433`.
+   - **Server:** Enter the IP address, followed by port number `31433` to the SQL Server 2019 Big Data cluster. It should have a format of IP separated by a comma from the port, such as: `11.122.133.144,31433`.
    - **Authentication type:** Select SQL Login.
    - **Username:** Enter `sa`.
-   - **Password:** Enter the password provided to you for this lab, you can find this value documented as `SQL 2019 Big Data Cluster password`.
+   - **Password:** Enter the password you used when creating the cluster. The default value is **MySQLBigData2019**.
    - **Remember password:** Checked.
    - Leave all other options at their default values.
 
@@ -120,29 +114,21 @@ A link to Azure Data Studio should already be on the desktop of the VM. If not, 
 
 ### Connect with SQL Server Management Studio
 
-The version of SQL Server Management Studio (SSMS) used in this lab is v17.x. There is a [newer preview version (v18)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017#ssms-180-preview-7) that includes some SQL Server 2019 features, which is not included in the provided environment.
-
 1. On the bottom-left corner of your Windows desktop, locate the search box next to the Start Menu. Type **SQL Server Management Studio**, then select the SQL Server Management Studio desktop app in the search results.
 
    ![The search box has "SQL Server Management Studio" entered into it and the desktop app is highlighted in the results.](media/launch-ssms.png 'Launch SQL Server Management Studio')
 
 2. Within the Connection dialog that appears, configure the following:
 
-   - **Server name:** Enter the IP address, followed by port number `31433` to the SQL Server 2019 Big Data cluster. Use the value from the `SQL SERVER_2019_CLUSTER URL` for this from the environment documentation. It should have a format of IP separated by a comma from the port, such as: `11.122.133.144,31433`.
+   - **Server name:** Enter the IP address, followed by port number `31433` to the SQL Server 2019 Big Data cluster. It should have a format of IP separated by a comma from the port, such as: `11.122.133.144,31433`.
    - **Authentication:** Select SQL Server Authentication.
    - **Login:** Enter `sa`.
-   - **Password:** Enter the password provided to you for this lab, you can find this value documented as `SQL 2019 Big Data Cluster password`.
+   - **Password:** Enter the password you used when creating the cluster. The default value is **MySQLBigData2019**.
    - **Remember password:** Checked.
 
    ![The Connect form is filled out with the previously mentioned settings entered into the appropriate fields.](media/ssms-connection.png 'SQL Server Management Studio - Connect')
 
-3. Click **Options >>**.
-
-4. Select the **Additional Connection Parameters** tab. In the text area below, enter `TrustServerCertificate=True`. This is needed because the server certificates are dynamically generated for the Big Data Clusters, and are self-signed.
-
-   ![The Additional Connection Parameters tab is selected and the TrustServerCertificate=True value is highlighted.](media/ssms-connection-additional.png 'Additional Connection Parameters')
-
-5. Click **Connect**.
+3. Click **Connect**.
 
 ## Exercise 1: Using data virtualization
 
@@ -164,7 +150,7 @@ To start, we will use the External Table Wizard in Azure Data Studio to connect 
 
 1. Open Azure Data Studio and connect to your SQL Server 2019 cluster, following the [connection steps](#connect-with-azure-data-studio) above.
 
-2. Expand the Databases folder, right-click on the **sales_YOUR_UNIQUE_IDENTIFIER** database, then select **Create External Table**. The `YOUR_UNIQUE_IDENTIFIER` portion of the name is the unique identifier assigned to you for this lab.
+2. Expand the Databases folder, right-click on the **sales** database, then select **Create External Table**.
 
    ![The sales database and the Create External Table sub-menu item are highlighted.](media/ads-create-external-table-sales.png 'Create External Table')
 
@@ -179,18 +165,18 @@ To start, we will use the External Table Wizard in Azure Data Studio to connect 
 5. Now, enter the credentials provided to you for the **CA_Commerce** Azure SQL Database within the following fields:
 
    - **External Data Source Name:** Enter the string "SQLReviews".
-   - **Server Name:** Enter the value provided to you for the Azure SQL Server name. The name should end with `.database.windows.net` (you can find this value in the lab environment details page, with the label `AZURE DATABASE SERVER`).
-   - **Database Name:** Enter "CA_Commerce".
+   - **Server Name:** Enter the value of the Azure SQL Server name for the server you created when you provisioned the Azure SQL Database. The name should end with `.database.windows.net`.
+   - **Database Name:** Enter "WWI_Commerce".
    - **Choose Credential:** Select "-- Create New Credential --".
    - **New Credential Name:** Enter "SQLCred".
-   - **Username:** Enter the Azure SQL Server username provided to you for this lab (look to the lab environment details for the label `DATABASE USER`).
-   - **Password:** Enter the Azure SQL Server password provided to you for this lab (look to the lab environment details for the label `DATABASE PASSWORD`).
+   - **Username:** Enter the Azure SQL Server username (such as **ServerAdmin**).
+   - **Password:** Enter the Azure SQL Server password (such as **MySQLBigData2019**).
 
    ![The external data source connection form is filled out with the previously mentioned settings entered into the appropriate fields.](media/ads-external-table-wizard-data-source.png 'Create a connection to your Data Source')
 
 6. Click **Next**. This process will take a few moments while the External Table Wizard attempts to connect to your data source.
 
-7. The next screen allows you to configure external table mapping and select the tables for which you want to create external views. Expand the **CA_Commerce** database node, then expand Tables, and check the box next to the **dbo.Reviews** table. Click on the table name to highlight it as well. It is here where you can rename the external table if you wish. For now, just click **Next**.
+7. The next screen allows you to configure external table mapping and select the tables for which you want to create external views. Expand the **WWI_Commerce** database node, then expand Tables, and check the box next to the **dbo.Reviews** table. Click on the table name to highlight it as well. It is here where you can rename the external table if you wish. For now, just click **Next**.
 
    ![The external tables are listed and the Reviews table is checked and selected.](media/ads-external-table-wizard-table-mapping.png 'External tables')
 
@@ -202,7 +188,7 @@ To start, we will use the External Table Wizard in Azure Data Studio to connect 
 
    ![The Create External Table succeeded message is displayed.](media/ads-external-table-wizard-succeeded.png 'Create External Table succeeded message')
 
-10. Select the Servers link (Ctrl+G) on the left-hand menu, then expand the Tables list underneath your **sales_YOUR_UNIQUE_IDENTIFIER** database and find the **dbo.Reviews (External)** table. If you do not see it, right-click on the Tables folder, then select Refresh. The "(External)" portion of the table name denotes that it is a virtual data object that was added as an external table.
+10. Select the Servers link (Ctrl+G) on the left-hand menu, then expand the Tables list underneath your **sales** database and find the **dbo.Reviews (External)** table. If you do not see it, right-click on the Tables folder, then select Refresh. The "(External)" portion of the table name denotes that it is a virtual data object that was added as an external table.
 
     ![The Reviews external table is displayed in the sales tables list.](media/ads-reviews-table-in-list.png 'Reviews external table')
 
@@ -219,65 +205,77 @@ To start, we will use the External Table Wizard in Azure Data Studio to connect 
         ,[customer_id]
         ,[review]
         ,[date_added]
-    FROM [sales_YOUR_UNIQUE_IDENTIFIER].[dbo].[Reviews]
+    FROM [sales].[dbo].[Reviews]
     ```
 
 ### Task 2: Create external table from CSV files
 
-The next data source we will be virtualizing is a CSV file that was uploaded to HDFS.
+The next data source we will be virtualizing is a CSV file that you will upload to HDFS.
 
-1. Within Azure Data Studio, scroll down below the list of SQL Server 2019 databases to find the **Data Services** folder. Expand that folder, expand the **HDFS** folder, then expand the **data** subfolder. Right-click on the `stockitemholdings.csv` file, then select **Create External Table From CSV Files**.
+1. Within Azure Data Studio, scroll down below the list of SQL Server 2019 databases to find the **Data Services** folder. Expand that folder, then **right-click** on the **HDFS** folder. Select **New Directory**.
+
+   ![The HDFS foler is highlighted and the context menu is displayed.](media/ads-hdfs-new-directory.png 'New directory')
+
+2. In the dialog that appears, type **data** then press 'Enter' to confirm.
+
+3. **Right-click** on the new **data** folder, then select **Upload files**.
+
+   ![The new data folder is highlighted and the context menu is displayed.](media/ads-data-upload-files-link.png 'Upload files')
+
+4. In the folder browser dialog, navigate to the `C:\MCW-Modernizing-data-analytics-with-SQL-Server-2019-master\Hands-on lab\Resources` folder and select **stockitemholdings.csv**.
+
+   ![The file browser is displayed.](media/ads-open-stockitemholdings.png 'Open')
+
+5. Click **Upload**.
+
+6. Expand the **data** subfolder you created, then right-click on the `stockitemholdings.csv` file and select **Create External Table From CSV Files**.
 
    ![The CSV file and the Create External Table From CSV Files menu item are highlighted.](media/ads-create-external-table-csv.png 'Create External Table From CSV Files')
 
-2. The first dialog has you select the SQL Server Master instance containing your Big Data Cluster. Select the connection underneath **Active SQL Server connections** that includes the cluster's IP address and the **sales_YOUR_UNIQUE_IDENTIFIER** database name.
+7. In the Create External Table from CSV dialog, confirm that the **sales** database is selected and that the name of the external table is **stockitemholdings**.
 
-   ![The active SQL Server connection is highlighted.](media/ads-external-table-csv-wizard-active-connection.png 'Active SQL Server connections')
+   ![The previously mentioned form is displayed.](media/ads-external-table-csv-wizard-active-connection.png 'Active SQL Server connections')
 
-3. Click **Next**.
+8. Click **Next**.
 
-4. In the destination database step, select the **sales_YOUR_UNIQUE_IDENTIFIER** database underneath **Database the external table will be created in**. Leave the name and schema at their defaults, then click **Next**.
-
-   ![The sales database is selected and highlighted.](media/ads-external-table-csv-destination.png 'Destination database')
-
-5. The next step displays a preview of the first 50 rows CSV data for validation. Click **Next** to continue.
+9. The next step displays a preview of the first 50 rows CSV data for validation. Click **Next** to continue.
 
    ![A preview of the CSV data is displayed.](media/ads-external-table-csv-preview.png 'Preview Data')
 
-6. In the next step, you will be able to modify the columns of the external table you intend to create. You are able to alter the column name, change the data type, and allow for Nullable rows. For now, leave everything as-is and click **Next**.
+10. In the next step, you will be able to modify the columns of the external table you intend to create. You are able to alter the column name, change the data type, and allow for Nullable rows. For now, leave everything as-is and click **Next**.
 
-   ![The Modify Columns step is displayed.](media/ads-external-table-csv-modify.png 'Modify Columns')
+    ![The Modify Columns step is displayed.](media/ads-external-table-csv-modify.png 'Modify Columns')
 
-7. Verify that everything looks correct in the Summary step, then click **Create Table**.
+11. Verify that everything looks correct in the Summary step, then click **Create Table**.
 
-   ![The Summary step is displayed.](media/ads-external-table-csv-create.png 'Summary')
+    ![The Summary step is displayed.](media/ads-external-table-csv-create.png 'Summary')
 
-8. As with the previous external table you created, a "Create External Table succeeded" dialog will appear under your task history in a few moments. Select the Servers link (Ctrl+G) on the left-hand menu, then expand the Tables list underneath your **sales** database and find the **dbo.stockitemholdings (External)** table. If you do not see it, right-click on the Tables folder, then select Refresh. **Right-click** the **dbo.stockitemholdings (External)** table, then select **Select Top 1000** from the context menu.
+12. As with the previous external table you created, a "Create External Table succeeded" dialog will appear under your task history in a few moments. Select the Servers link (Ctrl+G) on the left-hand menu, then expand the Tables list underneath your **sales** database and find the **dbo.stockitemholdings (External)** table. If you do not see it, right-click on the Tables folder, then select Refresh. **Right-click** the **dbo.stockitemholdings (External)** table, then select **Select Top 1000** from the context menu.
 
-   ![The Select Top 1000 rows menu item is highlighted.](media/ads-stockitemholdings-select-top-1000.png 'Select Top 1000')
+    ![The Select Top 1000 rows menu item is highlighted.](media/ads-stockitemholdings-select-top-1000.png 'Select Top 1000')
 
-9. Just as before, you should see a SQL query selecting the top 1000 rows and its query results, this time from the `stockitemholdings` table. Again, the SQL query is the same type of query you would write to select from a table internal to the sales database.
+13. Just as before, you should see a SQL query selecting the top 1000 rows and its query results, this time from the `stockitemholdings` table. Again, the SQL query is the same type of query you would write to select from a table internal to the sales database.
 
-   ![The stockitemholdings query and results are displayed.](media/ads-stockitemholdings-results.png 'Stockitemholdings results')
+    ![The stockitemholdings query and results are displayed.](media/ads-stockitemholdings-results.png 'Stockitemholdings results')
 
-   ```sql
-   SELECT TOP (1000) [StockItemID]
-       ,[QuantityOnHand]
-       ,[BinLocation]
-       ,[LastStocktakeQuantity]
-       ,[LastCostPrice]
-       ,[ReorderLevel]
-       ,[TargetStockLevel]
-       ,[LastEditedBy]
-       ,[LastEditedWhen]
-   FROM [sales_YOUR_UNIQUE_IDENTIFIER].[dbo].[stockitemholdings]
-   ```
+    ```sql
+    SELECT TOP (1000) [StockItemID]
+        ,[QuantityOnHand]
+        ,[BinLocation]
+        ,[LastStocktakeQuantity]
+        ,[LastCostPrice]
+        ,[ReorderLevel]
+        ,[TargetStockLevel]
+        ,[LastEditedBy]
+        ,[LastEditedWhen]
+    FROM [sales].[dbo].[stockitemholdings]
+    ```
 
 ### Task 3: Query and join data from flat files, data from external database systems, and SQL Server
 
 Now that we have our two external tables added, we will now join those two external tables and two internal tables with a new SQL query to demonstrate how you can seamlessly combine all these data sources without having to copy any files or with separate queries or additional processing of that data.
 
-1. **Right-click** the **sales_YOUR_UNIQUE_IDENTIFIER** database, then select **New Query**.
+1. **Right-click** the **sales** database, then select **New Query**.
 
    ![The sales database and New Query menu item are highlighted.](media/ads-new-query.png 'New Query')
 
@@ -344,7 +342,7 @@ In this exercise, you will use Azure Data Studio to execute a notebook that will
 
     ![Refresh data](media/task02-refresh-data.png 'Refresh data')
 
-3.  You should see `battery-life-YOUR_UNIQUE_IDENTIFIER.csv` as a folder (where `YOUR_UNIQUE_IDENTIFIER` is your assigned identifier), expand it and then right click on the CSV file whose name starts with `part-00000-` and select `Create External Table From CSV Files`.
+3.  You should see `battery-life.csv` as a folder, expand it and then right click on the CSV file whose name starts with `part-00000-` and select `Create External Table From CSV Files`.
 
     ![Create External Table](media/task02-create-external-menu.png 'Create External Table')
 
@@ -352,7 +350,7 @@ In this exercise, you will use Azure Data Studio to execute a notebook that will
 
     ![Select endpoint](media/task02-ext-step1.png 'Select endpoint')
 
-5.  In Step 2, select the `sales_YOUR_UNIQUE_IDENTIFIER` database and for the `Name for new external table` field provide `battery-life-predictions`. Select Next.
+5.  In Step 2, select the `sales` database and for the `Name for new external table` field provide `battery-life-predictions`. Select Next.
 
     ![Step 2](media/task02-ext-step2.png 'Step 2')
 
@@ -502,7 +500,7 @@ In this task, you will run the SQL Data Discovery & Classification tool against 
 
 1.  Open SQL Server Management Studio (SSMS) and connect to your SQL Server 2019 cluster.
 
-2.  Right-click on the **sales_YOUR_UNIQUE_IDENTIFIER** database, then choose **Tasks > Classify Data...**.
+2.  Right-click on the **sales** database, then choose **Tasks > Classify Data...**.
 
     ![The sales database, Tasks menu, and Classify Data items are highlighted.](media/ssms-classify-data-link.png 'Data Classification')
 
@@ -540,7 +538,7 @@ In this task, you will apply dynamic data masking to one of the database fields 
 
 1. Open SQL Server Management Studio (SSMS) and connect to your SQL Server 2019 cluster.
 
-2. Expand the databases list, right-click on **sales_YOUR_UNIQUE_IDENTIFIER**, then select **New Query**.
+2. Expand the databases list, right-click on **sales**, then select **New Query**.
 
    ![The sales database and New Query menu item are highlighted.](media/ssms-sales-new-query.png 'New Query')
 

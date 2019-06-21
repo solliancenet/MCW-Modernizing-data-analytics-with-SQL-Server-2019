@@ -307,21 +307,23 @@ In this lab, you will be using an Azure SQL Database as a source for virtual tab
 
    ![The Basics form is displayed.](media/azure-create-sql-database-basics.png 'Create SQL Database')
 
-5. Select **Next: Additional settings >**.
+5. **Save your server credentials and server name** to Notepad or similar text editor for later.
 
-6. Within the **Additional settings** form, select **Sample** next to **Use existing data**. Then select **Review + create**.
+6. Select **Next: Additional settings >**.
+
+7. Within the **Additional settings** form, select **Sample** next to **Use existing data**. Then select **Review + create**.
 
    ![The Additional settings form is displayed.](media/azure-create-sql-database-additional-settings.png 'Create SQL Database')
 
-7. Within the **Review + create** form, select **Create**.
+8. Within the **Review + create** form, select **Create**.
 
-8. After the database is created, open it.
+9. After the database is created, open it.
 
-9. Select **Query editor** from the left-hand menu. When prompted, type **ServerAdmin** for the Login name, and **MySQLBigData2019** for the password, then click **OK** to log in.
+10. Select **Query editor** from the left-hand menu. When prompted, type **ServerAdmin** for the Login name, and **MySQLBigData2019** for the password, then click **OK** to log in.
 
-   ![The login form for the Query Editor is displayed.](media/azure-sql-query-editor-login.png 'Query editor')
+    ![The login form for the Query Editor is displayed.](media/azure-sql-query-editor-login.png 'Query editor')
 
-10. Paste the following into the query window, then execute. This creates a new Reviews table with data.
+11. Paste the following into the query window, then execute. This creates a new Reviews table with data.
 
     ```sql
     SET ANSI_NULLS ON
