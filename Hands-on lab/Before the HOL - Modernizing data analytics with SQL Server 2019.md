@@ -266,7 +266,7 @@ Open PowerShell and execute the following to deploy the clusters in preparation 
 4. Run the bootstrap script. Substitute `<CLUSTER_NAMESPACE>`, `<SQL_MASTER_IP>`, `<SQL_MASTER_SA_PASSWORD>`, `<KNOX_IP>`, `<KNOX_PASSWORD>` with values output from the SQL Server 2019 cluster creation script above.
 
    ```bash
-   .\bootstrap-sample-db.cmd <CLUSTER_NAMESPACE> <SQL_MASTER_IP> <SQL_MASTER_SA_PASSWORD> <KNOX_IP> <KNOX_PASSWORD>
+   .\bootstrap-sample-db.cmd <CLUSTER_NAMESPACE> <SQL_MASTER_IP> <SQL_MASTER_SA_PASSWORD> <KNOX_IP> <KNOX_PASSWORD> --install-extra-samples
    ```
 
    | Parameter                | Description                                                                |
@@ -276,6 +276,7 @@ Open PowerShell and execute the following to deploy the clusters in preparation 
    | <SQL_MASTER_SA_PASSWORD> | The SA password for the master instance (default is **MySQLBigData2019**). |
    | <KNOX_IP>                | The IP address of the HDFS/Spark Gateway.                                  |
    | <KNOX_PASSWORD>          | The same as your SA password.                                              |
+   | --install-extra-samples  | Uploads database backup files for AdventureWorks and Wide World Importers  |
 
    > Use kubectl to find the IP addresses for the SQL Server master instance and Knox. Run `kubectl get svc -n <your-big-data-cluster-name>` and look at the EXTERNAL-IP addresses for the master instance (**master-svc-external**) and Knox (**gateway-svc-external**).
 

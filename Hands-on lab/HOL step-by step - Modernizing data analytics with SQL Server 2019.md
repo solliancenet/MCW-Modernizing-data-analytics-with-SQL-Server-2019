@@ -314,7 +314,7 @@ Notebooks are made up of one or more of cells that allow for the execution of th
 
    ![The Open File dialog is displayed.](media/ads-open-notebook0.png 'Open File')
 
-3. When the notebook opens, you need to select the **Kernel** you would like to use to run the notebook. Located the **Kernel** dropdown in the toolbar above the notebook, then select **Python 3**.
+3. When the notebook opens, you need to select the **Kernel** you would like to use to run the notebook. Locate the **Kernel** dropdown in the toolbar above the notebook, then select **Python 3**.
 
    ![The Python 3 kernel is selected.](media/ads-notebook-select-kernel.png 'Kernel dropdown')
 
@@ -332,11 +332,73 @@ Notebooks are made up of one or more of cells that allow for the execution of th
 
 ### Task 2: Querying the SQL Server Master Instance (MI)
 
+In this task, you will learn how to run standard SQL Server Queries against the Master Instance (MI) in a SQL Server big data cluster.
+
+1. In Azure Data Studio, click **File**, then **Open File...**.
+
+2. In the folder browser dialog, navigate to the `C:\MCW-Modernizing-data-analytics-with-SQL-Server-2019-master\Hands-on lab\Resources` folder and select **notebook_01.ipynb**.
+
+   ![The Open File dialog is displayed.](media/ads-open-notebook0.png 'Open File')
+
+3. When the notebook opens, you need to select the **Kernel** you would like to use to run the notebook. Locate the **Kernel** dropdown in the toolbar above the notebook, then select **SQL**.
+
+4. Follow the instructions within the notebook.
+
 ### Task 3: Virtualizing data with scripts
+
+Earlier in this lab, you virtualized data using the UI components within Azure Data Studio to create external tables from an external database and from flat files. In this task, you will use a notebook to create and query Virtualized Data in a SQL Server big data cluster.
+
+- You'll start with creating a text file format, since that's the type of data you are reading in.
+- Next, you'll create a data source for the SQL Storage Pool, since that allows you to access the HDFS system in BDC.
+- Finally, you'll create an External Table, which uses the previous steps to access the data.
+
+1. In Azure Data Studio, click **File**, then **Open File...**.
+
+2. In the folder browser dialog, navigate to the `C:\MCW-Modernizing-data-analytics-with-SQL-Server-2019-master\Hands-on lab\Resources` folder and select **notebook_02.ipynb**.
+
+   ![The Open File dialog is displayed.](media/ads-open-notebook0.png 'Open File')
+
+3. When the notebook opens, you need to select the **Kernel** you would like to use to run the notebook. Locate the **Kernel** dropdown in the toolbar above the notebook, then select **SQL**.
+
+4. Follow the instructions within the notebook.
 
 ### Task 4: Creating and querying a Data Mart
 
+In this task, you will learn how to create and query a Data Mart using Virtualized Data in a SQL Server big data cluster.
+
+Wide World Importers is interested in ingesting the data from web logs from an HDFS source where they have been streamed. They want to be able to analyze the traffic to see if there is a pattern in time, products, or locations.
+
+The web logs, however, are refreshed periodically. WWI would like to keep the logs in local storage to do deeper analysis.
+
+In this Jupyter Notebook you'll create a location to store the log files as a SQL Server Table in the SQL Data Pool, and then fill it by creating an External Table that reads HDFS.
+
+1. In Azure Data Studio, click **File**, then **Open File...**.
+
+2. In the folder browser dialog, navigate to the `C:\MCW-Modernizing-data-analytics-with-SQL-Server-2019-master\Hands-on lab\Resources` folder and select **notebook_03.ipynb**.
+
+   ![The Open File dialog is displayed.](media/ads-open-notebook0.png 'Open File')
+
+3. When the notebook opens, you need to select the **Kernel** you would like to use to run the notebook. Locate the **Kernel** dropdown in the toolbar above the notebook, then select **SQL**.
+
+4. Follow the instructions within the notebook.
+
 ### Task 5: Using the powerful Spark engine for data exploration
+
+In this task, you will learn how to work with Spark Jobs in a SQL Server big data cluster.
+
+Apache Spark is an open-source processing framework that runs large-scale data analytics applications. Spark is built on an in-memory compute engine, which enables high-performance querying on big data. It takes advantage of a parallel data-processing framework that persists data in-memory and disk if needed. This allows Spark to deliver 100-times faster speed and a common execution model for tasks such as extract, transform, load (ETL), batch, interactive queries and others on data in an Apache Hadoop Distributed File System (HDFS).
+
+Many times Spark is used to do transformations on data at large scale. In this Jupyter Notebook, you'll read a large text file into a Spark DataFrame, and then save out the top 10 examples as a table using SparkSQL.
+
+1. In Azure Data Studio, click **File**, then **Open File...**.
+
+2. In the folder browser dialog, navigate to the `C:\MCW-Modernizing-data-analytics-with-SQL-Server-2019-master\Hands-on lab\Resources` folder and select **notebook_04.ipynb**.
+
+   ![The Open File dialog is displayed.](media/ads-open-notebook0.png 'Open File')
+
+3. When the notebook opens, you need to select the **Kernel** you would like to use to run the notebook. Locate the **Kernel** dropdown in the toolbar above the notebook, then select **PySpark3**.
+
+4. Follow the instructions within the notebook.
 
 ## Exercise 3: Machine learning
 
