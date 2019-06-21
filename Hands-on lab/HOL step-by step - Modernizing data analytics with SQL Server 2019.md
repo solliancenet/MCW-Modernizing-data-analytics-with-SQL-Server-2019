@@ -1,4 +1,4 @@
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
+![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
 
 <div class="MCWHeader1">
 Modernizing data analytics with SQL Server 2019
@@ -12,7 +12,6 @@ Hands-on lab step-by-step
 June 2019
 </div>
 
-
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
 
 Microsoft may have patents, patent applications, trademarks, copyrights, or other intellectual property rights covering subject matter in this document. Except as expressly provided in any written license agreement from Microsoft, the furnishing of this document does not give you any license to these patents, trademarks, copyrights, or other intellectual property.
@@ -23,7 +22,7 @@ The names of manufacturers, products, or URLs are provided for informational pur
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
-**Contents** 
+**Contents**
 
 <!-- TOC -->
 
@@ -53,12 +52,15 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 1: Use the Data Discovery & Classification in SSMS](#Task-1-Use-the-Data-Discovery--Classification-in-SSMS)
     - [Task 2: Fix compliance issues with dynamic data masking](#Task-2-Fix-compliance-issues-with-dynamic-data-masking)
   - [Exercise 5: Exploring intelligent query processing (QP) features](#Exercise-5-Exploring-intelligent-query-processing-QP-features)
+    - [Task 1: Set database compatibility level](#Task-1-Set-database-compatibility-level)
+    - [Task 2: Scalar UDF inlining](#Task-2-Scalar-UDF-inlining)
+    - [Task 3: Table variable deferred compilation](#Task-3-Table-variable-deferred-compilation)
+    - [Task 4: Row mode memory grant feedback](#Task-4-Row-mode-memory-grant-feedback)
   - [Exercise 6: Monitoring the big data cluster](#Exercise-6-Monitoring-the-big-data-cluster)
     - [Task 1: Use the cluster administration portal](#Task-1-Use-the-cluster-administration-portal)
     - [Task 2: Monitor and troubleshoot using Kubectl commands](#Task-2-Monitor-and-troubleshoot-using-Kubectl-commands)
   - [After the hands-on lab](#After-the-hands-on-lab)
-    - [Task 1: Task name](#Task-1-Task-name)
-    - [Task 2: Task name](#Task-2-Task-name)
+    - [Task 1: Delete the resource group](#Task-1-Delete-the-resource-group)
 
 <!-- /TOC -->
 
@@ -78,7 +80,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Requirements
 
-1.  Number and insert your custom workshop content here . . . 
+1.  Number and insert your custom workshop content here . . .
 
 ## Before the hands-on lab
 
@@ -94,25 +96,25 @@ A link to Azure Data Studio should already be on the desktop of the VM. If not, 
 
 1. On the bottom-left corner of your Windows desktop, locate the search box next to the Start Menu. Type **Azure Data Studio**, then select the Azure Data Studio desktop app in the search results.
 
-    ![The search box has "Azure Data Studio" entered into it and the desktop app is highlighted in the results.](media/launch-azure-data-studio.png 'Launch Azure Data Studio')
+   ![The search box has "Azure Data Studio" entered into it and the desktop app is highlighted in the results.](media/launch-azure-data-studio.png 'Launch Azure Data Studio')
 
-    > **Please note:** If Azure Data Studio prompts you to update, please **do not apply** the update at this time. The lab has been tested with the software and library versions loaded in the provided environment.
+   > **Please note:** If Azure Data Studio prompts you to update, please **do not apply** the update at this time. The lab has been tested with the software and library versions loaded in the provided environment.
 
 2. Within Azure Data Studio, select **Servers** from the top of the left-hand menu, then select **New Connection** from the top toolbar to the right of the menu.
 
-    ![The Servers menu icon is selected, as well as the new connection icon.](media/ads-new-connection-link.png 'Azure Data Studio')
+   ![The Servers menu icon is selected, as well as the new connection icon.](media/ads-new-connection-link.png 'Azure Data Studio')
 
 3. Within the Connection dialog, configure the following:
 
-    - **Connection type:** Select Microsoft SQL Server.
-    - **Server:** Enter the IP address, followed by port number `31433`  to the SQL Server 2019 Big Data cluster. Use the value from the `SQL SERVER_2019_CLUSTER URL` for this from the environment documentation. It should have a format of IP separated by a comma from the port, such as: `11.122.133.144,31433`.
-    - **Authentication type:** Select SQL Login.
-    - **Username:** Enter `sa`.
-    - **Password:** Enter the password provided to you for this lab, you can find this value documented as `SQL 2019 Big Data Cluster password`.
-    - **Remember password:** Checked.
-    - Leave all other options at their default values.
+   - **Connection type:** Select Microsoft SQL Server.
+   - **Server:** Enter the IP address, followed by port number `31433` to the SQL Server 2019 Big Data cluster. Use the value from the `SQL SERVER_2019_CLUSTER URL` for this from the environment documentation. It should have a format of IP separated by a comma from the port, such as: `11.122.133.144,31433`.
+   - **Authentication type:** Select SQL Login.
+   - **Username:** Enter `sa`.
+   - **Password:** Enter the password provided to you for this lab, you can find this value documented as `SQL 2019 Big Data Cluster password`.
+   - **Remember password:** Checked.
+   - Leave all other options at their default values.
 
-    ![The Connection form is filled out with the previously mentioned settings entered into the appropriate fields.](media/ads-new-connection.png 'Azure Data Studio - New Connection')
+   ![The Connection form is filled out with the previously mentioned settings entered into the appropriate fields.](media/ads-new-connection.png 'Azure Data Studio - New Connection')
 
 4. Click **Connect**.
 
@@ -122,23 +124,23 @@ The version of SQL Server Management Studio (SSMS) used in this lab is v17.x. Th
 
 1. On the bottom-left corner of your Windows desktop, locate the search box next to the Start Menu. Type **SQL Server Management Studio**, then select the SQL Server Management Studio desktop app in the search results.
 
-    ![The search box has "SQL Server Management Studio" entered into it and the desktop app is highlighted in the results.](media/launch-ssms.png 'Launch SQL Server Management Studio')
+   ![The search box has "SQL Server Management Studio" entered into it and the desktop app is highlighted in the results.](media/launch-ssms.png 'Launch SQL Server Management Studio')
 
 2. Within the Connection dialog that appears, configure the following:
 
-    - **Server name:** Enter the IP address, followed by port number `31433` to the SQL Server 2019 Big Data cluster. Use the value from the `SQL SERVER_2019_CLUSTER URL` for this from the environment documentation. It should have a format of IP separated by a comma from the port, such as: `11.122.133.144,31433`.
-    - **Authentication:** Select SQL Server Authentication.
-    - **Login:** Enter `sa`.
-    - **Password:** Enter the password provided to you for this lab, you can find this value documented as `SQL 2019 Big Data Cluster password`.
-    - **Remember password:** Checked.
+   - **Server name:** Enter the IP address, followed by port number `31433` to the SQL Server 2019 Big Data cluster. Use the value from the `SQL SERVER_2019_CLUSTER URL` for this from the environment documentation. It should have a format of IP separated by a comma from the port, such as: `11.122.133.144,31433`.
+   - **Authentication:** Select SQL Server Authentication.
+   - **Login:** Enter `sa`.
+   - **Password:** Enter the password provided to you for this lab, you can find this value documented as `SQL 2019 Big Data Cluster password`.
+   - **Remember password:** Checked.
 
-    ![The Connect form is filled out with the previously mentioned settings entered into the appropriate fields.](media/ssms-connection.png 'SQL Server Management Studio - Connect')
+   ![The Connect form is filled out with the previously mentioned settings entered into the appropriate fields.](media/ssms-connection.png 'SQL Server Management Studio - Connect')
 
 3. Click **Options >>**.
 
 4. Select the **Additional Connection Parameters** tab. In the text area below, enter `TrustServerCertificate=True`. This is needed because the server certificates are dynamically generated for the Big Data Clusters, and are self-signed.
 
-    ![The Additional Connection Parameters tab is selected and the TrustServerCertificate=True value is highlighted.](media/ssms-connection-additional.png 'Additional Connection Parameters')
+   ![The Additional Connection Parameters tab is selected and the TrustServerCertificate=True value is highlighted.](media/ssms-connection-additional.png 'Additional Connection Parameters')
 
 5. Click **Connect**.
 
@@ -164,41 +166,41 @@ To start, we will use the External Table Wizard in Azure Data Studio to connect 
 
 2. Expand the Databases folder, right-click on the **sales_YOUR_UNIQUE_IDENTIFIER** database, then select **Create External Table**. The `YOUR_UNIQUE_IDENTIFIER` portion of the name is the unique identifier assigned to you for this lab.
 
-    ![The sales database and the Create External Table sub-menu item are highlighted.](media/ads-create-external-table-sales.png 'Create External Table')
+   ![The sales database and the Create External Table sub-menu item are highlighted.](media/ads-create-external-table-sales.png 'Create External Table')
 
 3. Select the **SQL Server** data source type, then click **Next**.
 
-    ![The SQL Server data source type is selected.](media/ads-external-table-wizard-data-source-type.png 'Select data source type')
+   ![The SQL Server data source type is selected.](media/ads-external-table-wizard-data-source-type.png 'Select data source type')
 
 4. The next step is to create a database master key, if it does not already exist. This secures the credentials used by an external data source. Enter `MySecure@MasterKey1` in the **Password** and **Confirm Password** fields. If you see a message stating that a master key already exists, you may skip this step. Click **Next**.
 
-    ![The Master Key step is displayed.](media/ads-external-table-wizard-master-key.png 'Master Key')
+   ![The Master Key step is displayed.](media/ads-external-table-wizard-master-key.png 'Master Key')
 
 5. Now, enter the credentials provided to you for the **CA_Commerce** Azure SQL Database within the following fields:
 
-    - **External Data Source Name:** Enter the string "SQLReviews".
-    - **Server Name:** Enter the value provided to you for the Azure SQL Server name. The name should end with `.database.windows.net` (you can find this value in the lab environment details page, with the label `AZURE DATABASE SERVER`).
-    - **Database Name:** Enter "CA_Commerce".
-    - **Choose Credential:** Select "-- Create New Credential --".
-    - **New Credential Name:** Enter "SQLCred".
-    - **Username:** Enter the Azure SQL Server username provided to you for this lab (look to the lab environment details for the label `DATABASE USER`).
-    - **Password:** Enter the Azure SQL Server password provided to you for this lab (look to the lab environment details for the label `DATABASE PASSWORD`).
+   - **External Data Source Name:** Enter the string "SQLReviews".
+   - **Server Name:** Enter the value provided to you for the Azure SQL Server name. The name should end with `.database.windows.net` (you can find this value in the lab environment details page, with the label `AZURE DATABASE SERVER`).
+   - **Database Name:** Enter "CA_Commerce".
+   - **Choose Credential:** Select "-- Create New Credential --".
+   - **New Credential Name:** Enter "SQLCred".
+   - **Username:** Enter the Azure SQL Server username provided to you for this lab (look to the lab environment details for the label `DATABASE USER`).
+   - **Password:** Enter the Azure SQL Server password provided to you for this lab (look to the lab environment details for the label `DATABASE PASSWORD`).
 
-    ![The external data source connection form is filled out with the previously mentioned settings entered into the appropriate fields.](media/ads-external-table-wizard-data-source.png 'Create a connection to your Data Source')
+   ![The external data source connection form is filled out with the previously mentioned settings entered into the appropriate fields.](media/ads-external-table-wizard-data-source.png 'Create a connection to your Data Source')
 
 6. Click **Next**. This process will take a few moments while the External Table Wizard attempts to connect to your data source.
 
 7. The next screen allows you to configure external table mapping and select the tables for which you want to create external views. Expand the **CA_Commerce** database node, then expand Tables, and check the box next to the **dbo.Reviews** table. Click on the table name to highlight it as well. It is here where you can rename the external table if you wish. For now, just click **Next**.
 
-    ![The external tables are listed and the Reviews table is checked and selected.](media/ads-external-table-wizard-table-mapping.png 'External tables')
+   ![The external tables are listed and the Reviews table is checked and selected.](media/ads-external-table-wizard-table-mapping.png 'External tables')
 
 8. In the Summary page that follows, you can see the name of the database scoped credential and external data source objects to be created in the destination database. Here you can click Generate Script to view the SQL script that will run to create the external table. Instead, click **Create**.
 
-    ![A screenshot of the summary is displayed.](media/ads-external-table-wizard-summary.png 'Summary')
+   ![A screenshot of the summary is displayed.](media/ads-external-table-wizard-summary.png 'Summary')
 
 9. After a few moments, a "Create External Table succeeded" message will display.
 
-    ![The Create External Table succeeded message is displayed.](media/ads-external-table-wizard-succeeded.png 'Create External Table succeeded message')
+   ![The Create External Table succeeded message is displayed.](media/ads-external-table-wizard-succeeded.png 'Create External Table succeeded message')
 
 10. Select the Servers link (Ctrl+G) on the left-hand menu, then expand the Tables list underneath your **sales_YOUR_UNIQUE_IDENTIFIER** database and find the **dbo.Reviews (External)** table. If you do not see it, right-click on the Tables folder, then select Refresh. The "(External)" portion of the table name denotes that it is a virtual data object that was added as an external table.
 
@@ -226,50 +228,50 @@ The next data source we will be virtualizing is a CSV file that was uploaded to 
 
 1. Within Azure Data Studio, scroll down below the list of SQL Server 2019 databases to find the **Data Services** folder. Expand that folder, expand the **HDFS** folder, then expand the **data** subfolder. Right-click on the `stockitemholdings.csv` file, then select **Create External Table From CSV Files**.
 
-    ![The CSV file and the Create External Table From CSV Files menu item are highlighted.](media/ads-create-external-table-csv.png 'Create External Table From CSV Files')
+   ![The CSV file and the Create External Table From CSV Files menu item are highlighted.](media/ads-create-external-table-csv.png 'Create External Table From CSV Files')
 
 2. The first dialog has you select the SQL Server Master instance containing your Big Data Cluster. Select the connection underneath **Active SQL Server connections** that includes the cluster's IP address and the **sales_YOUR_UNIQUE_IDENTIFIER** database name.
 
-    ![The active SQL Server connection is highlighted.](media/ads-external-table-csv-wizard-active-connection.png 'Active SQL Server connections')
+   ![The active SQL Server connection is highlighted.](media/ads-external-table-csv-wizard-active-connection.png 'Active SQL Server connections')
 
 3. Click **Next**.
 
 4. In the destination database step, select the **sales_YOUR_UNIQUE_IDENTIFIER** database underneath **Database the external table will be created in**. Leave the name and schema at their defaults, then click **Next**.
 
-    ![The sales database is selected and highlighted.](media/ads-external-table-csv-destination.png 'Destination database')
+   ![The sales database is selected and highlighted.](media/ads-external-table-csv-destination.png 'Destination database')
 
 5. The next step displays a preview of the first 50 rows CSV data for validation. Click **Next** to continue.
 
-    ![A preview of the CSV data is displayed.](media/ads-external-table-csv-preview.png 'Preview Data')
+   ![A preview of the CSV data is displayed.](media/ads-external-table-csv-preview.png 'Preview Data')
 
 6. In the next step, you will be able to modify the columns of the external table you intend to create. You are able to alter the column name, change the data type, and allow for Nullable rows. For now, leave everything as-is and click **Next**.
 
-    ![The Modify Columns step is displayed.](media/ads-external-table-csv-modify.png 'Modify Columns')
+   ![The Modify Columns step is displayed.](media/ads-external-table-csv-modify.png 'Modify Columns')
 
 7. Verify that everything looks correct in the Summary step, then click **Create Table**.
 
-    ![The Summary step is displayed.](media/ads-external-table-csv-create.png 'Summary')
+   ![The Summary step is displayed.](media/ads-external-table-csv-create.png 'Summary')
 
 8. As with the previous external table you created, a "Create External Table succeeded" dialog will appear under your task history in a few moments. Select the Servers link (Ctrl+G) on the left-hand menu, then expand the Tables list underneath your **sales** database and find the **dbo.stockitemholdings (External)** table. If you do not see it, right-click on the Tables folder, then select Refresh. **Right-click** the **dbo.stockitemholdings (External)** table, then select **Select Top 1000** from the context menu.
 
-    ![The Select Top 1000 rows menu item is highlighted.](media/ads-stockitemholdings-select-top-1000.png 'Select Top 1000')
+   ![The Select Top 1000 rows menu item is highlighted.](media/ads-stockitemholdings-select-top-1000.png 'Select Top 1000')
 
 9. Just as before, you should see a SQL query selecting the top 1000 rows and its query results, this time from the `stockitemholdings` table. Again, the SQL query is the same type of query you would write to select from a table internal to the sales database.
 
-    ![The stockitemholdings query and results are displayed.](media/ads-stockitemholdings-results.png 'Stockitemholdings results')
+   ![The stockitemholdings query and results are displayed.](media/ads-stockitemholdings-results.png 'Stockitemholdings results')
 
-    ```sql
-    SELECT TOP (1000) [StockItemID]
-        ,[QuantityOnHand]
-        ,[BinLocation]
-        ,[LastStocktakeQuantity]
-        ,[LastCostPrice]
-        ,[ReorderLevel]
-        ,[TargetStockLevel]
-        ,[LastEditedBy]
-        ,[LastEditedWhen]
-    FROM [sales_YOUR_UNIQUE_IDENTIFIER].[dbo].[stockitemholdings]
-    ```
+   ```sql
+   SELECT TOP (1000) [StockItemID]
+       ,[QuantityOnHand]
+       ,[BinLocation]
+       ,[LastStocktakeQuantity]
+       ,[LastCostPrice]
+       ,[ReorderLevel]
+       ,[TargetStockLevel]
+       ,[LastEditedBy]
+       ,[LastEditedWhen]
+   FROM [sales_YOUR_UNIQUE_IDENTIFIER].[dbo].[stockitemholdings]
+   ```
 
 ### Task 3: Query and join data from flat files, data from external database systems, and SQL Server
 
@@ -277,26 +279,26 @@ Now that we have our two external tables added, we will now join those two exter
 
 1. **Right-click** the **sales_YOUR_UNIQUE_IDENTIFIER** database, then select **New Query**.
 
-    ![The sales database and New Query menu item are highlighted.](media/ads-new-query.png 'New Query')
+   ![The sales database and New Query menu item are highlighted.](media/ads-new-query.png 'New Query')
 
 2. Paste the following into the new query window:
 
-    ```sql
-    SELECT i.i_item_sk AS ItemID, i.i_item_desc AS Item, c.c_first_name AS FirstName,
-      c.c_last_name AS LastName, s.QuantityOnHand, r.review AS Review, r.date_added AS DateReviewed
-    FROM dbo.item as i
-    JOIN dbo.Reviews AS r ON i.i_item_sk = r.product_id
-    JOIN dbo.customer AS c ON c.c_customer_sk = r.customer_id
-    JOIN dbo.stockitemholdings AS s ON i.i_item_sk = s.StockItemID
-    ```
+   ```sql
+   SELECT i.i_item_sk AS ItemID, i.i_item_desc AS Item, c.c_first_name AS FirstName,
+     c.c_last_name AS LastName, s.QuantityOnHand, r.review AS Review, r.date_added AS DateReviewed
+   FROM dbo.item as i
+   JOIN dbo.Reviews AS r ON i.i_item_sk = r.product_id
+   JOIN dbo.customer AS c ON c.c_customer_sk = r.customer_id
+   JOIN dbo.stockitemholdings AS s ON i.i_item_sk = s.StockItemID
+   ```
 
 3. Click the **Run** button above the query window to execute.
 
-    ![The Run button above the query window is highlighted.](media/ads-run.png 'Run')
+   ![The Run button above the query window is highlighted.](media/ads-run.png 'Run')
 
 4. At the bottom of the query window, you will see results that include columns from the four data sources.
 
-    ![Query results from the four data sets.](media/ads-query-results.png 'Query results')
+   ![Query results from the four data sets.](media/ads-query-results.png 'Query results')
 
 ## Exercise 2: Using notebooks
 
@@ -322,17 +324,17 @@ In this exercise, you will use Azure Data Studio to execute a notebook that will
 
 2. Right click your Big Data Cluster node select `Manage`.
 
-    ![Manage cluster](media/task02-manage-cluster.png 'Manage cluster')
+   ![Manage cluster](media/task02-manage-cluster.png 'Manage cluster')
 
 3. In the window, select the `SQL Big Data Cluster` tab and then select the `Open Notebook` tile.
 
-    ![Open notebook](media/task02-sql-bdc-manage.png 'Open notebook')
+   ![Open notebook](media/task02-sql-bdc-manage.png 'Open notebook')
 
 4. Browse to **C:\lab-files\data\1**, select **predict-battery-life-with-sqlbdc.ipynb** and select `Open`.
 
 5. Follow the instructions in the notebook and return to the next step after you have completed the notebook.
 
-    > There may be a kernel error pertaining to there not being a valid SQL connection when you open the notebook. If this happens, close the notebook and Azure Data Studio, then re-launch, reconnect, then re-open the notebook.
+   > There may be a kernel error pertaining to there not being a valid SQL connection when you open the notebook. If this happens, close the notebook and Azure Data Studio, then re-launch, reconnect, then re-open the notebook.
 
 ### Task 2: Score and save data as an external table
 
@@ -350,19 +352,19 @@ In this exercise, you will use Azure Data Studio to execute a notebook that will
 
     ![Select endpoint](media/task02-ext-step1.png 'Select endpoint')
 
-5. In Step 2, select the `sales_YOUR_UNIQUE_IDENTIFIER` database and for the `Name for new external table` field provide `battery-life-predictions`. Select Next.
+5.  In Step 2, select the `sales_YOUR_UNIQUE_IDENTIFIER` database and for the `Name for new external table` field provide `battery-life-predictions`. Select Next.
 
     ![Step 2](media/task02-ext-step2.png 'Step 2')
 
-6. On Step 3, select `Next`.
+6.  On Step 3, select `Next`.
 
-7. On Step 4, for the column `Car_Has_EcoStart` set the Data Type to `char(10)`. Select `Next`.
+7.  On Step 4, for the column `Car_Has_EcoStart` set the Data Type to `char(10)`. Select `Next`.
 
     ![Step 4](media/task02-ext-step4.png 'Step 4')
 
-8. On Step 5, select `Create Table`. Your predictions are now available for SQL querying in the battery-life-predictions table in the sales database.
+8.  On Step 5, select `Create Table`. Your predictions are now available for SQL querying in the battery-life-predictions table in the sales database.
 
-9. In Azure Data Studio, Servers, expand your Big Data Cluster, `Databases`, `sales_YOUR-UNIQUE-IDENTIFIER`, right click `Tables` and then select `Refresh`.
+9.  In Azure Data Studio, Servers, expand your Big Data Cluster, `Databases`, `sales_YOUR-UNIQUE-IDENTIFIER`, right click `Tables` and then select `Refresh`.
 
     ![Refresh sales](media/task02-refresh-sales.png 'Refresh sales')
 
@@ -376,26 +378,27 @@ In this exercise, you will use Azure Data Studio to execute a notebook that will
 
 ## Task 3: Mounting an Azure Data Lake Gen2 Storage Account to SQL Server 2019 Big Data Cluster using HDFS Tiering
 
-With tiering, applications can seamlessly access data in a variety of external stores as though the data resides in the local HDFS.   This allows you to interact with the files in Azure Data Lake Store Gen2 as if they were local files.  You can either use an Azure Storage access key or an Azure Active Directory User Account to gain permission to the files.  For this lab, we will use the access key.
+With tiering, applications can seamlessly access data in a variety of external stores as though the data resides in the local HDFS. This allows you to interact with the files in Azure Data Lake Store Gen2 as if they were local files. You can either use an Azure Storage access key or an Azure Active Directory User Account to gain permission to the files. For this lab, we will use the access key.
 
-1. In Windows, open PowerShell.  
+1. In Windows, open PowerShell.
 
-  ![Search for PowerShell .](media/powershell.png 'SQL Server Management Studio - Connect')
+![Search for PowerShell .](media/powershell.png 'SQL Server Management Studio - Connect')
 
 2. In PowerShell, install the mssqlstl package using pip:
 
-    ```powershell
-      pip3 install -r  https://private-repo.microsoft.com/python/ctp3.0/mssqlctl/requirements.txt
-    ```
+   ```powershell
+     pip3 install -r  https://private-repo.microsoft.com/python/ctp3.0/mssqlctl/requirements.txt
+   ```
 
 3. Once mssqlctl installs, connect to your Microsoft SQL Server 2019 Big Data Cluster:
 
-    ```python
-      mssqlctl login -e https://<SQL SERVER Controller IP ADDRESS>:30080
-    ```
-    a.  You will be prompted for your big data cluster name.
-    b.  The user name is admin
-    c.  The password is MySQLBigData2019
+   ```python
+     mssqlctl login -e https://<SQL SERVER Controller IP ADDRESS>:30080
+   ```
+
+   a. You will be prompted for your big data cluster name.
+   b. The user name is admin
+   c. The password is MySQLBigData2019
 
 4. Create an empty text file named filename.creds in your temp folder on the c:\ drive. Add this line as the contents:
 
@@ -404,47 +407,47 @@ fs.azure.account.key.ikedatabricks.dfs.core.windows.net=HUYPk/VUjdYzkCvrKXTgFBOb
 
 5. In PowerShell, type the following command to mount the drive
 
-    ```powershell
-        mssqlctl cluster storage-pool mount create --remote-uri abfs://databricksfiles@ikedatabricks.dfs.core.windows.net/ --mount-path   /mounts/dbfiles --credential-file c:\temp\filename.creds
-    ```
+   ```powershell
+       mssqlctl cluster storage-pool mount create --remote-uri abfs://databricksfiles@ikedatabricks.dfs.core.windows.net/ --mount-path   /mounts/dbfiles --credential-file c:\temp\filename.creds
+   ```
 
 6. Once the storage account has been mounted, you can check the status:
 
-  ```powershell
-    mssqlctl cluster storage-pool mount status
-  ```  
+```powershell
+  mssqlctl cluster storage-pool mount status
+```
 
-7. Now you can use Azure Data Studio and view the files from ADLS Gen2 under your HDFS folder in your Servers pane.  Look under /HDFS/mounts/dbfiles/
+7. Now you can use Azure Data Studio and view the files from ADLS Gen2 under your HDFS folder in your Servers pane. Look under /HDFS/mounts/dbfiles/
 
-    ![Azure Data Studio server pane for new dbfiles folder](media/data-studio-mounts.png)
+   ![Azure Data Studio server pane for new dbfiles folder](media/data-studio-mounts.png)
 
-8. Now that the drive is mounted, create an external file format for CSV.  Open a new query window and paste the following command:
+8. Now that the drive is mounted, create an external file format for CSV. Open a new query window and paste the following command:
 
-  ```sql
-    USE Sales;
-    GO
-    CREATE EXTERNAL FILE FORMAT csv_file
-    WITH (
-        FORMAT_TYPE = DELIMITEDTEXT,
-        FORMAT_OPTIONS(
-            FIELD_TERMINATOR = ',',
-            STRING_DELIMITER = '"',
-            FIRST_ROW = 2,
-            USE_TYPE_DEFAULT = TRUE)
-    );
-  ```
+```sql
+  USE Sales;
+  GO
+  CREATE EXTERNAL FILE FORMAT csv_file
+  WITH (
+      FORMAT_TYPE = DELIMITEDTEXT,
+      FORMAT_OPTIONS(
+          FIELD_TERMINATOR = ',',
+          STRING_DELIMITER = '"',
+          FIRST_ROW = 2,
+          USE_TYPE_DEFAULT = TRUE)
+  );
+```
 
 9. Now create an external connection to your HDFS cluster:
 
-  ```sql
-    IF NOT EXISTS(SELECT * FROM sys.external_data_sources WHERE name = 'SqlStoragePool')
-    BEGIN
-      CREATE EXTERNAL DATA SOURCE SqlStoragePool
-      WITH (LOCATION = 'sqlhdfs://controller-svc:8080/default');
-    END
-  ```
+```sql
+  IF NOT EXISTS(SELECT * FROM sys.external_data_sources WHERE name = 'SqlStoragePool')
+  BEGIN
+    CREATE EXTERNAL DATA SOURCE SqlStoragePool
+    WITH (LOCATION = 'sqlhdfs://controller-svc:8080/default');
+  END
+```
 
- 10. Now let's create two tables to two different files that exist in the storage account:
+10. Now let's create two tables to two different files that exist in the storage account:
 
 ```sql
 CREATE EXTERNAL TABLE planes
@@ -472,16 +475,16 @@ WITH
     LOCATION = '/mounts/dbfiles/flights_small.csv',
     FILE_FORMAT = csv_file
 );
- ```
+```
 
-11. Once the tables are created, you can interact with them like normal tables.  For instance, you can run a query that joins the two tables like this:
- 
- ```sql
- SELECT * 
-   FROM planes p 
-   JOIN flights f
-    on p.tailnum = f.tailnum
-  ```
+11. Once the tables are created, you can interact with them like normal tables. For instance, you can run a query that joins the two tables like this:
+
+```sql
+SELECT *
+  FROM planes p
+  JOIN flights f
+   on p.tailnum = f.tailnum
+```
 
 ## Exercise 4: Identify PII and GDPR-related compliance issues using Data Discovery & Classification in SSMS
 
@@ -539,52 +542,52 @@ In this task, you will apply dynamic data masking to one of the database fields 
 
 2. Expand the databases list, right-click on **sales_YOUR_UNIQUE_IDENTIFIER**, then select **New Query**.
 
-    ![The sales database and New Query menu item are highlighted.](media/ssms-sales-new-query.png 'New Query')
+   ![The sales database and New Query menu item are highlighted.](media/ssms-sales-new-query.png 'New Query')
 
 3. Add a dynamic data mask to the existing `dbo.customer.c_last_name` field by pasting the below query into the new query window:
 
-    ```sql
-    ALTER TABLE dbo.customer
-    ALTER COLUMN c_last_name ADD MASKED WITH (FUNCTION = 'partial(2,"XXX",0)');
-    ```
+   ```sql
+   ALTER TABLE dbo.customer
+   ALTER COLUMN c_last_name ADD MASKED WITH (FUNCTION = 'partial(2,"XXX",0)');
+   ```
 
-    > The `partial` custom string masking method above exposes the first two characters and adds a custom padding string after for the remaining characters. The parameters are: `prefix,[padding],suffix`
+   > The `partial` custom string masking method above exposes the first two characters and adds a custom padding string after for the remaining characters. The parameters are: `prefix,[padding],suffix`
 
 4. Execute the query by clicking the **Execute** button above the query window, or enter _F5_.
 
-    ![The dynamic data mask query is shown and the Execute button is highlighted above.](media/ssms-execute-ddm-query.png 'Execute query')
+   ![The dynamic data mask query is shown and the Execute button is highlighted above.](media/ssms-execute-ddm-query.png 'Execute query')
 
 5. Clear the query window and replace the previous query with the following to add a dynamic data mask to the `dbo.customer.c_email_address` field:
 
-    ```sql
-    ALTER TABLE dbo.customer
-    ALTER COLUMN c_email_address ADD MASKED WITH (FUNCTION = 'email()');
-    ```
+   ```sql
+   ALTER TABLE dbo.customer
+   ALTER COLUMN c_email_address ADD MASKED WITH (FUNCTION = 'email()');
+   ```
 
-    > The `email` masking method exposes the first letter of an email address and the constant suffix ".com", in the form of an email address: `aXXX@XXXX.com`.
+   > The `email` masking method exposes the first letter of an email address and the constant suffix ".com", in the form of an email address: `aXXX@XXXX.com`.
 
 6. Clear the query window and replace the previous query with the following, selecting all rows from the customer table:
 
-    ```sql
-    SELECT * FROM dbo.customer
-    ```
+   ```sql
+   SELECT * FROM dbo.customer
+   ```
 
-    ![The query results are shown with no mask applied to the Postal Code field.](media/ssms-ddm-results-no-mask.png 'Query results')
+   ![The query results are shown with no mask applied to the Postal Code field.](media/ssms-ddm-results-no-mask.png 'Query results')
 
 7. Notice that the full last name and email address values are visible. That is because the user you are logged in as a privileged user. Let's create a new user and execute the query again:
 
-    ```sql
-    CREATE USER TestUser WITHOUT LOGIN;
-    GRANT SELECT ON dbo.customer TO TestUser;
+   ```sql
+   CREATE USER TestUser WITHOUT LOGIN;
+   GRANT SELECT ON dbo.customer TO TestUser;
 
-    EXECUTE AS USER = 'TestUser';
-    SELECT * FROM dbo.customer;
-    REVERT;
-    ```
+   EXECUTE AS USER = 'TestUser';
+   SELECT * FROM dbo.customer;
+   REVERT;
+   ```
 
 8. Execute the query by clicking the **Execute** button. Notice this time that the Postal Code values are masked (`90XXX`).
 
-    ![The query results are shown with the mask applied to the Postal Code field.](media/ssms-ddm-results-mask.png 'Query results')
+   ![The query results are shown with the mask applied to the Postal Code field.](media/ssms-ddm-results-mask.png 'Query results')
 
 ## Exercise 5: Exploring intelligent query processing (QP) features
 
@@ -592,9 +595,11 @@ In this exercise, you will execute a series of SQL scripts in SQL Server Managem
 
 To learn more, read [intelligent query processing](https://docs.microsoft.com/sql/relational-databases/performance/intelligent-query-processing?view=sql-server-ver15) in SQL databases.
 
+### Task 1: Set database compatibility level
+
 1. To get started, expand databases in the SQL Server Management Studio (SSMS) Object Explorer, right-click the `sales_XXXXX` database (where XXXXX is the unique identifier assigned to you for this workshop), and then select **New Query**.
 
-   ![The sales database and New Query menu item are highlighted.](media/ssms-sales-new-query.png "New Query")
+   ![The sales database and New Query menu item are highlighted.](media/ssms-sales-new-query.png 'New Query')
 
 2. The first query you will run is to set the database compatibility level to `150`, which is the new compatibility level for SQL Server 2019, enabling the most recent intelligent QP features. Copy the SQL script below and paste it into the new query window. Replace `XXXXX` with the unique identifier you have been given for this workshop in both the `USE` and `ALTER DATABASE` statements.
 
@@ -609,9 +614,13 @@ To learn more, read [intelligent query processing](https://docs.microsoft.com/sq
 
 3. To run the query, select **Execute** in the SSMS toolbar.
 
-   ![The Execute button is highlighted in the SSMS toolbar.](media/ssms-execute-query.png "Execute")
+   ![The Execute button is highlighted in the SSMS toolbar.](media/ssms-execute-query.png 'Execute')
 
-4. Next, you will run a query to create a user-defined function (UDF) named `customer_category`. This UDF contains several steps to identify the discount price category for each customer. Notice that at the top of the query we run to create this UDF sets the database compatibility level to `150`, which is the new compatibility level for SQL Server 2019, enabling the most recent intelligent QP features. This UDF will be called inline from the two queries that follow in order to show QP improvements on scalar UDF inlining. Paste the following SQL code into your query window, overwriting the current content, replace `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop, and then select **Execute** on the SSMS toolbar.
+### Task 2: Scalar UDF inlining
+
+Next, you will run a query to create a user-defined function (UDF) named `customer_category`. This UDF contains several steps to identify the discount price category for each customer. Notice that at the top of the query we run to create this UDF sets the database compatibility level to `150`, which is the new compatibility level for SQL Server 2019, enabling the most recent intelligent QP features. This UDF will be called inline from the two queries that follow in order to show QP improvements on scalar UDF inlining.
+
+1. Paste the following SQL code into your query window, overwriting the current content, replace `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop, and then select **Execute** on the SSMS toolbar.
 
    ```sql
    USE sales_XXXXX;
@@ -647,151 +656,155 @@ To learn more, read [intelligent query processing](https://docs.microsoft.com/sq
 
    > Scalar UDF inlining automatically transforms [scalar UDFs](https://docs.microsoft.com/sql/relational-databases/user-defined-functions/create-user-defined-functions-database-engine?view=sql-server-2017#Scalar) into relational expressions. It embeds them in the calling SQL query. This transformation improves the performance of workloads that take advantage of scalar UDFs. Scalar UDF inlining facilitates cost-based optimization of operations inside UDFs. The results are efficient, set-oriented, and parallel instead of inefficient, iterative, serial execution plans. This feature is enabled by default under database compatibility level 150. _For more information, see [Scalar UDF inlining](https://docs.microsoft.com/sql/relational-databases/user-defined-functions/scalar-udf-inlining?view=sql-server-2017)_.
 
-5. Right-click on the `sales_XXXXX` database (where XXXXX is the unique identifier assigned to you for this workshop), then select **New Query**. This will open a new query window into which you can paste the following queries. You may wish to reuse the same query window, replacing its contents with each SQL statement blocks below, or follow these same steps to create new query windows for each.
+2. Right-click on the `sales_XXXXX` database (where XXXXX is the unique identifier assigned to you for this workshop), then select **New Query**. This will open a new query window into which you can paste the following queries. You may wish to reuse the same query window, replacing its contents with each SQL statement blocks below, or follow these same steps to create new query windows for each.
 
-   ![The sales database and New Query menu item are highlighted.](media/ssms-sales-new-query.png "New Query")
+   ![The sales database and New Query menu item are highlighted.](media/ssms-sales-new-query.png 'New Query')
 
-6. The query below selects the top 100 rows from the `customer` table, calling the `customer_category` user-defined function (UDF) inline for each row. It uses the `DISABLE_TSQL_SCALAR_UDF_INLINING` hint to disable the new scalar UDF inlining QP feature. Paste the following query into the the empty query window. Replace `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. **Do not execute yet**.
+3. The query below selects the top 100 rows from the `customer` table, calling the `customer_category` user-defined function (UDF) inline for each row. It uses the `DISABLE_TSQL_SCALAR_UDF_INLINING` hint to disable the new scalar UDF inlining QP feature. Paste the following query into the the empty query window. Replace `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. **Do not execute yet**.
 
-    ```sql
-    USE sales_XXXXX;
-    GO
+   ```sql
+   USE sales_XXXXX;
+   GO
 
-    -- Before (show actual query execution plan for legacy behavior)
-    SELECT TOP 100
-        [c_customer_sk], [c_first_name], [c_last_name],
-          dbo.customer_category([c_customer_sk]) AS [Discount Category]
-    FROM [dbo].[customer]
-    ORDER BY [c_customer_sk]
-    OPTION (RECOMPILE, USE HINT('DISABLE_TSQL_SCALAR_UDF_INLINING'));
-    ```
+   -- Before (show actual query execution plan for legacy behavior)
+   SELECT TOP 100
+       [c_customer_sk], [c_first_name], [c_last_name],
+         dbo.customer_category([c_customer_sk]) AS [Discount Category]
+   FROM [dbo].[customer]
+   ORDER BY [c_customer_sk]
+   OPTION (RECOMPILE, USE HINT('DISABLE_TSQL_SCALAR_UDF_INLINING'));
+   ```
 
-7. Select the **Include Actual Execution Plan** (Ctrl+M) button in the toolbar above the query window. This will allow us to view the actual (not estimated) query plan after executing the query.
+4. Select the **Include Actual Execution Plan** (Ctrl+M) button in the toolbar above the query window. This will allow us to view the actual (not estimated) query plan after executing the query.
 
-   ![The Actual Query Plan button is highlighted in the toolbar.](media/ssms-enable-actual-query-plan-customer.png "Enable Actual Query Plan")
+   ![The Actual Query Plan button is highlighted in the toolbar.](media/ssms-enable-actual-query-plan-customer.png 'Enable Actual Query Plan')
 
-8. Execute the query by selecting **Execute** from the SSMS toolbar.
+5. Execute the query by selecting **Execute** from the SSMS toolbar.
 
-9. After the query executes, select the **Execution plan** tab. As the plan shows, SQL Server adopts a simple strategy here: for every tuple in the `customer` table, invoke the UDF and output the results (single line from the clustered index scan to compute scalar). This strategy is naïve and inefficient, especially with more complex queries.
+6. After the query executes, select the **Execution plan** tab. As the plan shows, SQL Server adopts a simple strategy here: for every tuple in the `customer` table, invoke the UDF and output the results (single line from the clustered index scan to compute scalar). This strategy is naïve and inefficient, especially with more complex queries.
 
-   ![This screenshot shows the query execution plan using the legacy method.](media/ssms-udf-inlining-before.png "Query execution plan with legacy method")
+   ![This screenshot shows the query execution plan using the legacy method.](media/ssms-udf-inlining-before.png 'Query execution plan with legacy method')
 
-10. Clear the query window, or open a new one, then paste the following query that makes use of the scalar UDF inlining QP feature. Replace `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. If you opened a new query window instead of reusing this one, make sure to select the **Include Actual Execution Plan** button to enable it. **Execute** the query.
+7. Clear the query window, or open a new one, then paste the following query that makes use of the scalar UDF inlining QP feature. Replace `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. If you opened a new query window instead of reusing this one, make sure to select the **Include Actual Execution Plan** button to enable it. **Execute** the query.
 
-    ```sql
-    USE sales_XXXXX;
-    GO
+   ```sql
+   USE sales_XXXXX;
+   GO
 
-    -- After (show actual query execution plan for legacy behavior)
-    SELECT TOP 100
-        [c_customer_sk], [c_first_name], [c_last_name],
-          dbo.customer_category([c_customer_sk]) AS [Discount Category]
-    FROM [dbo].[customer]
-    ORDER BY [c_customer_sk]
-    OPTION (RECOMPILE);
-    ```
+   -- After (show actual query execution plan for legacy behavior)
+   SELECT TOP 100
+       [c_customer_sk], [c_first_name], [c_last_name],
+         dbo.customer_category([c_customer_sk]) AS [Discount Category]
+   FROM [dbo].[customer]
+   ORDER BY [c_customer_sk]
+   OPTION (RECOMPILE);
+   ```
 
-11. After the query executes, select the **Execution plan** tab once again. With scalar UDF inlining, this UDF is transformed into equivalent scalar subqueries, which are substituted in the calling query in place of the UDF.
+8. After the query executes, select the **Execution plan** tab once again. With scalar UDF inlining, this UDF is transformed into equivalent scalar subqueries, which are substituted in the calling query in place of the UDF.
 
-    ![This screenshot shows the query execution plan using the new QP feature.](media/ssms-udf-inlining-after.png "Query execution plan with new method")
+   ![This screenshot shows the query execution plan using the new QP feature.](media/ssms-udf-inlining-after.png 'Query execution plan with new method')
 
-    > As you can see, the query plan no longer has a user-defined function operator, but its effects are now observable in the plan, like views or inline TVFs. Here are some key observations from the above plan:
+   > As you can see, the query plan no longer has a user-defined function operator, but its effects are now observable in the plan, like views or inline TVFs. Here are some key observations from the above plan:
 
-    A. SQL Server has inferred the implicit join between `dbo.customer` and `dbo.web_sales` and made that explicit via a join operator.
+   A. SQL Server has inferred the implicit join between `dbo.customer` and `dbo.web_sales` and made that explicit via a join operator.
 
-    B. SQL Server has also inferred the implicit `GROUP BY [Customer Key] on dbo.web_sales` and has used the IndexSpool + StreamAggregate to implement it.
+   B. SQL Server has also inferred the implicit `GROUP BY [Customer Key] on dbo.web_sales` and has used the IndexSpool + StreamAggregate to implement it.
 
-    > Depending upon the complexity of the logic in the UDF, the resulting query plan might also get bigger and more complex. As we can see, the operations inside the UDF are now no longer a black box, and hence the query optimizer is able to cost and optimize those operations. Also, since the UDF is no longer in the plan, iterative UDF invocation is replaced by a plan that completely avoids function call overhead.
+   > Depending upon the complexity of the logic in the UDF, the resulting query plan might also get bigger and more complex. As we can see, the operations inside the UDF are now no longer a black box, and hence the query optimizer is able to cost and optimize those operations. Also, since the UDF is no longer in the plan, iterative UDF invocation is replaced by a plan that completely avoids function call overhead.
 
-12. Either highlight and delete everything in the query window, or open a new query window. Paste the following query into the query window, replacing `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. This query makes use of the table variable deferred compilation feature, since the database compatibility level is set to `150`. If you opened a new query window instead of reusing this one, make sure to click the **Include Actual Execution Plan** button to enable it. **Execute** the query.
+### Task 3: Table variable deferred compilation
 
-    ```sql
-    USE sales_XXXXX
-    GO
+1. Either highlight and delete everything in the query window, or open a new query window. Paste the following query into the query window, replacing `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. This query makes use of the table variable deferred compilation feature, since the database compatibility level is set to `150`. If you opened a new query window instead of reusing this one, make sure to click the **Include Actual Execution Plan** button to enable it. **Execute** the query.
 
-    DECLARE @ItemClick TABLE (
-      [itemKey] BIGINT NOT NULL,
-      [clickDate] BIGINT NOT NULL
-    );
+   ```sql
+   USE sales_XXXXX
+   GO
 
-    INSERT @ItemClick
-    SELECT [wcs_item_sk], [wcs_click_date_sk]
-    FROM [dbo].[web_clickstreams]
+   DECLARE @ItemClick TABLE (
+     [itemKey] BIGINT NOT NULL,
+     [clickDate] BIGINT NOT NULL
+   );
 
-    -- Look at estimated rows, speed, join algorithm
-    SELECT i.[i_item_sk], i.[i_current_price], c.[clickDate]
-    FROM dbo.item AS i
-    INNER JOIN @ItemClick AS c
-      ON i.[i_item_sk] = c.[itemKey]
-    WHERE i.[i_current_price] > 90
-    ORDER BY i.[i_current_price] DESC;
-    GO
-    ```
+   INSERT @ItemClick
+   SELECT [wcs_item_sk], [wcs_click_date_sk]
+   FROM [dbo].[web_clickstreams]
 
-    > The script above assigns a table variable, `@ItemClick`, storing the `itemKey` and `clickDate` fields from the `web_clickstreams` table to be used in an INNER JOIN below.
+   -- Look at estimated rows, speed, join algorithm
+   SELECT i.[i_item_sk], i.[i_current_price], c.[clickDate]
+   FROM dbo.item AS i
+   INNER JOIN @ItemClick AS c
+     ON i.[i_item_sk] = c.[itemKey]
+   WHERE i.[i_current_price] > 90
+   ORDER BY i.[i_current_price] DESC;
+   GO
+   ```
 
-    **Old method**
+   > The script above assigns a table variable, `@ItemClick`, storing the `itemKey` and `clickDate` fields from the `web_clickstreams` table to be used in an INNER JOIN below.
 
-    In prior versions of SQL Server (compatibility level of 140 or lower), the table variable deferred compilation QP feature is not used (more on this below).
+   **Old method**
 
-    There are two plans. The one you want to observe is the second query plan. When we mouse over the INNER JOIN to view the estimated number of rows and the output list, which shows the join algorithm. The estimated number of rows is 1. Also, observe the execution time. In our case, it took 10 seconds to complete.
+   In prior versions of SQL Server (compatibility level of 140 or lower), the table variable deferred compilation QP feature is not used (more on this below).
 
-    ![This screenshot shows the query execution plan using the legacy method.](media/ssms-tvdc-old-method.png "Query execution plan with old method")
+   There are two plans. The one you want to observe is the second query plan. When we mouse over the INNER JOIN to view the estimated number of rows and the output list, which shows the join algorithm. The estimated number of rows is 1. Also, observe the execution time. In our case, it took 10 seconds to complete.
 
-    **New method**
+   ![This screenshot shows the query execution plan using the legacy method.](media/ssms-tvdc-old-method.png 'Query execution plan with old method')
 
-    After the query above executes, select the **Execution plan** tab once again. Since our database compatibility level is set to 150, notice that the join algorithm is a hash match, and that the overall query execution plan looks different. When you hover over the INNER JOIN, notice that there is a high value for estimated number of rows and that the output list shows the use of hash keys and an optimized join algorithm. Once again, observe the execution time. In our case, it took 6 seconds to complete, which is approximately half the time it took to execute without the table variable deferred compilation feature.
+   **New method**
 
-    ![This screenshot shows the query execution plan using the new method.](media/ssms-tvdc-new-method.png "Query execution plan with new method")
+   After the query above executes, select the **Execution plan** tab once again. Since our database compatibility level is set to 150, notice that the join algorithm is a hash match, and that the overall query execution plan looks different. When you hover over the INNER JOIN, notice that there is a high value for estimated number of rows and that the output list shows the use of hash keys and an optimized join algorithm. Once again, observe the execution time. In our case, it took 6 seconds to complete, which is approximately half the time it took to execute without the table variable deferred compilation feature.
 
-    > Table variable deferred compilation improves plan quality and overall performance for queries that reference table variables. During optimization and initial compilation, this feature propagates cardinality estimates that are based on actual table variable row counts. This accurate row count information optimizes downstream plan operations. Table variable deferred compilation defers compilation of a statement that references a table variable until the first actual run of the statement. This deferred compilation behavior is the same as that of temporary tables. This change results in the use of actual cardinality instead of the original one-row guess. _For more information, see [Table variable deferred compilation](https://docs.microsoft.com/sql/t-sql/data-types/table-transact-sql?view=sql-server-2017#table-variable-deferred-compilation)._
+   ![This screenshot shows the query execution plan using the new method.](media/ssms-tvdc-new-method.png 'Query execution plan with new method')
 
-13. Either highlight and delete everything in the query window, or open a new query window. Paste the following query to simulate out-of-date statistics on the `web_sales` table, followed by a query that executes a hash match, replacing `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. If you opened a new query window instead of reusing this one, make sure to click the **Include Actual Execution Plan** button to enable it. **Execute** the query.
+   > Table variable deferred compilation improves plan quality and overall performance for queries that reference table variables. During optimization and initial compilation, this feature propagates cardinality estimates that are based on actual table variable row counts. This accurate row count information optimizes downstream plan operations. Table variable deferred compilation defers compilation of a statement that references a table variable until the first actual run of the statement. This deferred compilation behavior is the same as that of temporary tables. This change results in the use of actual cardinality instead of the original one-row guess. _For more information, see [Table variable deferred compilation](https://docs.microsoft.com/sql/t-sql/data-types/table-transact-sql?view=sql-server-2017#table-variable-deferred-compilation)._
 
-    ```sql
-    USE sales_XXXXX;
-    GO
+### Task 4: Row mode memory grant feedback
 
-    -- Simulate out-of-date stats
-    UPDATE STATISTICS dbo.web_sales
-    WITH ROWCOUNT = 1;
-    GO
+1. Either highlight and delete everything in the query window, or open a new query window. Paste the following query to simulate out-of-date statistics on the `web_sales` table, followed by a query that executes a hash match, replacing `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. If you opened a new query window instead of reusing this one, make sure to click the **Include Actual Execution Plan** button to enable it. **Execute** the query.
 
-    SELECT
-      ws.[ws_order_number], ws.ws_quantity,
-      i.[i_current_price], i.[i_item_desc]
-    FROM    dbo.web_sales AS ws
-    INNER HASH JOIN dbo.[item] AS i
-      ON ws.[ws_item_sk] = i.[i_item_sk]
-    WHERE   i.[i_current_price] > 10
-      AND ws.[ws_quantity] > 40;
-    ```
+   ```sql
+   USE sales_XXXXX;
+   GO
 
-14. After the query executes, select the **Execution plan** tab. Hover over the Hash Match step of the execution plan. You should see a warning toward the bottom of the Hash Match dialog showing spilled data. Also observe the execution time. In our case, this query took 16 seconds to execute.
+   -- Simulate out-of-date stats
+   UPDATE STATISTICS dbo.web_sales
+   WITH ROWCOUNT = 1;
+   GO
 
-    ![The Hash Match dialog shows spilled data warnings.](media/ssms-memory-grant-feedback-old.png "Query execution plan showing spilled data")
+   SELECT
+     ws.[ws_order_number], ws.ws_quantity,
+     i.[i_current_price], i.[i_item_desc]
+   FROM    dbo.web_sales AS ws
+   INNER HASH JOIN dbo.[item] AS i
+     ON ws.[ws_item_sk] = i.[i_item_sk]
+   WHERE   i.[i_current_price] > 10
+     AND ws.[ws_quantity] > 40;
+   ```
 
-15. Either highlight and delete everything in the query window, or open a new query window. Paste the following query to execute the select query that contains the hash match once more, replacing `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. If you opened a new query window instead of reusing this one, make sure to click the **Include Actual Execution Plan** button to enable it. **Execute** the query.
+2. After the query executes, select the **Execution plan** tab. Hover over the Hash Match step of the execution plan. You should see a warning toward the bottom of the Hash Match dialog showing spilled data. Also observe the execution time. In our case, this query took 16 seconds to execute.
 
-    ```sql
-    USE sales_XXXXX;
-    GO
+   ![The Hash Match dialog shows spilled data warnings.](media/ssms-memory-grant-feedback-old.png 'Query execution plan showing spilled data')
 
-    SELECT
-      ws.[ws_order_number], ws.ws_quantity,
-      i.[i_current_price], i.[i_item_desc]
-    FROM    dbo.web_sales AS ws
-    INNER HASH JOIN dbo.[item] AS i
-      ON ws.[ws_item_sk] = i.[i_item_sk]
-    WHERE   i.[i_current_price] > 10
-      AND ws.[ws_quantity] > 40;
-    ```
+3. Either highlight and delete everything in the query window, or open a new query window. Paste the following query to execute the select query that contains the hash match once more, replacing `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. If you opened a new query window instead of reusing this one, make sure to click the **Include Actual Execution Plan** button to enable it. **Execute** the query.
 
-16. After the query executes, select the **Execution plan** tab. Hover over the Hash Match step of the execution plan. You should **no longer** see a warning about spilled data. Also observe the execution time. In our case, this query took 11 seconds to execute.
+   ```sql
+   USE sales_XXXXX;
+   GO
 
-    ![The Hash Match dialog no longer contains spilled data warnings.](media/ssms-memory-grant-feedback-fix.png "Query execution plan with no spilled data")
+   SELECT
+     ws.[ws_order_number], ws.ws_quantity,
+     i.[i_current_price], i.[i_item_desc]
+   FROM    dbo.web_sales AS ws
+   INNER HASH JOIN dbo.[item] AS i
+     ON ws.[ws_item_sk] = i.[i_item_sk]
+   WHERE   i.[i_current_price] > 10
+     AND ws.[ws_quantity] > 40;
+   ```
 
-    > So what happened? A query's post-execution plan in SQL Server includes the minimum required memory needed for execution and the ideal memory grant size to have all rows fit in memory. Performance suffers when memory grant sizes are incorrectly sized. Excessive grants result in wasted memory and reduced concurrency. Insufficient memory grants cause expensive spills to disk. By addressing repeating workloads, batch mode memory grant feedback recalculates the actual memory required for a query and then updates the grant value for the cached plan. **When an identical query statement is executed**, the query uses the revised memory grant size, reducing excessive memory grants that impact concurrency and fixing underestimated memory grants that cause expensive spills to disk. Row mode memory grant feedback expands on the batch mode memory grant feedback feature by adjusting memory grant sizes for both batch and row mode operators. _For more information, see [Row mode memory grant feedback](https://docs.microsoft.com/sql/relational-databases/performance/adaptive-query-processing?view=sql-server-2017#row-mode-memory-grant-feedback)._
+4. After the query executes, select the **Execution plan** tab. Hover over the Hash Match step of the execution plan. You should **no longer** see a warning about spilled data. Also observe the execution time. In our case, this query took 11 seconds to execute.
+
+   ![The Hash Match dialog no longer contains spilled data warnings.](media/ssms-memory-grant-feedback-fix.png 'Query execution plan with no spilled data')
+
+   > So what happened? A query's post-execution plan in SQL Server includes the minimum required memory needed for execution and the ideal memory grant size to have all rows fit in memory. Performance suffers when memory grant sizes are incorrectly sized. Excessive grants result in wasted memory and reduced concurrency. Insufficient memory grants cause expensive spills to disk. By addressing repeating workloads, batch mode memory grant feedback recalculates the actual memory required for a query and then updates the grant value for the cached plan. **When an identical query statement is executed**, the query uses the revised memory grant size, reducing excessive memory grants that impact concurrency and fixing underestimated memory grants that cause expensive spills to disk. Row mode memory grant feedback expands on the batch mode memory grant feedback feature by adjusting memory grant sizes for both batch and row mode operators. _For more information, see [Row mode memory grant feedback](https://docs.microsoft.com/sql/relational-databases/performance/adaptive-query-processing?view=sql-server-2017#row-mode-memory-grant-feedback)._
 
 ## Exercise 6: Monitoring the big data cluster
 
@@ -801,24 +814,14 @@ To learn more, read [intelligent query processing](https://docs.microsoft.com/sq
 
 ## After the hands-on lab
 
-Duration: X minutes
+Duration: 10 mins
 
-\[insert your custom Hands-on lab content here . . .\]
+In this exercise, you will delete any Azure resources that were created in support of the lab. You should follow all steps provided after attending the Hands-on lab to ensure your account does not continue to be charged for lab resources.
 
-### Task 1: Task name
+### Task 1: Delete the resource group
 
-1.  Number and insert your custom workshop content here . . .
+1. Using the [Azure portal](https://portal.azure.com), navigate to the Resource group you used throughout this hands-on lab by selecting Resource groups in the left menu.
+2. Search for the name of your resource group, and select it from the list.
+3. Select Delete in the command bar, and confirm the deletion by re-typing the Resource group name, and selecting Delete.
 
-    a.  Insert content here
-
-        i.  
-
-### Task 2: Task name
-
-1.  Number and insert your custom workshop content here . . .
-
-    a.  Insert content here
-
-        i.  
-You should follow all steps provided *after* attending the Hands-on lab.
-
+You should follow all steps provided _after_ attending the Hands-on lab.
