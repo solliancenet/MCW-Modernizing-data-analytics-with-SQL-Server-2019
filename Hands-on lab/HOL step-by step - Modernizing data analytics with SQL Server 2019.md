@@ -300,7 +300,33 @@ Now that we have our two external tables added, we will now join those two exter
 
 ## Exercise 2: Using notebooks
 
+Executable, or interactive, notebooks have a long history in science and academia. Notebooks were traditionally provided by applications such as [MATLAB](https://www.mathworks.com/products/matlab.html) and [Wolfram Mathematica](https://www.wolfram.com/mathematica/) to help scientists, students, professors, and mathematicians create self-documenting notebooks that others can use to reproduce experiments. To accomplish this, notebooks contain a combination of runnable code, output, formatted text, and visualizations. Over the past several years, web-based interactive notebooks have gained popularity with data scientists and data engineers to conduct exploratory data analysis and model training using a number of languages, such as Python, Scala, SQL, R, and others.
+
+One of the most popular notebooks in use today are [Jupyter](http://jupyter.org/) notebooks. This is what SQL Server 2019 Big Data clusters use, and what you will be using in the exercises below.
+
+Notebooks are made up of one or more of cells that allow for the execution of the code snippets or commands within those cells. They store commands and the results of running those commands. If you are used to developing software and applications using your favorite IDE, then you will realize that there are some disadvantages to using notebooks in place of a more traditional development platform. For example, you cannot set breakpoints and run in debug mode, allowing you to step through the code and inspect object and environment states during execution. However, there are many advantages notebooks do provide. They offer an environment that allows for exploration, documentation, collaboration, and visualization. When a data scientist creates and shares it with a colleague, they are sharing notes and insights about the data with access to all of the queries, formulas, visualizations, and models. This enables interactive conversations and further exploration, with simple reproducibility by anyone running the notebook in the same or similar environment, without others needing to know a sequence of shell commands and environment variables known only to the original author. This collaborative knowledge exchange within an easy to share self-contained package is far more valuable than simply sharing a static, final report.
+
 ### Task 1: Introduction to Jupyter notebooks
+
+1. In Azure Data Studio, click **File**, then **Open File...**.
+
+2. In the folder browser dialog, navigate to the `C:\MCW-Modernizing-data-analytics-with-SQL-Server-2019-master\Hands-on lab\Resources` folder and select **notebook_00.ipynb**.
+
+   ![The Open File dialog is displayed.](media/ads-open-notebook0.png 'Open File')
+
+3. When the notebook opens, you need to select the **Kernel** you would like to use to run the notebook. Located the **Kernel** dropdown in the toolbar above the notebook, then select **Python 3**.
+
+   ![The Python 3 kernel is selected.](media/ads-notebook-select-kernel.png 'Kernel dropdown')
+
+4. After selecting the Kernel, you may be prompted to install Python for Notebooks components. If you see this, either select **New Python installation** or select **Use existing Python installation**. Select the existing option first and make sure it automatically locates the Python Install Location. If not, then select the first option for a new installation. Click **Install**. This may take **several minutes to complete**.
+
+   ![The dialog is displayed.](media/ads-configure-python-for-notebooks.png 'Configure Python for Notebooks')
+
+   While it is running, you will see the install progress in the **Tasks** tab, and the **Kernel** will display "Changing kernel..." in the dropdown.
+
+   ![The installation status is displayed.](media/ads-configure-python-for-notebooks-running.png 'Tasks')
+
+5. After the Python components are installed, make sure that **Python 3** is your selected **Kernel**, then follow the instructions within the notebook.
 
 ### Task 2: Querying the SQL Server Master Instance (MI)
 
