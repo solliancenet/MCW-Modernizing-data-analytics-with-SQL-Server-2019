@@ -57,7 +57,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 4: Row mode memory grant feedback](#Task-4-Row-mode-memory-grant-feedback)
   - [Exercise 6: Monitoring the big data cluster](#Exercise-6-Monitoring-the-big-data-cluster)
     - [Task 1: Use the cluster administration portal](#Task-1-Use-the-cluster-administration-portal)
-    - [Task 2: Monitor and troubleshoot using Kubectl commands](#Task-2-Monitor-and-troubleshoot-using-Kubectl-commands)
+    - [Task 2: Monitor and troubleshoot using kubectl commands](#Task-2-Monitor-and-troubleshoot-using-kubectl-commands)
   - [After the hands-on lab](#After-the-hands-on-lab)
     - [Task 1: Delete the resource group](#Task-1-Delete-the-resource-group)
 
@@ -130,6 +130,8 @@ Follow the steps below to connect to your SQL Server 2019 cluster with both Azur
 3. Click **Connect**.
 
 ## Exercise 1: Using data virtualization
+
+Duration: 20 mins
 
 One of the key new features of SQL Server 2019 is data virtualization. What this means is that you can _virtualize_ external data in a SQL Server instance, regardless of source, location, and format, so that it can be queried like any other table, or sets of tables, within your SQL Server instance. In essence, data virtualization helps you create a single "virtual" layer of data from these disparate sources, providing unified data services to support multiple applications and users. A more familiar term we could use is data lake, or perhaps data hub. Unlike a typical data lake, however, you do not have to move data out from where it lives, yet you can still query that data through a consistent interface. This is a huge advantage over traditional ETL (extract-transform-load) processes where data must be moved from its original source to a new destination, oftentimes with some data transformation or mapping. This causes delays, extra storage, additional security, and a fair amount of engineering in most cases. With data virtualization, no data movement is required, which means the data sets are up-to-date, and it is possible to query and join these different data sources through these new capabilities, thanks to the use of new [PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide?view=sql-server-ver15) connectors. The data sources you can connect to include Cosmos DB, SQL Server (including Azure SQL Database), Oracle, HDFS (for flat files), and DB2.
 
@@ -299,6 +301,8 @@ Now that we have our two external tables added, we will now join those two exter
 
 ## Exercise 2: Using notebooks
 
+Duration: 20 mins
+
 Executable, or interactive, notebooks have a long history in science and academia. Notebooks were traditionally provided by applications such as [MATLAB](https://www.mathworks.com/products/matlab.html) and [Wolfram Mathematica](https://www.wolfram.com/mathematica/) to help scientists, students, professors, and mathematicians create self-documenting notebooks that others can use to reproduce experiments. To accomplish this, notebooks contain a combination of runnable code, output, formatted text, and visualizations. Over the past several years, web-based interactive notebooks have gained popularity with data scientists and data engineers to conduct exploratory data analysis and model training using a number of languages, such as Python, Scala, SQL, R, and others.
 
 One of the most popular notebooks in use today are [Jupyter](http://jupyter.org/) notebooks. This is what SQL Server 2019 Big Data clusters use, and what you will be using in the exercises below.
@@ -393,6 +397,8 @@ Many times Spark is used to do transformations on data at large scale. In this J
 
 ## Exercise 3: Machine learning
 
+Duration: 15 mins
+
 In this exercise, you will use Azure Data Studio to execute a notebook that will enable you to train a model to predict the battery lifetime, apply the model to make batch predictions against a set of vehicle telemetry and save the scored telemetry to an external table that you can query using SQL.
 
 Wide World Importers has refrigerated trucks to deliver temperature-sensitive products. These are high-profit, and high-expense items. In the past, there have been failures in the cooling systems, and the primary culprit has been the deep-cycle batteries used in the system.
@@ -450,6 +456,8 @@ The trucks have sensors that transmit data to a file location. The trips are als
     ![View data](media/task02-view-data.png 'View data')
 
 ## Exercise 4: Identify PII and GDPR-related compliance issues using Data Discovery & Classification in SSMS
+
+Duration: 15 mins
 
 Contoso Auto has several databases that include tables containing sensitive data, such as personally identifiable information (PII) like phone numbers, social security numbers, financial data, etc. Since some of their personnel and customer data include individuals who reside within the European Union (EU), they need to adhere to the General Data Protection Regulation ([GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation)) as well. Because of this, Contoso Auto is required to provide periodic data auditing reports to identify sensitive and GDPR-related data that reside within their various databases.
 
@@ -553,6 +561,8 @@ In this task, you will apply dynamic data masking to one of the database fields 
    ![The query results are shown with the mask applied to the Postal Code field.](media/ssms-ddm-results-mask.png 'Query results')
 
 ## Exercise 5: Exploring intelligent query processing (QP) features
+
+Duration: 15 mins
 
 In this exercise, you will execute a series of SQL scripts in SQL Server Management Studio (SSMS) to explore the improvements to the family of intelligent query processing (QP) features in SQL Server 2019. These features improve the performance of existing workloads with minimal work on your part to implement. The key to enabling these features in SQL Server 2019 is to set the [database compatibility level](https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-database-transact-sql-compatibility-level?view=sql-server-ver15) to `150`. You will be executing these queries against the `sales` database.
 
@@ -771,6 +781,14 @@ Next, you will run a query to create a user-defined function (UDF) named `custom
 
 ## Exercise 6: Monitoring the big data cluster
 
+Duration: 10 mins
+
+When you need to monitor and troubleshoot your big data cluster, some of your options are quite different than what you may be used to in a typical Windows-based, or even Linux installation. No longer are you viewing Windows event logs or other familiar locations to view metrics and system-level information about your SQL environment. This is because the services that comprise your big data cluster are distributed across multiple Kubernetes pods. If you are unfamiliar with Kubernetes or Docker containers, then you may not know where to start.
+
+On the other hand, monitoring and managing SQL Server 2019 itself is very much the [same process as you would normally perform for any SQL Server system](https://docs.microsoft.com/en-us/sql/relational-databases/database-lifecycle-management?view=sql-server-ver15). You have the same type of services, surface points, security areas, and other control factors as in a stand-alone installation of SQL server. The tools you have available for managing the Master Instance in the SQL Server BDC are the same as managing a stand-alone installation, including SQL Server Management Studio, command-line interfaces, Azure Data Studio, and third party tools.
+
+For the cluster components, you have three primary interfaces to use: The cluster administration portal, kubectl (Kubernetes tool), and the Kubernetes dashboard. For this exercise, we will focus on reviewing the first two.
+
 ### Task 1: Use the cluster administration portal
 
 The cluster administration portal can be used to monitor and troubleshoot your SQL Server 2019 Big Data cluster.
@@ -820,6 +838,57 @@ To access the portal, use the IP address and port you captured after deploying y
    ![The About page is displayed.](media/admin-portal-about.png 'About')
 
 ### Task 2: Monitor and troubleshoot using kubectl commands
+
+> For all of the commands you will execute, replace **CLUSTER_NAMESPACE** with the big data cluster namespace you defined when deploying your cluster.
+
+Before executing these commands, you will need to make sure you are authenticated to Azure. If not, sign in using **az login**.
+
+1. Open a new Windows command prompt.
+
+2. Execute the following kubectl command to show the status of all the pods in your SQL Server big data cluster. Remember, **replace** CLUSTER_NAMESPACE with your own namespace.
+
+   ```bash
+   kubectl get pods -n CLUSTER_NAMESPACE
+   ```
+
+   ![Get pods command.](media/kubectl-get-pods.png 'Command prompt')
+
+3. Now, let's get some more details about one of the pods. In the list from the previous output, you should see a pod named **master-0**. Use the `describe` command to get a detailed description of a specific pod in json format. It includes details such as the current Kubernetes node that the pod is placed on, the containers running within the pod, and the image used to bootstrap the containers. It also shows other details, such as labels, status, and persisted volumes claims that are associated with the pod. If any errors have occurred, you can sometimes see the error in the recent events for the pod.
+
+   ```bash
+   kubectl describe pod master-0 -n CLUSTER_NAMESPACE
+   ```
+
+   ![Describe pod command shows no errors in recent events.](media/kubectl-describe-pod.png 'Command prompt')
+
+   In our case, the `master-0` pod shows no errors in recent events.
+
+4. As you saw in the previous section, you can view the logs through Kibana from the cluster administration portal. However, sometimes you want quick access to download all the logs for containers running within a pod. Run the command below to output the logs for all containers running in the `master-0` pod to a new file named `master-0-pod-logs.txt`.
+
+   ```bash
+   kubectl logs master-0 --all-containers=true -n CLUSTER_NAMESPACE > master-0-pod-logs.txt
+   ```
+
+5. A useful command that you may run relatively often is the `get svc` command. This returns details about your big data cluster services, including their type, IP, and ports. We've referred to this command a few times throughout the lab to show how you can retrieve the external IP address and port for services such as the cluster admin portal, Knox, and the SQL master instance.
+
+   ```bash
+   kubectl get svc -n CLUSTER_NAMESPACE
+   ```
+
+6. The command to retrieve service details is very similar to the one you ran to retrieve details about a pod. You can use this command to get a detailed description about a service in JSON format, such as IP, external IP, port, labels, selector, etc. In this case, we will retrieve service details for `master-svc-external`. Simply swap the service name for another to view details about that service.
+
+   ```bash
+   kubectl describe service master-svc-external -n CLUSTER_NAMESPACE
+   ```
+
+7. Besides retrieving useful information about pods, containers, and services, you can execute commands in a container as well. It is necessary at times to perform certain tasks by logging into a container, like checking if a certain file exists or restarting services in the container. You use this by executing the `kubectl exec` command. The syntax is as follows: `kubectl exec -it <pod_name> -c <container_name> -n <namespace_name> -- /bin/bash <command name>`. Execute the following command to log in to the `mssql-server` container within the `master-0` pod and restart the SQL Server process (remember to replace CLUSTER_NAMESPACE with your namespace):
+
+   ```bash
+   kubectl exec -it master-0  -c mssql-server -n CLUSTER_NAMESPACE -- /bin/bash
+   supervisorctl restart mssql
+   ```
+
+   ![Kubectl exec command.](media/kubectl-exec.png 'Command prompt')
 
 ## After the hands-on lab
 
