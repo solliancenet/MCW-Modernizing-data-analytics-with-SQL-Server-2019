@@ -554,23 +554,23 @@ In this task, you will apply dynamic data masking to one of the database fields 
 
 ## Exercise 5: Exploring intelligent query processing (QP) features
 
-In this exercise, you will execute a series of SQL scripts in SQL Server Management Studio (SSMS) to explore the improvements to the family of intelligent query processing (QP) features in SQL Server 2019. These features improve the performance of existing workloads with minimal work on your part to implement. The key to enabling these features in SQL Server 2019 is to set the [database compatibility level](https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-database-transact-sql-compatibility-level?view=sql-server-ver15) to `150`. You will be executing these queries against the `sales_XXXXX` database (where XXXXX is the unique identifier assigned to you for this workshop).
+In this exercise, you will execute a series of SQL scripts in SQL Server Management Studio (SSMS) to explore the improvements to the family of intelligent query processing (QP) features in SQL Server 2019. These features improve the performance of existing workloads with minimal work on your part to implement. The key to enabling these features in SQL Server 2019 is to set the [database compatibility level](https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-database-transact-sql-compatibility-level?view=sql-server-ver15) to `150`. You will be executing these queries against the `sales` database.
 
 To learn more, read [intelligent query processing](https://docs.microsoft.com/sql/relational-databases/performance/intelligent-query-processing?view=sql-server-ver15) in SQL databases.
 
 ### Task 1: Set database compatibility level
 
-1. To get started, expand databases in the SQL Server Management Studio (SSMS) Object Explorer, right-click the `sales_XXXXX` database (where XXXXX is the unique identifier assigned to you for this workshop), and then select **New Query**.
+1. To get started, expand databases in the SQL Server Management Studio (SSMS) Object Explorer, right-click the `sales` database, and then select **New Query**.
 
    ![The sales database and New Query menu item are highlighted.](media/ssms-sales-new-query.png 'New Query')
 
-2. The first query you will run is to set the database compatibility level to `150`, which is the new compatibility level for SQL Server 2019, enabling the most recent intelligent QP features. Copy the SQL script below and paste it into the new query window. Replace `XXXXX` with the unique identifier you have been given for this workshop in both the `USE` and `ALTER DATABASE` statements.
+2. The first query you will run is to set the database compatibility level to `150`, which is the new compatibility level for SQL Server 2019, enabling the most recent intelligent QP features. Copy the SQL script below and paste it into the new query window.
 
    ```sql
-   USE sales_XXXXX;
+   USE sales;
    GO
 
-   ALTER DATABASE sales_XXXXX
+   ALTER DATABASE sales
    SET COMPATIBILITY_LEVEL = 150;
    GO
    ```
@@ -583,10 +583,10 @@ To learn more, read [intelligent query processing](https://docs.microsoft.com/sq
 
 Next, you will run a query to create a user-defined function (UDF) named `customer_category`. This UDF contains several steps to identify the discount price category for each customer. Notice that at the top of the query we run to create this UDF sets the database compatibility level to `150`, which is the new compatibility level for SQL Server 2019, enabling the most recent intelligent QP features. This UDF will be called inline from the two queries that follow in order to show QP improvements on scalar UDF inlining.
 
-1. Paste the following SQL code into your query window, overwriting the current content, replace `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop, and then select **Execute** on the SSMS toolbar.
+1. Paste the following SQL code into your query window, overwriting the current content, and then select **Execute** on the SSMS toolbar.
 
    ```sql
-   USE sales_XXXXX;
+   USE sales;
    GO
 
    ALTER DATABASE SCOPED CONFIGURATION
@@ -619,14 +619,14 @@ Next, you will run a query to create a user-defined function (UDF) named `custom
 
    > Scalar UDF inlining automatically transforms [scalar UDFs](https://docs.microsoft.com/sql/relational-databases/user-defined-functions/create-user-defined-functions-database-engine?view=sql-server-2017#Scalar) into relational expressions. It embeds them in the calling SQL query. This transformation improves the performance of workloads that take advantage of scalar UDFs. Scalar UDF inlining facilitates cost-based optimization of operations inside UDFs. The results are efficient, set-oriented, and parallel instead of inefficient, iterative, serial execution plans. This feature is enabled by default under database compatibility level 150. _For more information, see [Scalar UDF inlining](https://docs.microsoft.com/sql/relational-databases/user-defined-functions/scalar-udf-inlining?view=sql-server-2017)_.
 
-2. Right-click on the `sales_XXXXX` database (where XXXXX is the unique identifier assigned to you for this workshop), then select **New Query**. This will open a new query window into which you can paste the following queries. You may wish to reuse the same query window, replacing its contents with each SQL statement blocks below, or follow these same steps to create new query windows for each.
+2. Right-click on the `sales` database, then select **New Query**. This will open a new query window into which you can paste the following queries. You may wish to reuse the same query window, replacing its contents with each SQL statement blocks below, or follow these same steps to create new query windows for each.
 
    ![The sales database and New Query menu item are highlighted.](media/ssms-sales-new-query.png 'New Query')
 
-3. The query below selects the top 100 rows from the `customer` table, calling the `customer_category` user-defined function (UDF) inline for each row. It uses the `DISABLE_TSQL_SCALAR_UDF_INLINING` hint to disable the new scalar UDF inlining QP feature. Paste the following query into the the empty query window. Replace `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. **Do not execute yet**.
+3. The query below selects the top 100 rows from the `customer` table, calling the `customer_category` user-defined function (UDF) inline for each row. It uses the `DISABLE_TSQL_SCALAR_UDF_INLINING` hint to disable the new scalar UDF inlining QP feature. Paste the following query into the the empty query window. **Do not execute yet**.
 
    ```sql
-   USE sales_XXXXX;
+   USE sales;
    GO
 
    -- Before (show actual query execution plan for legacy behavior)
@@ -648,10 +648,10 @@ Next, you will run a query to create a user-defined function (UDF) named `custom
 
    ![This screenshot shows the query execution plan using the legacy method.](media/ssms-udf-inlining-before.png 'Query execution plan with legacy method')
 
-7. Clear the query window, or open a new one, then paste the following query that makes use of the scalar UDF inlining QP feature. Replace `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. If you opened a new query window instead of reusing this one, make sure to select the **Include Actual Execution Plan** button to enable it. **Execute** the query.
+7. Clear the query window, or open a new one, then paste the following query that makes use of the scalar UDF inlining QP feature. If you opened a new query window instead of reusing this one, make sure to select the **Include Actual Execution Plan** button to enable it. **Execute** the query.
 
    ```sql
-   USE sales_XXXXX;
+   USE sales;
    GO
 
    -- After (show actual query execution plan for legacy behavior)
@@ -677,10 +677,10 @@ Next, you will run a query to create a user-defined function (UDF) named `custom
 
 ### Task 3: Table variable deferred compilation
 
-1. Either highlight and delete everything in the query window, or open a new query window. Paste the following query into the query window, replacing `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. This query makes use of the table variable deferred compilation feature, since the database compatibility level is set to `150`. If you opened a new query window instead of reusing this one, make sure to click the **Include Actual Execution Plan** button to enable it. **Execute** the query.
+1. Either highlight and delete everything in the query window, or open a new query window. Paste the following query into the query window. This query makes use of the table variable deferred compilation feature, since the database compatibility level is set to `150`. If you opened a new query window instead of reusing this one, make sure to click the **Include Actual Execution Plan** button to enable it. **Execute** the query.
 
    ```sql
-   USE sales_XXXXX
+   USE sales
    GO
 
    DECLARE @ItemClick TABLE (
@@ -722,10 +722,10 @@ Next, you will run a query to create a user-defined function (UDF) named `custom
 
 ### Task 4: Row mode memory grant feedback
 
-1. Either highlight and delete everything in the query window, or open a new query window. Paste the following query to simulate out-of-date statistics on the `web_sales` table, followed by a query that executes a hash match, replacing `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. If you opened a new query window instead of reusing this one, make sure to click the **Include Actual Execution Plan** button to enable it. **Execute** the query.
+1. Either highlight and delete everything in the query window, or open a new query window. Paste the following query to simulate out-of-date statistics on the `web_sales` table, followed by a query that executes a hash match. If you opened a new query window instead of reusing this one, make sure to click the **Include Actual Execution Plan** button to enable it. **Execute** the query.
 
    ```sql
-   USE sales_XXXXX;
+   USE sales;
    GO
 
    -- Simulate out-of-date stats
@@ -747,10 +747,10 @@ Next, you will run a query to create a user-defined function (UDF) named `custom
 
    ![The Hash Match dialog shows spilled data warnings.](media/ssms-memory-grant-feedback-old.png 'Query execution plan showing spilled data')
 
-3. Either highlight and delete everything in the query window, or open a new query window. Paste the following query to execute the select query that contains the hash match once more, replacing `XXXXX` in the `USE` statement with the unique identifier assigned to you for this workshop. If you opened a new query window instead of reusing this one, make sure to click the **Include Actual Execution Plan** button to enable it. **Execute** the query.
+3. Either highlight and delete everything in the query window, or open a new query window. Paste the following query to execute the select query that contains the hash match once more. If you opened a new query window instead of reusing this one, make sure to click the **Include Actual Execution Plan** button to enable it. **Execute** the query.
 
    ```sql
-   USE sales_XXXXX;
+   USE sales;
    GO
 
    SELECT
@@ -773,7 +773,53 @@ Next, you will run a query to create a user-defined function (UDF) named `custom
 
 ### Task 1: Use the cluster administration portal
 
-### Task 2: Monitor and troubleshoot using Kubectl commands
+The cluster administration portal can be used to monitor and troubleshoot your SQL Server 2019 Big Data cluster.
+
+The cluster administration portal allows you to:
+
+- Quickly view number of pods running and any issues
+- Monitor deployment status
+- View available service endpoints
+- View controller and SQL Server master instance
+- Drill down information on pods, including accessing Grafana dashboards and Kibana logs
+
+To access the portal, use the IP address and port you captured after deploying your cluster.
+
+1. Open a new web browser window and go to `https://<ip-address>:30777/portal`, replacing `<ip-address>` with your portal's IP. You may receive a security warning when accessing the web page since it is using auto-generated SSL certificates.
+
+   > Use kubectl to find the IP addresses for the cluster administration portal. Run `kubectl get svc -n <your-big-data-cluster-name>` and look at the EXTERNAL-IP addresses for **mgmtproxy-svc-external**).
+
+2. When prompted to log in, the username is **admin** and the password is the one you set when you provisioned the cluster (default is **MySQLBigData2019**).
+
+   ![The Cluster Administration Portal home page is displayed.](media/admin-portal-home.png 'Cluster Administration Portal home page')
+
+3. The home page shows you how many pods are currently running within the Controller, Master Instance, Compute Pool, Storage Pool, and Data Pool. You can either select a pool to view its details, or use the menu on the left. For now, select the **Controller** card or its item from the left-hand menu.
+
+4. You will see the 11 pods associated with the Controller on this page. All of them have links to view metrics in Grafana, and a few of them have links to view logs. Select **View** under **Node Metrics** next to the **Knox Service** pod. This will open a new browser tab into the Grafana dashboard.
+
+   ![The Controller Status is displayed with 11 pods.](media/admin-portal-controller.png 'Controller Status')
+
+5. Spend some time viewing the available metrics and graphs on the Grafana dashboard for the Knox Service pod. This dashboard gives good insight on load and any problem areas, as well as uptime and health checks.
+
+   ![The Grafana dashboard is displaying information about the Knox Service pod.](media/grafana-knox.png 'Grafana dashboard')
+
+6. Switch back to the cluster administration portal tab and select **View** under **Logs** next to the **Knox Service** pod. This will open a new browser tab into the Kibana log dashboard.
+
+   ![The View link under Logs is highlighted.](media/admin-portal-controller-logs.png 'Controller Status')
+
+7. When the Kibana page is displayed, you are presented with a nice interface for deriving insights from your pod's logs. You can search through your logs, filter by timeline, and refine your view. There is also an automatic refresh feature you can turn on. To do this, select **Auto-refresh** at the top of the page, then select a refresh interval, such as 10 seconds. Once set, you can turn it back off or pause the auto-refresh if it interferes with looking through the logs.
+
+   ![The auto refresh interval is set to 10 seconds.](media/kibana-discover.png 'Kibana')
+
+8. Switch back to the cluster administration portal tab and select **Service Endpoints** on the left-hand menu. This lists the service endpoints, including links to the Spark jobs management and monitoring dashboard, Grafana dashboard, HDFS proxy, and Kibana logs.
+
+   ![The Service Endpoints page is displayed.](media/admin-portal-service-endpoints.png 'Service Endpoints')
+
+9. Select **About** in the top-right corner of the portal to view information about your cluster, such as version numbers, container images, and a link to the documentation.
+
+   ![The About page is displayed.](media/admin-portal-about.png 'About')
+
+### Task 2: Monitor and troubleshoot using kubectl commands
 
 ## After the hands-on lab
 
