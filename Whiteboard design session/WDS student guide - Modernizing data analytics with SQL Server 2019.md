@@ -1,4 +1,4 @@
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
+![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
 
 <div class="MCWHeader1">
 Modernizing data analytics with SQL Server 2019
@@ -11,7 +11,6 @@ Whiteboard design session student guide
 <div class="MCWHeader3">
 June 2019
 </div>
-
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
 
@@ -63,29 +62,79 @@ Directions: With all participants in the session, the facilitator/SME presents a
 
 3.  As a table team, review the following customer case study.
 
-
 ### Customer situation
 
-\[insert your custom workshop content here . . . \]
+Wide World Importers (WWI) is a traditional brick and mortar business with a long track record of success, generating profits through strong retail store sales of their unique offering of affordable products from around the world. They have a great training program for new employees, that focuses on connecting with their customers and providing great face-to-face customer service. This strong focus on customer relationships has helped set WWI apart from their competitors.
 
+WWI's evolution of services over the years has helped them expand their reach beyond the walls of their retail stores into the web and mobile space. With this expansion, they have generated a significant amount of additional data, and data formats. These new platforms were added without integrating into the OLTP system data or Business Intelligence infrastructures. As a result, "silos" of data stores have developed.
+
+This is their omni-channel strategy:
+
+![WWI's omni-channel strategy includes retail stores, web e-commerce, and mobile e-commerce.](media/omni-channel-strategy.png 'Omni-channel strategy')
+
+Due to their continued growth, lending to expansion into the digital space, WWI is prepared to innovate by taking advantage of their omni-channel strategy and increased variety and amount of valuable data. They believe they can foster innovation by building upon their track record of strong customer connections, and engage with their customers through personalized, high-quality application experiences that incorporate data and intelligence.
+
+However, as a first step, WWI's technology team has recognized they must address the fact that they have quickly outgrown their ability to handle data. They anticipate the following solutions needed to reach more customers and grow the business:
+
+- Scale data systems to reach more consumers
+- Unlock business insights from multiple sources of structured and unstructured data
+- Apply deep analytics with high-performance responses
+- Infuse AI into apps to actively engage with customers
+
+Prior to expanding to their current omni-channel strategy, WWI had a simple Point of Sale (POS) application that handled customer orders at each retail store. The back-end was a series of service layers used to process orders and store them in a SQL database. They had designed their systems and tuned them to handle this level of data.
+
+![A POS app was the only source of data prior to the omni-channel strategy.](media/pos-app.png 'Single channel: POS app')
+
+As they added new e-commerce channels to expand the customer base, consumer demand also increased. This increased demand from more customers ordering products through more channels generated more data. Now WWI has new challenges to address:
+
+- Increased consumer demand, leading to increased app data
+- They are unable to determine business trends because of siloed insights
+- They have a rising data management footprint, increasing cost and complexity
+- New development challenges resulting from more deployment targets and duplicated code
+
+![The expansion to omni-channel causes issues.](media/omni-channel.png 'Omni-channel causes issues like siloed insights')
+
+WWI has considered using a traditional data warehouse to join data from their disparate systems to gain insights in one location. Their biggest concerns with this approach are the amount of time to put such a system in place and properly maintain it, but even more so, having an inherent delay between when new data is written to the source system and when that data is moved into the data warehouse. They would like to have access to data from all systems while it is fresh, but do so in a way that is highly scalable and able to support complex joins between the external sources and internal SQL server tables as well.
+
+However, there are times when they would like to move data into storage to provide denormalized and aggregated representations of their data for reporting purposes. In other terms, a data mart. However, they would like to also take advantage of distributed storage of this data, which would include sharding the data across multiple databases. They are concerned about the level of effort to shard their data, access that data, and maintain the distributed system.
+
+There are two scenarios WWI is considering using AI to help grow their business and reduce costs:
+
+1. Sales forecasting. Based on current and historical retail data, could they predict whether retail sales will be on track this month? Being able to meet sales targets while accurately forecasting sales revenue are critical success enablers by helping drive marketing campaigns and scale logistics and staffing accordingly.
+
+2. Reduce maintenance costs, waste, and maximize fleet availability by predicting battery lifespans. Wide World Importers relies on refrigerated trucks to deliver temperature-sensitive products. A dead or malfunctioning battery could cause the cooling systems to fail, requiring regular battery testing and replacements. WWI would like to use transmitted sensor data from these trucks to predict when a battery will most likely fail to reduce downtime and cut waste resulting from fixed battery replacement schedules.
 
 ### Customer needs
 
-1.  \[insert your custom workshop content here . . . \]
+1. Need distributed storage available to all nodes of the container: The storage can disappear when the Container is removed, and other Containers and technologies can't access storage easily within a Container.
 
-2.  
+2. Require a data lake to easily store and access disparate data.
 
+3. Would like a data mart to store denormalized and aggregated data while taking advantage of distributed storage.
+
+4. Simplified programming surface to prepare data and do data science.
+
+5. Scale data systems to reach more consumers.
+
+6. Unlock business insights from multiple sources of structured and unstructured data.
+
+7. Apply deep analytics with high-performance responses.
+
+8. Enable AI into apps to actively engage with customers.
+
+9. Identify PII and GDPR-related compliance issues for audit reports and take steps to fix these issues.
 
 ### Customer objections
 
-1.  \[insert your custom workshop content here . . . \]
+1. How do we centrally manage and monitor the cluster once deployed?
 
-2.  
+2. Do our workloads require us to use a data warehouse, or will a data mart suffice?
 
+3. Will moving to container-based SQL clusters be complex and too high of an operational and management cost for our IT team?
+
+4. How can SQL Server 2019 help us protect PII data and remain GDPR compliant?
 
 ### Infographic for common scenarios
-
-\[insert your custom workshop content here . . . \]
 
 ## Step 2: Design a proof of concept solution
 
@@ -97,7 +146,7 @@ Timeframe: 60 minutes
 
 **Business needs**
 
-Directions:  With all participants at your table, answer the following questions and list the answers on a flip chart:
+Directions: With all participants at your table, answer the following questions and list the answers on a flip chart:
 
 1.  Who should you present this solution to? Who is your target customer audience? Who are the decision makers?
 
@@ -107,23 +156,39 @@ Directions:  With all participants at your table, answer the following questions
 
 Directions: With all participants at your table, respond to the following questions on a flip chart:
 
-*Title*
+_High-level architecture_
 
-1.  Number and insert questions here
+1. Diagram your initial vision for the architecture of the solution.
 
-*Title*
+_Modern data warehouse_
 
-1.  Number and insert questions here
+1. What services and technologies should be used for the big data warehouse?
+
+2. How will you enable a single data query to work across multiple, disparate data sources with the ability to join internal SQL server tables at scale?
+
+3. How will you provide a data mart to store denormalized and aggregated data while taking advantage of distributed storage?
+
+4. What methods can be used to ensure the best performance when querying data?
+
+_Deep analytics and AI_
+
+1. What would be used to solve the AI requirements?
+
+2. How will you execute and train the Machine Learning model(s) used for the solution?
+
+_Monitor and Troubleshoot_
+
+1. How will you monitor and troubleshoot issues with the big data cluster?
 
 **Prepare**
 
 Directions: With all participants at your table:
 
-1.  Identify any customer needs that are not addressed with the proposed solution.
+1. Identify any customer needs that are not addressed with the proposed solution.
 
-2.  Identify the benefits of your solution.
+2. Identify the benefits of your solution.
 
-3.  Determine how you will respond to the customer's objections.
+3. Determine how you will respond to the customer's objections.
 
 Prepare a 15-minute chalk-talk style presentation to the customer.
 
@@ -139,32 +204,34 @@ Timeframe: 30 minutes
 
 Directions:
 
-1.  Pair with another table.
+1. Pair with another table.
 
-2.  One table is the Microsoft team and the other table is the customer.
+2. One table is the Microsoft team and the other table is the customer.
 
-3.  The Microsoft team presents their proposed solution to the customer.
+3. The Microsoft team presents their proposed solution to the customer.
 
-4.  The customer makes one of the objections from the list of objections.
+4. The customer makes one of the objections from the list of objections.
 
-5.  The Microsoft team responds to the objection.
+5. The Microsoft team responds to the objection.
 
-6.  The customer team gives feedback to the Microsoft team.
+6. The customer team gives feedback to the Microsoft team.
 
-7.  Tables switch roles and repeat Steps 2-6.
+7. Tables switch roles and repeat Steps 2-6.
 
-##  Wrap-up
+## Wrap-up
 
 Timeframe: 15 minutes
 
 Directions: Tables reconvene with the larger group to hear the facilitator/SME share the preferred solution for the case study.
 
-##  Additional references
+## Additional references
 
-|                 |           |
-| --------------- | :-------: |
-| **Description** | **Links** |
-|                 |           |
-|                 |           |
-|                 |           |
-|                 |           |
+|                                         |                                                                                                                                           |
+| --------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------: |
+| **Description**                         |                                                                 **Links**                                                                 |
+| What are SQL Server big data clusters?  |             <https://docs.microsoft.com/en-us/sql/big-data-cluster/big-data-cluster-overview?view=sqlallproducts-allversions>             |
+| How to use notebooks in SQL Server 2019 |                     <https://docs.microsoft.com/en-us/sql/big-data-cluster/notebooks-guidance?view=sql-server-ver15>                      |
+| Dynamic Data Masking                    |                         <https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking>                         |
+| Row-Level Security                      |                          <https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security>                          |
+| Always Encrypted with Secure Enclaves   | <https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/always-encrypted-enclaves?view=sqlallproducts-allversions> |
+| SQL Data Discovery and Classification   |     <https://docs.microsoft.com/en-us/sql/relational-databases/security/sql-data-discovery-and-classification?view=sql-server-ver15>      |

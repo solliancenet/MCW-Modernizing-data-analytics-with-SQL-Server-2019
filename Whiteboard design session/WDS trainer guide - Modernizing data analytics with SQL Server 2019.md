@@ -1,4 +1,4 @@
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
+![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
 
 <div class="MCWHeader1">
 Modernizing data analytics with SQL Server 2019
@@ -11,7 +11,6 @@ Whiteboard design session trainer guide
 <div class="MCWHeader3">
 June 2019
 </div>
-
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
 
@@ -63,25 +62,25 @@ Thank you for taking time to support the whiteboard design sessions as a trainer
 
 An amazing trainer:
 
--   Creates a safe environment in which learning can take place.
+- Creates a safe environment in which learning can take place.
 
--   Stimulates the participant's thinking.
+- Stimulates the participant's thinking.
 
--   Involves the participant in the learning process.
+- Involves the participant in the learning process.
 
--   Manages the learning process (on time, on topic, and adjusting to benefit participants).
+- Manages the learning process (on time, on topic, and adjusting to benefit participants).
 
--   Ensures individual participant accountability.
+- Ensures individual participant accountability.
 
--   Ties it all together for the participant.
+- Ties it all together for the participant.
 
--   Provides insight and experience to the learning process.
+- Provides insight and experience to the learning process.
 
--   Effectively leads the whiteboard design session discussion.
+- Effectively leads the whiteboard design session discussion.
 
--   Monitors quality and appropriateness of participant deliverables.
+- Monitors quality and appropriateness of participant deliverables.
 
--   Effectively leads the feedback process.
+- Effectively leads the feedback process.
 
 ## Whiteboard design session flow
 
@@ -93,11 +92,11 @@ Each whiteboard design session uses the following flow:
 
 Analyze your customer's needs.
 
--   Customer's background, situation, needs and technical requirements
+- Customer's background, situation, needs and technical requirements
 
--   Current customer infrastructure and architecture
+- Current customer infrastructure and architecture
 
--   Potential issues, objectives and blockers
+- Potential issues, objectives and blockers
 
 **Step 2: Design a proof of concept solution (60 minutes)**
 
@@ -105,13 +104,13 @@ Analyze your customer's needs.
 
 Design a solution and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format.
 
--   Determine your target customer audience.
+- Determine your target customer audience.
 
--   Determine customer's business needs to address your solution.
+- Determine customer's business needs to address your solution.
 
--   Design and diagram your solution.
+- Design and diagram your solution.
 
--   Prepare to present your solution.
+- Prepare to present your solution.
 
 **Step 3: Present the solution (30 minutes)**
 
@@ -119,29 +118,29 @@ Design a solution and prepare to present the solution to the target customer aud
 
 Present solution to your customer:
 
--   Present solution
+- Present solution
 
--   Respond to customer objections
+- Respond to customer objections
 
--   Receive feedback
+- Receive feedback
 
 **Wrap-up (15 minutes)**
 
--   Review preferred solution
+- Review preferred solution
 
 ## Before the whiteboard design session: How to prepare
 
 Before conducting your first whiteboard design session:
 
--   Read the Student guide (including the case study) and Trainer guide.
+- Read the Student guide (including the case study) and Trainer guide.
 
--   Become familiar with all key points and activities.
+- Become familiar with all key points and activities.
 
--   Plan the point you want to stress, which questions you want to drive, transitions, and be ready to answer questions.
+- Plan the point you want to stress, which questions you want to drive, transitions, and be ready to answer questions.
 
--   Prior to the whiteboard design session, discuss the case study to pick up more ideas.
+- Prior to the whiteboard design session, discuss the case study to pick up more ideas.
 
--   Make notes for later.
+- Make notes for later.
 
 ## During the whiteboard design session: Tips for an effective whiteboard design session
 
@@ -151,13 +150,13 @@ Before conducting your first whiteboard design session:
 
 When participants are doing activities, you can **look ahead to refresh your memory**.
 
--   **Adjust activity and whiteboard design session pace** as needed to allow time for presenting, feedback, and sharing.
+- **Adjust activity and whiteboard design session pace** as needed to allow time for presenting, feedback, and sharing.
 
--   **Add examples, points, and stories** from your own experience. Think about stories you can share that help you make your points clearly and effectively.
+- **Add examples, points, and stories** from your own experience. Think about stories you can share that help you make your points clearly and effectively.
 
--   **Consider creating a "parking lot"** to record issues or questions raised that are outside the scope of the whiteboard design session or can be answered later. Decide how you will address these issues, so you can acknowledge them without being derailed by them.
+- **Consider creating a "parking lot"** to record issues or questions raised that are outside the scope of the whiteboard design session or can be answered later. Decide how you will address these issues, so you can acknowledge them without being derailed by them.
 
-***Have fun**! Encourage participants to have fun and share!*
+**\*Have fun**! Encourage participants to have fun and share!\*
 
 **Involve your participants.** Talk and share your knowledge but always involve your participants, even while you are the one speaking.
 
@@ -181,7 +180,7 @@ Analyze your customer's needs.
 
 Timeframe: 15 minutes
 
-Directions:  With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips.
+Directions: With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips.
 
 1.  Meet your table participants and trainer.
 
@@ -195,6 +194,10 @@ Wide World Importers (WWI) is a traditional brick and mortar business with a lon
 
 WWI's evolution of services over the years has helped them expand their reach beyond the walls of their retail stores into the web and mobile space. With this expansion, they have generated a significant amount of additional data, and data formats. These new platforms were added without integrating into the OLTP system data or Business Intelligence infrastructures. As a result, "silos" of data stores have developed.
 
+This is their omni-channel strategy:
+
+![WWI's omni-channel strategy includes retail stores, web e-commerce, and mobile e-commerce.](media/omni-channel-strategy.png 'Omni-channel strategy')
+
 Due to their continued growth, lending to expansion into the digital space, WWI is prepared to innovate by taking advantage of their omni-channel strategy and increased variety and amount of valuable data. They believe they can foster innovation by building upon their track record of strong customer connections, and engage with their customers through personalized, high-quality application experiences that incorporate data and intelligence.
 
 However, as a first step, WWI's technology team has recognized they must address the fact that they have quickly outgrown their ability to handle data. They anticipate the following solutions needed to reach more customers and grow the business:
@@ -206,12 +209,20 @@ However, as a first step, WWI's technology team has recognized they must address
 
 Prior to expanding to their current omni-channel strategy, WWI had a simple Point of Sale (POS) application that handled customer orders at each retail store. The back-end was a series of service layers used to process orders and store them in a SQL database. They had designed their systems and tuned them to handle this level of data.
 
+![A POS app was the only source of data prior to the omni-channel strategy.](media/pos-app.png 'Single channel: POS app')
+
 As they added new e-commerce channels to expand the customer base, consumer demand also increased. This increased demand from more customers ordering products through more channels generated more data. Now WWI has new challenges to address:
 
 - Increased consumer demand, leading to increased app data
 - They are unable to determine business trends because of siloed insights
 - They have a rising data management footprint, increasing cost and complexity
 - New development challenges resulting from more deployment targets and duplicated code
+
+![The expansion to omni-channel causes issues.](media/omni-channel.png 'Omni-channel causes issues like siloed insights')
+
+WWI has considered using a traditional data warehouse to join data from their disparate systems to gain insights in one location. Their biggest concerns with this approach are the amount of time to put such a system in place and properly maintain it, but even more so, having an inherent delay between when new data is written to the source system and when that data is moved into the data warehouse. They would like to have access to data from all systems while it is fresh, but do so in a way that is highly scalable and able to support complex joins between the external sources and internal SQL server tables as well.
+
+However, there are times when they would like to move data into storage to provide denormalized and aggregated representations of their data for reporting purposes. In other terms, a data mart. However, they would like to also take advantage of distributed storage of this data, which would include sharding the data across multiple databases. They are concerned about the level of effort to shard their data, access that data, and maintain the distributed system.
 
 There are two scenarios WWI is considering using AI to help grow their business and reduce costs:
 
@@ -225,17 +236,19 @@ There are two scenarios WWI is considering using AI to help grow their business 
 
 2. Require a data lake to easily store and access disparate data.
 
-3. Simplified programming surface to prepare data and do data science.
+3. Would like a data mart to store denormalized and aggregated data while taking advantage of distributed storage.
 
-4. Scale data systems to reach more consumers.
+4. Simplified programming surface to prepare data and do data science.
 
-5. Unlock business insights from multiple sources of structured and unstructured data.
+5. Scale data systems to reach more consumers.
 
-6. Apply deep analytics with high-performance responses.
+6. Unlock business insights from multiple sources of structured and unstructured data.
 
-7. Enable AI into apps to actively engage with customers.
+7. Apply deep analytics with high-performance responses.
 
-8. Identify PII and GDPR-related compliance issues for audit reports and take steps to fix these issues.
+8. Enable AI into apps to actively engage with customers.
+
+9. Identify PII and GDPR-related compliance issues for audit reports and take steps to fix these issues.
 
 ### Customer objections
 
@@ -248,9 +261,6 @@ There are two scenarios WWI is considering using AI to help grow their business 
 4. How can SQL Server 2019 help us protect PII data and remain GDPR compliant?
 
 ### Infographic for common scenarios
-
-SQL Server big data clusters architecture
-![SQL Server big data clusters architecture diagram](media/common-scenario-1.png)
 
 ## Step 2: Design a proof of concept solution
 
@@ -272,25 +282,27 @@ Directions: With all participants at your table, answer the following questions 
 
 Directions: With all participants at your table, respond to the following questions on a flip chart:
 
-*High-level architecture*
+_High-level architecture_
 
 1. Diagram your initial vision for the architecture of the solution.
 
-*Modern data warehouse*
+_Modern data warehouse_
 
 1. What services and technologies should be used for the big data warehouse?
 
-2. How will you integrate multiple, disparate data sources?
+2. How will you enable a single data query to work across multiple, disparate data sources with the ability to join internal SQL server tables at scale?
 
-3. What method can be used to ensure the best performance when querying data?
+3. How will you provide a data mart to store denormalized and aggregated data while taking advantage of distributed storage?
 
-*Deep analytics and AI*
+4. What methods can be used to ensure the best performance when querying data?
+
+_Deep analytics and AI_
 
 1. What would be used to solve the AI requirements?
 
 2. How will you execute and train the Machine Learning model(s) used for the solution?
 
-*Monitor and Troubleshoot*
+_Monitor and Troubleshoot_
 
 1. How will you monitor and troubleshoot issues with the big data cluster?
 
@@ -340,15 +352,15 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 ## Additional references
 
-|                 |           |
-| --------------- | :-------: |
-| **Description** | **Links** |
-| What are SQL Server big data clusters? | <https://docs.microsoft.com/en-us/sql/big-data-cluster/big-data-cluster-overview?view=sqlallproducts-allversions> |
-| How to use notebooks in SQL Server 2019 | <https://docs.microsoft.com/en-us/sql/big-data-cluster/notebooks-guidance?view=sql-server-ver15> |
-| Dynamic Data Masking | <https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking> |
-| Row-Level Security | <https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security> |
-| Always Encrypted with Secure Enclaves | <https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/always-encrypted-enclaves?view=sqlallproducts-allversions> |
-| SQL Data Discovery and Classification | <https://docs.microsoft.com/en-us/sql/relational-databases/security/sql-data-discovery-and-classification?view=sql-server-ver15> |
+|                                         |                                                                                                                                           |
+| --------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------: |
+| **Description**                         |                                                                 **Links**                                                                 |
+| What are SQL Server big data clusters?  |             <https://docs.microsoft.com/en-us/sql/big-data-cluster/big-data-cluster-overview?view=sqlallproducts-allversions>             |
+| How to use notebooks in SQL Server 2019 |                     <https://docs.microsoft.com/en-us/sql/big-data-cluster/notebooks-guidance?view=sql-server-ver15>                      |
+| Dynamic Data Masking                    |                         <https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking>                         |
+| Row-Level Security                      |                          <https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security>                          |
+| Always Encrypted with Secure Enclaves   | <https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/always-encrypted-enclaves?view=sqlallproducts-allversions> |
+| SQL Data Discovery and Classification   |     <https://docs.microsoft.com/en-us/sql/relational-databases/security/sql-data-discovery-and-classification?view=sql-server-ver15>      |
 
 # Modernizing data analytics with SQL Server 2019 whiteboard design session trainer guide
 
@@ -368,11 +380,11 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 - Provide some feedback on their responses to the business needs and design.
 
-    - Try asking questions first that will lead the participants to discover the answers on their own.
+  - Try asking questions first that will lead the participants to discover the answers on their own.
 
 - Provide feedback for their responses to the customer's objections.
 
-    - Try asking questions first that will lead the participants to discover the answers on their own.
+  - Try asking questions first that will lead the participants to discover the answers on their own.
 
 ## Step 3: Present the solution
 
@@ -382,15 +394,15 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 - Have the presenting team present their solution to the customer team.
 
-    - Have the customer team provide one objection for the presenting team to respond to.
+  - Have the customer team provide one objection for the presenting team to respond to.
 
-    - The presentation, objections, and feedback should take no longer than 15 minutes.
+  - The presentation, objections, and feedback should take no longer than 15 minutes.
 
-    - If needed, the trainer may also provide feedback.
+  - If needed, the trainer may also provide feedback.
 
 ## Wrap-up
 
--   Have the table participants reconvene with the larger session group to hear the facilitator/SME share the following preferred solution.
+- Have the table participants reconvene with the larger session group to hear the facilitator/SME share the following preferred solution.
 
 ## Preferred target audience
 
@@ -400,59 +412,71 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 \[insert your custom workshop content here . . . \]
 
-*High-level architecture*
+_High-level architecture_
 
 1. Diagram your initial vision for the architecture of the solution.
 
-    \[insert preferred solution diagram here . . . \]
+   ![Preferred solution.](../Media/preferred-solution.png 'Preferred solution diagram')
 
-*Modern data warehouse*
+   SQL Server big data clusters architecture
+
+   ![SQL Server big data clusters architecture diagram](media/common-scenario-1.png)
+
+_Modern data warehouse_
 
 1. What services and technologies should be used for the big data warehouse?
 
-    **SQL Server 2019 Big Data Clusters**
+   **SQL Server 2019 Big Data Clusters**
 
-    SQL Server Big Data Clusters enable the deployment of scalable clusters of SQL Server, Spark, and HDFS containers running on Kubernetes. These components run side-by-side to enable you to read, write, and process big data from Transact-SQL or Spark. This allows you to easily combine and analyze high-value relational data with high-volume big data.
+   SQL Server Big Data Clusters enable the deployment of scalable clusters of SQL Server, Spark, and HDFS containers running on Kubernetes. These components run side-by-side to enable you to read, write, and process big data from Transact-SQL or Spark. This allows you to easily combine and analyze high-value relational data with high-volume big data.
 
-    **SQL Server 2019 Data Virtualization**
+   **SQL Server 2019 Data Virtualization**
 
-    One of the key new features of SQL Server 2019 is data virtualization. What this means is that you can virtualize external data in a SQL Server instance, regardless of source, location, and format, so that it can be queried like any other table, or sets of tables, within your SQL Server instance. In essence, data virtualization helps you create a single "virtual" layer of data from these disparate sources, providing unified data services to support multiple applications and users. A more familiar term we could use is data lake, or perhaps data hub. Unlike a typical data lake, however, you do not have to move data out from where it lives, yet you can still query that data through a consistent interface. This is a huge advantage over traditional ETL (extract-transform-load) processes where data must be moved from its original source to a new destination, oftentimes with some data transformation or mapping. This causes delays, extra storage, additional security, and a fair amount of engineering in most cases. With data virtualization, no data movement is required, which means the data sets are up-to-date, and it is possible to query and join these different data sources through these new capabilities, thanks to the use of new [PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide?view=sql-server-ver15) connectors. The data sources you can connect to include Cosmos DB, SQL Server (including Azure SQL Database), Oracle, HDFS (for flat files), and DB2.
+   One of the key new features of SQL Server 2019 is data virtualization. What this means is that you can virtualize external data in a SQL Server instance, regardless of source, location, and format, so that it can be queried like any other table, or sets of tables, within your SQL Server instance. In essence, data virtualization helps you create a single "virtual" layer of data from these disparate sources, providing unified data services to support multiple applications and users. A more familiar term we could use is data lake, or perhaps data hub. Unlike a typical data lake, however, you do not have to move data out from where it lives, yet you can still query that data through a consistent interface. This is a huge advantage over traditional ETL (extract-transform-load) processes where data must be moved from its original source to a new destination, oftentimes with some data transformation or mapping. This causes delays, extra storage, additional security, and a fair amount of engineering in most cases. With data virtualization, no data movement is required, which means the data sets are up-to-date, and it is possible to query and join these different data sources through these new capabilities, thanks to the use of new [PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide?view=sql-server-ver15) connectors. The data sources you can connect to include Cosmos DB, SQL Server (including Azure SQL Database), Oracle, HDFS (for flat files), and DB2.
 
-    ![ETL vs. Data Virtualization](../Hands-on%20lab/media/data-virtualization-vs-etl.png)
+   ![ETL vs. Data Virtualization](../Hands-on%20lab/media/data-virtualization-vs-etl.png)
 
-    The image to the left represents traditional data movement using ETL. Compare that to data virtualization, which does not require data movement and provides a unified layer over top of existing data sources.
+   The image to the left represents traditional data movement using ETL. Compare that to data virtualization, which does not require data movement and provides a unified layer over top of existing data sources.
 
-    **SQL Server 2019 Data Lake**
+   **SQL Server 2019 Data Lake**
 
-    SQL Server 2019 Big Data Clusters include a scalable HDFS storage pool. This pool can be used to store big data, potentially ingested from multiple external sources. This data can be either structured or unstructured data. once the big data is stored in HDFS in the big data cluster, you can analyze and query the data and combine it with your relational data.
+   SQL Server 2019 Big Data Clusters include a scalable HDFS storage pool. This pool can be used to store big data, potentially ingested from multiple external sources. This data can be either structured or unstructured data. once the big data is stored in HDFS in the big data cluster, you can analyze and query the data and combine it with your relational data.
 
-    ![Diagram of SQL Server 2019 Data Lake](media/sql-server-2019-data-lake.png)
+   ![Diagram of SQL Server 2019 Data Lake](media/sql-server-2019-data-lake.png)
 
-2. How will you integrate multiple, disparate data sources?
+2. How will you enable a single data query to work across multiple, disparate data sources with the ability to join internal SQL server tables at scale?
 
-    With tiering, applications can seamlessly access data in a variety of external stores as though the data resides in the local HDFS. This allows you to interact with the files in Azure Data Lake Store Gen2 as if they were local files. You can either use an Azure Storage access key or an Azure Active Directory User Account to gain permission to the files.
+   With tiering, applications can seamlessly access data in a variety of external stores as though the data resides in the local HDFS. This allows you to interact with the files in Azure Data Lake Store Gen2 as if they were local files. You can either use an Azure Storage access key or an Azure Active Directory User Account to gain permission to the files.
 
-3. What method can be used to ensure the best performance when querying data?
+3. How will you provide a data mart to store denormalized and aggregated data while taking advantage of distributed storage?
 
-    The [Intelligent Query Processing](https://docs.microsoft.com/en-us/sql/relational-databases/performance/intelligent-query-processing?view=sql-server-ver15) (QP) features of SQL Server 2019 and Azure SQL Database can be sued to improve the performance of existing workloads with minimal work. The key to enabling these features in SQL Server 2019 is to set the [database compatibility level](https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-database-transact-sql-compatibility-level?view=sql-server-ver15) to `150`.
+4. What methods can be used to ensure the best performance when querying data?
 
-*Deep analytics and AI*
+   The [Intelligent Query Processing](https://docs.microsoft.com/en-us/sql/relational-databases/performance/intelligent-query-processing?view=sql-server-ver15) (QP) features of SQL Server 2019 and Azure SQL Database can be sued to improve the performance of existing workloads with minimal work. The key to enabling these features in SQL Server 2019 is to set the [database compatibility level](https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-database-transact-sql-compatibility-level?view=sql-server-ver15) to `150`.
 
-1.  What would be used to solve the AI requirements?
+   Performance of PolyBase queries in SQL Server 2019 big data clusters can be boosted further by distributing the cross-partition aggregation and shuffling of the filtered query results to “compute pools” comprised of multiple SQL Server instances that work together (this is similar to a PolyBase scale-out group).
 
-    SQL Server 2019 big data clusters **Integrated AI and Machine Learning** would be used. This feature enables AI and machine learning tasks on the data stored in HDFS storage pools and the data pools. Spark can be used as well as built-in AI tools in SQL Server, using R, Python, Scala, or Java.
+   When you combine the enhanced PolyBase connectors with SQL Server 2019 big data clusters data pools, data from external data sources can be partitioned and cached across all the SQL Server instances in a data pool, creating a “scale-out data mart”. There can be more than one scale-out data mart in a given data pool, and a data mart can combine data from multiple external data sources and tables, making it easy to integrate and cache combined data sets from multiple external sources.
 
-    ![Diagram of SQL Server 2019 Integrated Ai and Machine Learning](media/sql-server-2019-integrated-ai-ml.png)
+_Deep analytics and AI_
+
+1. What would be used to solve the AI requirements?
+
+   SQL Server 2019 big data clusters **Integrated AI and Machine Learning** would be used. This feature enables AI and machine learning tasks on the data stored in HDFS storage pools and the data pools. Spark can be used as well as built-in AI tools in SQL Server, using R, Python, Scala, or Java.
+
+   ![Diagram of SQL Server 2019 Integrated Ai and Machine Learning](media/sql-server-2019-integrated-ai-ml.png)
+
+   Data scientists can continue to use big data ecosystem tools against HDFS while also utilizing easy, real-time access to the high-value data in SQL Server because it is all part of one integrated, complete system.
 
 2. How will you execute and train the Machine Learning model(s) used for the solution?
 
-    SQL Server 2019 Big Data clusters support the use of the popular Jupyter notebooks. You will use Azure Data Studio to execute a notebook that will enable you to train a model to predict the battery lifetime, apply the model to make batch predictions against a set of vehicle telemetry and save the scored telemetry to an external table that you can query using SQL.
+   SQL Server 2019 Big Data clusters support the use of the popular Jupyter notebooks. You will use Azure Data Studio to execute a notebook that will enable you to train a model to predict the battery lifetime, apply the model to make batch predictions against a set of vehicle telemetry and save the scored telemetry to an external table that you can query using SQL.
 
-    Notebooks were traditionally provided by applications such as MATLAB and Wolfram Mathematica to help scientists, students, professors, and mathematicians create self-documenting notebooks that others can use to reproduce experiments. To accomplish this, notebooks contain a combination of runnable code, output, formatted text, and visualizations. Over the past several years, web-based interactive notebooks have gained popularity with data scientists and data engineers to conduct exploratory data analysis and model training using a number of languages, such as Python, Scala, SQL, R, and others.
+   Notebooks were traditionally provided by applications such as MATLAB and Wolfram Mathematica to help scientists, students, professors, and mathematicians create self-documenting notebooks that others can use to reproduce experiments. To accomplish this, notebooks contain a combination of runnable code, output, formatted text, and visualizations. Over the past several years, web-based interactive notebooks have gained popularity with data scientists and data engineers to conduct exploratory data analysis and model training using a number of languages, such as Python, Scala, SQL, R, and others.
 
-    Notebooks are made up of one or more of cells that allow for the execution of the code snippets or commands within those cells. They store commands and the results of running those commands. If you are used to developing software and applications using your favorite IDE, then you will realize that there are some disadvantages to using notebooks in place of a more traditional development platform. For example, you cannot set breakpoints and run in debug mode, allowing you to step through the code and inspect object and environment states during execution. However, there are many advantages notebooks do provide. They offer an environment that allows for exploration, documentation, collaboration, and visualization. When a data scientist creates and shares it with a colleague, they are sharing notes and insights about the data with access to all of the queries, formulas, visualizations, and models. This enables interactive conversations and further exploration, with simple reproducibility by anyone running the notebook in the same or similar environment, without others needing to know a sequence of shell commands and environment variables known only to the original author. This collaborative knowledge exchange within an easy to share self-contained package is far more valuable than simply sharing a static, final report.
+   Notebooks are made up of one or more of cells that allow for the execution of the code snippets or commands within those cells. They store commands and the results of running those commands. If you are used to developing software and applications using your favorite IDE, then you will realize that there are some disadvantages to using notebooks in place of a more traditional development platform. For example, you cannot set breakpoints and run in debug mode, allowing you to step through the code and inspect object and environment states during execution. However, there are many advantages notebooks do provide. They offer an environment that allows for exploration, documentation, collaboration, and visualization. When a data scientist creates and shares it with a colleague, they are sharing notes and insights about the data with access to all of the queries, formulas, visualizations, and models. This enables interactive conversations and further exploration, with simple reproducibility by anyone running the notebook in the same or similar environment, without others needing to know a sequence of shell commands and environment variables known only to the original author. This collaborative knowledge exchange within an easy to share self-contained package is far more valuable than simply sharing a static, final report.
 
-*Monitor and Troubleshoot*
+_Monitor and Troubleshoot_
 
 1. How will you monitor and troubleshoot issues with the big data cluster?
 
@@ -462,31 +486,30 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 1. How do we centrally manage and monitor the cluster once deployed?
 
-    Kubernetes is responsible for the state of the SQL Server big data cluster. Kubernetes provides the orchestration to build and configure cluster nodes, assign pods to nodes, and monitor the health of the cluster.
+   Kubernetes is responsible for the state of the SQL Server big data cluster. Kubernetes provides the orchestration to build and configure cluster nodes, assign pods to nodes, and monitor the health of the cluster.
 
-    A SQL Server big data cluster is a cluster of Linux containers managed by a control plane that consists of a Kubernetes master, the SQL Server master instance, and other cluster-level services; such as the Hive Metastore and Spark Driver.
+   A SQL Server big data cluster is a cluster of Linux containers managed by a control plane that consists of a Kubernetes master, the SQL Server master instance, and other cluster-level services; such as the Hive Metastore and Spark Driver.
 
 2. Do our workloads require us to use a data warehouse, or will a data mart suffice?
 
-    The solution will use a data mart. Data marts are persisted in SQL Server big data clusters using a data pool that consists of pods running SQL Server on Linux.
+   The solution will use a data mart. Data marts are persisted in SQL Server big data clusters using a data pool that consists of pods running SQL Server on Linux.
 
 3. Will moving to container-based SQL clusters be complex and too high of an operational and management cost for our IT team?
 
-    Kubernetes is an open source container orchestrator, which is used to scale container deployments within the cluster according to need. The Kubernetes cluster comprises a set of machines called nodes. One node controls the cluster and is designated the master node, with all remaining nodes are worker nodes. The master is responsible for distributing work between the workers, and for monitoring the health of the cluster.
+   Kubernetes is an open source container orchestrator, which is used to scale container deployments within the cluster according to need. The Kubernetes cluster comprises a set of machines called nodes. One node controls the cluster and is designated the master node, with all remaining nodes are worker nodes. The master is responsible for distributing work between the workers, and for monitoring the health of the cluster.
 
 4. How can SQL Server 2019 help us protect PII data and remain GDPR compliant?
 
-    SQL Server 2019 includes the following security features that can help with PII data security and GDPR compliance:
+   SQL Server 2019 includes the following security features that can help with PII data security and GDPR compliance:
 
-    - **Dynamic Data Masking** - Limits sensitive data exposure by masking it to non-privileged users.
+   - **Dynamic Data Masking** - Limits sensitive data exposure by masking it to non-privileged users.
 
-    - **Row-Level Security** - Used to implement restrictions on which specific rows within database tables are accessible to certain database users; based on either group membership or execution context.
+   - **Row-Level Security** - Used to implement restrictions on which specific rows within database tables are accessible to certain database users; based on either group membership or execution context.
 
-    - **Always Encrypted with Secure Enclaves** - Protects the confidentiality of sensitive data from malware and high-privileged **unauthorized** users of SQL Server. A *high-privileged unauthorized user* is a DBA, admin, or anyone else who has legitimate access to server instances, VMs, etc., but who should not have access to some or all of the actual data.
+   - **Always Encrypted with Secure Enclaves** - Protects the confidentiality of sensitive data from malware and high-privileged **unauthorized** users of SQL Server. A _high-privileged unauthorized user_ is a DBA, admin, or anyone else who has legitimate access to server instances, VMs, etc., but who should not have access to some or all of the actual data.
 
-    - **SQL Data Discovery and Classification tool** - Tool built into SQL Server Management Studio (SSMS) for discovering, classifying, labeling, and reporting the sensitive data in a database.
+   - **SQL Data Discovery and Classification tool** - Tool built into SQL Server Management Studio (SSMS) for discovering, classifying, labeling, and reporting the sensitive data in a database.
 
 ## Customer quote (to be read back to the attendees at the end)
 
 \[insert your custom workshop content here . . . \]
-
