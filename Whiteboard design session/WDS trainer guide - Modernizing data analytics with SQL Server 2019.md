@@ -280,9 +280,19 @@ Directions: With all participants at your table, respond to the following questi
 
 1. What services and technologies should be used for the big data warehouse?
 
+2. How will you integrate multiple, disparate data sources?
+
+3. What method can be used to ensure the best performance when querying data?
+
 *Deep analytics and AI*
 
-1.  What would be used to solve the AI requirements?
+1. What would be used to solve the AI requirements?
+
+2. How will you execute and train the Machine Learning model(s) used for the solution?
+
+*Monitor and Troubleshoot*
+
+1. How will you monitor and troubleshoot issues with the big data cluster?
 
 **Prepare**
 
@@ -418,6 +428,14 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
     ![Diagram of SQL Server 2019 Data Lake](media/sql-server-2019-data-lake.png)
 
+2. How will you integrate multiple, disparate data sources?
+
+    With tiering, applications can seamlessly access data in a variety of external stores as though the data resides in the local HDFS. This allows you to interact with the files in Azure Data Lake Store Gen2 as if they were local files. You can either use an Azure Storage access key or an Azure Active Directory User Account to gain permission to the files.
+
+3. What method can be used to ensure the best performance when querying data?
+
+    The [Intelligent Query Processing](https://docs.microsoft.com/en-us/sql/relational-databases/performance/intelligent-query-processing?view=sql-server-ver15) (QP) features of SQL Server 2019 and Azure SQL Database can be sued to improve the performance of existing workloads with minimal work. The key to enabling these features in SQL Server 2019 is to set the [database compatibility level](https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-database-transact-sql-compatibility-level?view=sql-server-ver15) to `150`.
+
 *Deep analytics and AI*
 
 1.  What would be used to solve the AI requirements?
@@ -425,6 +443,20 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
     SQL Server 2019 big data clusters **Integrated AI and Machine Learning** would be used. This feature enables AI and machine learning tasks on the data stored in HDFS storage pools and the data pools. Spark can be used as well as built-in AI tools in SQL Server, using R, Python, Scala, or Java.
 
     ![Diagram of SQL Server 2019 Integrated Ai and Machine Learning](media/sql-server-2019-integrated-ai-ml.png)
+
+2. How will you execute and train the Machine Learning model(s) used for the solution?
+
+    SQL Server 2019 Big Data clusters support the use of the popular Jupyter notebooks. You will use Azure Data Studio to execute a notebook that will enable you to train a model to predict the battery lifetime, apply the model to make batch predictions against a set of vehicle telemetry and save the scored telemetry to an external table that you can query using SQL.
+
+    Notebooks were traditionally provided by applications such as MATLAB and Wolfram Mathematica to help scientists, students, professors, and mathematicians create self-documenting notebooks that others can use to reproduce experiments. To accomplish this, notebooks contain a combination of runnable code, output, formatted text, and visualizations. Over the past several years, web-based interactive notebooks have gained popularity with data scientists and data engineers to conduct exploratory data analysis and model training using a number of languages, such as Python, Scala, SQL, R, and others.
+
+    Notebooks are made up of one or more of cells that allow for the execution of the code snippets or commands within those cells. They store commands and the results of running those commands. If you are used to developing software and applications using your favorite IDE, then you will realize that there are some disadvantages to using notebooks in place of a more traditional development platform. For example, you cannot set breakpoints and run in debug mode, allowing you to step through the code and inspect object and environment states during execution. However, there are many advantages notebooks do provide. They offer an environment that allows for exploration, documentation, collaboration, and visualization. When a data scientist creates and shares it with a colleague, they are sharing notes and insights about the data with access to all of the queries, formulas, visualizations, and models. This enables interactive conversations and further exploration, with simple reproducibility by anyone running the notebook in the same or similar environment, without others needing to know a sequence of shell commands and environment variables known only to the original author. This collaborative knowledge exchange within an easy to share self-contained package is far more valuable than simply sharing a static, final report.
+
+*Monitor and Troubleshoot*
+
+1. How will you monitor and troubleshoot issues with the big data cluster?
+
+   Since SQL Server 2019 Big Data Clusters run on containers in a Kubernetes cluster, then the Kubernetes cluster administration portal can be used to monitor the cluster. You can also use the Kubectl commands from the command-line to both monitor and troubleshoot issues with the cluster.
 
 ## Checklist of preferred objection handling
 
