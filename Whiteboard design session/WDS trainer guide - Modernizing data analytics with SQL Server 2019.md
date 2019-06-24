@@ -286,17 +286,15 @@ _High-level architecture_
 
 1. Diagram your initial vision for the architecture of the solution.
 
-_Modern data warehouse_
+_Big data and insights_
 
-1. What services and technologies should be used for the big data warehouse?
+1. What services and technologies should be used for scale-out processing and analyzing big data? Can this be done while minimizing code changes?
 
 2. How will you enable a single data query to work across multiple, disparate data sources with the ability to join internal SQL server tables at scale?
 
-3. How will you provide a data mart to store denormalized and aggregated data while taking advantage of distributed storage?
+3. How will you provide a data mart to store denormalized and aggregated data while taking advantage of distributed storage? Would you suggest using a data warehouse instead?
 
 4. What methods can be used to ensure the best performance when querying data?
-
-5. How will the data systems scale to reach more consumers? Can this be done while minimizing code changes?
 
 _Deep analytics and AI_
 
@@ -431,9 +429,9 @@ _High-level architecture_
 
    ![SQL Server big data clusters architecture diagram](media/common-scenario-1.png)
 
-_Modern data warehouse_
+_Big data and insights_
 
-1. What services and technologies should be used for the big data warehouse?
+1. What services and technologies should be used for scale-out processing and analyzing big data? Can this be done while minimizing code changes?
 
    **SQL Server 2019 Big Data Clusters**
 
@@ -494,15 +492,32 @@ _Modern data warehouse_
 
 3. How will you provide a data mart to store denormalized and aggregated data while taking advantage of distributed storage? Would you suggest using a data warehouse instead?
 
+   There are times where it makes sense to bring data into storage as opposed to strictly using data virtualization techniques. Typically, this is done to create denormalized representations of datasets to make building reports easier for business analysts who do not know the underlying data structures, aggregated data, and other purpose-specific data tasks. Storing data in this fashion is called a "data mart".
+
+   Other reasons for storing data in a data mart include:
+
+   - The external system that receives the push down queries to return the data may not be optimized to keep up with demand, causing performance degradation or too much interference on the system, so caching results in the data mart helps relieve pressure
+   - The external source may not keep track of historical data and you need to store this data somewhere for historical analysis
+
+   The process of creating a data mart begins much like when you set up data virtualization. The primary difference is that you configure your PolyBase statements that connect to the external data sources to specify the target of the returned data to be the Data Pool.
+
+   Here is a detailed breakdown of the flow:
+
+   To start, External Tables are created using PolyBase statements. These External Table definitions are stored in the database on the SQL Server Master Instance within the cluster. When queried by the user, the queries are engaged from the SQL Server Master Instance through the Compute Pool in the SQL Server Big Data Cluster (BDC), which holds Kubernetes Nodes containing the Pods running SQL Server Instances. These Instances send the query to the PolyBase Connector at the target data system, which processes the query based on the type of target system. The results are processed and returned through the PolyBase Connector to the Compute Pool and then on to the Master Instance, and the PolyBase statements can specify the target of the Data Pool. The SQL Server Instances in the Data Pool store the data in a distributed fashion across multiple databases, called _Shards_.
+
+   When using data virtualization alone, the last step of saving the data to the Data Pool is skipped, and the results are just processed and returned through the PolyBase Connector to the Compute Pool, back to the SQL Server Master Instance, and finally to the user.
+
+   Combining the enhanced PolyBase connectors with the SQL Server 2019 BDC Data Pools as described creates a scale-out data mart, where data from external sources can be partitioned and cached across all the SQL Server instances in the Data Pool. The sharding of data is managed by the BDC, abstracting that complexity from the end users and calling systems. There can also be more than one scale-out data mart within a given Data Pool, and these can also be combined.
+
+   How does this differ from a traditional data warehouse, such as Azure SQL Data Warehouse? The biggest difference is that a data warehouse is typically a [massively parallel processing](https://en.wikipedia.org/wiki/Massively_parallel) system (MPP), where SQL Server 2019 BDC is not. Although SQL Server 2019 big data clusters have separate compute and storage pools, that is where the similarities to an MPP system end. A disadvantage of using MPP systems is that the differences in querying, modeling, and data partitioning mean that MPP solutions require a different skillset. When you choose to use SQL Server 2019 BDC for your data mart, you can use your existing skillset and maintain compatibility with existing software that are written to query SQL Server databases.
+
 4) What methods can be used to ensure the best performance when querying data?
 
    The [Intelligent Query Processing](https://docs.microsoft.com/en-us/sql/relational-databases/performance/intelligent-query-processing?view=sql-server-ver15) (QP) features of SQL Server 2019 and Azure SQL Database can be sued to improve the performance of existing workloads with minimal work. The key to enabling these features in SQL Server 2019 is to set the [database compatibility level](https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-database-transact-sql-compatibility-level?view=sql-server-ver15) to `150`.
 
-   Performance of PolyBase queries in SQL Server 2019 big data clusters can be boosted further by distributing the cross-partition aggregation and shuffling of the filtered query results to “compute pools” comprised of multiple SQL Server instances that work together (this is similar to a PolyBase scale-out group).
+   In addition, you can take advantage of the distributed architecture of SQL Server 2019 BDC to increase performance where needed. Each component can be scaled out separately to improve performance where needed, such as the SQL Server Master Instance, Compute Pool, Data Pool, and Storage Pool. Each are contained within Kubernetes nodes that contain pods that can be increased in number to add more resources to the instances contained within. Performance of PolyBase queries can be boosted further by distributing the cross-partition aggregation and shuffling of the filtered query results to the Compute Pools that are comprised of multiple SQL Server instances that work together.
 
-   When you combine the enhanced PolyBase connectors with SQL Server 2019 big data clusters data pools, data from external data sources can be partitioned and cached across all the SQL Server instances in a data pool, creating a “scale-out data mart”. There can be more than one scale-out data mart in a given data pool, and a data mart can combine data from multiple external data sources and tables, making it easy to integrate and cache combined data sets from multiple external sources.
-
-5) How will the data systems scale to reach more consumers? Can this be done while minimizing code changes?
+   Another option for processing flat files stored in the HDFS cluster within the Storage Pool, as an alternative to PolyBase, is to take advantage of Apache Spark within the Storage Pool. Spark is made accessible through the Knox gateway, using Livy to send Spark Jobs. Data scientists and engineers use Jupyter notebooks as an easy way to directly query against the Spark kernel, which is optimized to process huge amounts of data at scale, boosted by in-memory and other optimizations that make using Spark up to 100x faster than Hadoop in most workloads.
 
 _Deep analytics and AI_
 
@@ -526,7 +541,11 @@ _Monitor and Troubleshoot_
 
 1. How will you monitor and troubleshoot issues with the big data cluster?
 
-   Since SQL Server 2019 Big Data Clusters run on containers in a Kubernetes cluster, then the Kubernetes cluster administration portal can be used to monitor the cluster. You can also use the Kubectl commands from the command-line to both monitor and troubleshoot issues with the cluster.
+   When you need to monitor and troubleshoot your big data cluster, some of your options are quite different than what you may be used to in a typical Windows-based, or even Linux installation. No longer are you viewing Windows event logs or other familiar locations to view metrics and system-level information about your SQL environment. This is because the services that comprise your big data cluster are distributed across multiple Kubernetes pods. If you are unfamiliar with Kubernetes or Docker containers, then you may not know where to start.
+
+   On the other hand, monitoring and managing SQL Server 2019 itself is very much the [same process as you would normally perform for any SQL Server system](https://docs.microsoft.com/en-us/sql/relational-databases/database-lifecycle-management?view=sql-server-ver15). You have the same type of services, surface points, security areas, and other control factors as in a stand-alone installation of SQL server. The tools you have available for managing the Master Instance in the SQL Server BDC are the same as managing a stand-alone installation, including SQL Server Management Studio, command-line interfaces, Azure Data Studio, and third party tools.
+
+   For the cluster components, you have three primary interfaces to use: The cluster administration portal, kubectl (Kubernetes tool), and the Kubernetes dashboard.
 
 ## Checklist of preferred objection handling
 
