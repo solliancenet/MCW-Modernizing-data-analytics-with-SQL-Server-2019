@@ -423,9 +423,11 @@ _High-level architecture_
 
    ![Preferred solution.](../Media/preferred-solution.png 'Preferred solution diagram')
 
-   In SQL Server big data clusters, Kubernetes is responsible for the state of the SQL Server big data clusters; Kubernetes builds and configures the cluster nodes, assigns pods to nodes, and monitors the health of the cluster.
+   WWI's requirements can be fully met with SQL Server 2019 Big Data Clusters (BDC). Kubernetes is responsible for the state of the BDC, and it builds and configures the cluster nodes, assigns pods to nodes, and monitors the health of the cluster. The architecture is composed of an App Pool that hosts applications, an instance of Machine Learning Server, and SSIS packages. It has a Control Plane consisting of a SQL Server Master Instance, and components for managing access to the HDFS cluster, Spark jobs, and metadata. SQL Server instances are distributed within the Compute Pool, under direction of the SQL Server Master Instance. The Storage Pool consists of collocated instances of SQL Server, Apache Spark, and HDFS. These components of the storage pool can be combined to create a data lake to store big data in a highly available-distributed fashion. The Data Pool provides persistent SQL Server storage for the cluster, distributed into shards across the member SQL Server data pool instances.
 
-   SQL Server big data clusters architecture
+   This architecture enables line-of-business applications to query the SQL Server Master Instance without requiring code changes. Multiple data sources can be combined with internal SQL Server tables in single queries through either the use of Data Virtualization, enabled by enhanced PolyBase connectors and scaled out through the Compute Pool and other components, or cached and distributed across shards of the Data Pool, enabling a scale-out data mart. Advanced analytics and AI is enabled by Machine Learning Services as well as Apache Spark jobs executed through Jupyter notebooks and other data processing features.
+
+   SQL Server big data clusters architecture:
 
    ![SQL Server big data clusters architecture diagram](media/common-scenario-1.png)
 
@@ -513,7 +515,7 @@ _Big data and insights_
 
 4) What methods can be used to ensure the best performance when querying data?
 
-   The [Intelligent Query Processing](https://docs.microsoft.com/en-us/sql/relational-databases/performance/intelligent-query-processing?view=sql-server-ver15) (QP) features of SQL Server 2019 and Azure SQL Database can be sued to improve the performance of existing workloads with minimal work. The key to enabling these features in SQL Server 2019 is to set the [database compatibility level](https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-database-transact-sql-compatibility-level?view=sql-server-ver15) to `150`.
+   The [Intelligent Query Processing](https://docs.microsoft.com/en-us/sql/relational-databases/performance/intelligent-query-processing?view=sql-server-ver15) (QP) features of SQL Server 2019, coupled with Automatic Plan Correction, can be used to improve the performance of existing workloads with minimal work. The key to enabling these features in SQL Server 2019 is to set the [database compatibility level](https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-database-transact-sql-compatibility-level?view=sql-server-ver15) to `150`.
 
    In addition, you can take advantage of the distributed architecture of SQL Server 2019 BDC to increase performance where needed. Each component can be scaled out separately to improve performance where needed, such as the SQL Server Master Instance, Compute Pool, Data Pool, and Storage Pool. Each are contained within Kubernetes nodes that contain pods that can be increased in number to add more resources to the instances contained within. Performance of PolyBase queries can be boosted further by distributing the cross-partition aggregation and shuffling of the filtered query results to the Compute Pools that are comprised of multiple SQL Server instances that work together.
 
@@ -561,7 +563,9 @@ _Monitor and Troubleshoot_
 
 2. Do our workloads require us to use a data warehouse, or will a data mart suffice?
 
-   The solution will use a data mart. Data marts are persisted in SQL Server big data clusters using a data pool that consists of pods running SQL Server on Linux.
+   Most of WWI's workloads can be processed without any data movement whatsoever, using Data Virtualization enabled by the Compute Pool and enhanced PolyBase connectors. However, some workloads may require denormalization and pre-aggregation of data for use in reporting, historical records, and other specific data scenarios. For these scenarios, we recommend combining the enhanced PolyBase connectors with the SQL Server 2019 BDC Data Pools to create a scale-out data mart, where data from external sources can be partitioned and cached across all the SQL Server instances in the Data Pool. The sharding of data is managed by the BDC, abstracting that complexity from the end users and calling systems. There can also be more than one scale-out data mart within a given Data Pool, and these can also be combined.
+
+   There are advantages of using a data mart over a data warehouse. Data warehouses are typically [massively parallel processing](https://en.wikipedia.org/wiki/Massively_parallel) systems (MPP), where querying, modeling, and data partitioning require a different skillset. When you choose to use SQL Server 2019 BDC for your data mart, you can use your existing skillset and maintain compatibility with existing software that are written to query SQL Server databases. Also, when creating a data mart in SQL Server 2019 BDC, you are doing so from within a system that already gives you access to the multiple data sources, internal and external, that would otherwise have to be moved to an external data warehouse. This means you have faster access to fresh data while taking advantage of the benefits of distributed caching of data the data mart provides.
 
 3. Will moving to container-based SQL clusters be complex and too high of an operational and management cost for our IT team?
 
@@ -581,4 +585,6 @@ _Monitor and Troubleshoot_
 
 ## Customer quote (to be read back to the attendees at the end)
 
-\[insert your custom workshop content here . . . \]
+"Thanks to the Big Data features that have been added to SQL Server 2019 through the new Big Data Clusters, we can now solve our problems around siloed data and insights, and do so in a way that allows us to continue growing and using our existing applications and data systems. Not only that, but we can also perform our AI workloads within the same system without having to also orchestrate data movement as a prerequisite for data preparation. Five years ago, I would have never dreamed that Microsoft would combine so many Big Data features within a single SQL Server package, but we are living proof that this dream is now a reality!"
+
+Charlene Mathis, CIO, Wide World Importers

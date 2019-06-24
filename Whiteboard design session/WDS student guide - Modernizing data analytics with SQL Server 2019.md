@@ -160,13 +160,13 @@ _High-level architecture_
 
 1. Diagram your initial vision for the architecture of the solution.
 
-_Modern data warehouse_
+_Big data and insights_
 
-1. What services and technologies should be used for the big data warehouse?
+1. What services and technologies should be used for scale-out processing and analyzing big data? Can this be done while minimizing code changes?
 
 2. How will you enable a single data query to work across multiple, disparate data sources with the ability to join internal SQL server tables at scale?
 
-3. How will you provide a data mart to store denormalized and aggregated data while taking advantage of distributed storage?
+3. How will you provide a data mart to store denormalized and aggregated data while taking advantage of distributed storage? Would you suggest using a data warehouse instead?
 
 4. What methods can be used to ensure the best performance when querying data?
 
@@ -231,7 +231,12 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | **Description**                         |                                                                 **Links**                                                                 |
 | What are SQL Server big data clusters?  |             <https://docs.microsoft.com/en-us/sql/big-data-cluster/big-data-cluster-overview?view=sqlallproducts-allversions>             |
 | How to use notebooks in SQL Server 2019 |                     <https://docs.microsoft.com/en-us/sql/big-data-cluster/notebooks-guidance?view=sql-server-ver15>                      |
+| SQL Server 2019 Master Instance         |              <https://docs.microsoft.com/en-us/sql/big-data-cluster/concept-master-instance?view=sqlallproducts-allversions>              |
+| SQL Server extensibility framework      |                             <https://docs.microsoft.com/en-us/sql/advanced-analytics/?view=sql-server-ver15>                              |
+| PolyBase                                |                 <https://docs.microsoft.com/en-us/sql/relational-databases/polybase/polybase-guide?view=sql-server-ver15>                 |
 | Dynamic Data Masking                    |                         <https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking>                         |
 | Row-Level Security                      |                          <https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security>                          |
 | Always Encrypted with Secure Enclaves   | <https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/always-encrypted-enclaves?view=sqlallproducts-allversions> |
 | SQL Data Discovery and Classification   |     <https://docs.microsoft.com/en-us/sql/relational-databases/security/sql-data-discovery-and-classification?view=sql-server-ver15>      |
+| Hadoop File System (HDFS)               |                                        <https://kubernetes.io/docs/concepts/overview/components/>                                         |
+| Apache Spark                            |                                                        <https://spark.apache.org/>                                                        |
