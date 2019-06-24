@@ -457,7 +457,7 @@ _Big data and insights_
 
    SQL Server 2019 Big Data Clusters include a storage pool that consists of storage nodes comprised of SQL Server on Linux, Spark, and HDFS. All the storage nodes in a SQL big data cluster are members of a scalable HDFS cluster. These components of the storage pool can be combined to create a data lake to store big data, potentially ingested from multiple, disparate external sources. This data can be either structured or unstructured data. Once the big data is stored in HDFS in the big data cluster, you can analyze and query the data and combine it with your relational data.
 
-   HDFS also provides data persistency, as HDFS data is spread across all the storage nodes in the SQL big data cluster. However, you can add external HDFS data sources to the HDFS cluster through tiering. With tiering, applications can seamlessly access data in a variety of external stores as though the data resides in the local HDFS. This allows you to interact with the files in Azure Data Lake Store Gen2 or Amazon S3 as if they were local files. Both options allow you to mount the data store using storage keys. However, with Azure Data Lake Store Gen 2, you can either use an Azure Storage access key or an Azure Active Directory User Account to gain permission to the files.
+   HDFS also provides data persistency, as HDFS data is spread across all the storage nodes in the SQL big data cluster. However, you can add external HDFS data sources to the HDFS cluster through tiering. With tiering, applications can seamlessly access data in a variety of external stores as though the data resides in the local HDFS. This allows you to interact with the files in Azure Data Lake Storage Gen2 or Amazon S3 as if they were local files. Both options allow you to mount the data store using storage keys. However, with Azure Data Lake Storage Gen 2, you can either use an Azure Storage access key or an Azure Active Directory User Account to gain permission to the files.
 
    ![Diagram of SQL Server 2019 Data Lake](media/sql-server-2019-data-lake.png)
 
@@ -471,7 +471,7 @@ _Big data and insights_
 
    **App Pool**
 
-   The App Pool is a set of Pods within a [Kubernetes Node](https://kubernetes.io/docs/concepts/architecture/nodes/) that hold multiple types of end-points into the system. SQL Server Integration Services lives in the App Pool, and other Job systems are possible. You could start a long-running job (such as IoT streaming) or Machine Learning (ML) endpoints used for scoring a prediction or returning a classification. The App Pool can be scaled out according to demand by adding or removing instances as needed.
+   The App Pool is a set of Pods within a [Kubernetes Node](https://kubernetes.io/docs/concepts/architecture/nodes/) that hold multiple types of end-points into the system. SQL Server Integration Services and Machine Learning Server live in the App Pool, and other Job systems are possible. You could start a long-running job (such as IoT streaming) or Machine Learning (ML) endpoints used for scoring a prediction or returning a classification. The App Pool can be scaled out according to demand by adding or removing instances as needed.
 
 2. How will you enable a single data query to work across multiple, disparate data sources with the ability to join internal SQL Server tables at scale?
 
@@ -552,6 +552,16 @@ _Monitor and Troubleshoot_
    On the other hand, monitoring and managing SQL Server 2019 itself is very much the [same process as you would normally perform for any SQL Server system](https://docs.microsoft.com/en-us/sql/relational-databases/database-lifecycle-management?view=sql-server-ver15). You have the same type of services, surface points, security areas, and other control factors as in a stand-alone installation of SQL server. The tools you have available for managing the Master Instance in the SQL Server BDC are the same as managing a stand-alone installation, including SQL Server Management Studio, command-line interfaces, Azure Data Studio, and third party tools.
 
    For the cluster components, you have three primary interfaces to use: The cluster administration portal, kubectl (Kubernetes tool), and the Kubernetes dashboard.
+
+   The cluster administration portal can be used to monitor and troubleshoot your SQL Server 2019 Big Data cluster.
+
+   The cluster administration portal allows you to:
+
+   - Quickly view number of pods running and any issues
+   - Monitor deployment status
+   - View available service endpoints
+   - View controller and SQL Server master instance
+   - Drill down information on pods, including accessing Grafana dashboards and Kibana logs
 
 ## Checklist of preferred objection handling
 
