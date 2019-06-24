@@ -220,7 +220,7 @@ As they added new e-commerce channels to expand the customer base, consumer dema
 
 ![The expansion to omni-channel causes issues.](media/omni-channel.png 'Omni-channel causes issues like siloed insights')
 
-WWI has considered using a traditional data warehouse to join data from their disparate systems to gain insights in one location. Their biggest concerns with this approach are the amount of time to put such a system in place and properly maintain it, but even more so, having an inherent delay between when new data is written to the source system and when that data is moved into the data warehouse. They would like to have access to data from all systems while it is fresh, but do so in a way that is highly scalable and able to support complex joins between the external sources and internal SQL server tables as well.
+WWI has considered using a traditional data warehouse to join data from their disparate systems to gain insights in one location. Their biggest concerns with this approach are the amount of time to put such a system in place and properly maintain it, but even more so, having an inherent delay between when new data is written to the source system and when that data is moved into the data warehouse. They would like to have access to data from all systems while it is fresh, but do so in a way that is highly scalable and able to support complex joins between the external sources and internal SQL server tables as well. They also want to be able to use their existing codebase while enabling a flexible scale-out architecture.
 
 However, there are times when they would like to move data into storage to provide denormalized and aggregated representations of their data for reporting purposes. In other terms, a data mart. However, they would like to also take advantage of distributed storage of this data, which would include sharding the data across multiple databases. They are concerned about the level of effort to shard their data, access that data, and maintain the distributed system.
 
@@ -296,6 +296,8 @@ _Modern data warehouse_
 
 4. What methods can be used to ensure the best performance when querying data?
 
+5. How will the data systems scale to reach more consumers? Can this be done while minimizing code changes?
+
 _Deep analytics and AI_
 
 1. What would be used to solve the AI requirements?
@@ -357,10 +359,15 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | **Description**                         |                                                                 **Links**                                                                 |
 | What are SQL Server big data clusters?  |             <https://docs.microsoft.com/en-us/sql/big-data-cluster/big-data-cluster-overview?view=sqlallproducts-allversions>             |
 | How to use notebooks in SQL Server 2019 |                     <https://docs.microsoft.com/en-us/sql/big-data-cluster/notebooks-guidance?view=sql-server-ver15>                      |
+| SQL Server 2019 Master Instance         |              <https://docs.microsoft.com/en-us/sql/big-data-cluster/concept-master-instance?view=sqlallproducts-allversions>              |
+| SQL Server extensibility framework      |                             <https://docs.microsoft.com/en-us/sql/advanced-analytics/?view=sql-server-ver15>                              |
+| PolyBase                                |                 <https://docs.microsoft.com/en-us/sql/relational-databases/polybase/polybase-guide?view=sql-server-ver15>                 |
 | Dynamic Data Masking                    |                         <https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking>                         |
 | Row-Level Security                      |                          <https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security>                          |
 | Always Encrypted with Secure Enclaves   | <https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/always-encrypted-enclaves?view=sqlallproducts-allversions> |
 | SQL Data Discovery and Classification   |     <https://docs.microsoft.com/en-us/sql/relational-databases/security/sql-data-discovery-and-classification?view=sql-server-ver15>      |
+| Hadoop File System (HDFS)               |                                        <https://kubernetes.io/docs/concepts/overview/components/>                                         |
+| Apache Spark                            |                                                        <https://spark.apache.org/>                                                        |
 
 # Modernizing data analytics with SQL Server 2019 whiteboard design session trainer guide
 
@@ -406,17 +413,19 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 ## Preferred target audience
 
-\[insert your custom workshop content here . . . \]
+Charlene Mathis, Chief Information Officer (CIO), Wide World Importers
+
+The primary audience is the business decision makers and technology decision makers. From the case study scenario, this includes Charlene Mathis, CIO for Wide World Importers. Usually, we talk to the database administrators and infrastructure managers who report to the chief information officers (CIOs). We also speak with application sponsors (like a vice president [VP] line of business [LOB], or chief marketing officer [CMO]), or to those who represent the business unit IT or developers that report to application sponsors.
 
 ## Preferred solution
-
-\[insert your custom workshop content here . . . \]
 
 _High-level architecture_
 
 1. Diagram your initial vision for the architecture of the solution.
 
    ![Preferred solution.](../Media/preferred-solution.png 'Preferred solution diagram')
+
+   In SQL Server big data clusters, Kubernetes is responsible for the state of the SQL Server big data clusters; Kubernetes builds and configures the cluster nodes, assigns pods to nodes, and monitors the health of the cluster.
 
    SQL Server big data clusters architecture
 
@@ -438,25 +447,62 @@ _Modern data warehouse_
 
    The image to the left represents traditional data movement using ETL. Compare that to data virtualization, which does not require data movement and provides a unified layer over top of existing data sources.
 
-   **SQL Server 2019 Data Lake**
+   **SQL Server Master Instance**
 
-   SQL Server 2019 Big Data Clusters include a scalable HDFS storage pool. This pool can be used to store big data, potentially ingested from multiple external sources. This data can be either structured or unstructured data. once the big data is stored in HDFS in the big data cluster, you can analyze and query the data and combine it with your relational data.
+   The SQL Server Master Instance is an installation of SQL Server 2019 in a Pod on a Node in the Kubernetes cluster. This instance behaves the same as a single server instance installed on traditional physical hardware or in a Virtual Machine. You access it in the same way and use it for high-value, OLTP, OLAP and other types of workloads, and it contains all of the standard SQL Server system databases.
+
+   The SQL Server Master Instance is part of the control plane of the big data cluster, and as such, performs duties unique to the cluster. This includes storing metadata about the PolyBase external data sources and external tables defined in user databases when using data virtualization. In addition, the SQL master instance stores a data plane shard map, HDFS table metadata, and details of external tables that provide access to the cluster data plane.
+
+   **SQL Server 2019 Data Lake (Storage Pool)**
+
+   SQL Server 2019 Big Data Clusters include a storage pool that consists of storage nodes comprised of SQL Server on Linux, Spark, and HDFS. All the storage nodes in a SQL big data cluster are members of a scalable HDFS cluster. These components of the storage pool can be combined to create a data lake to store big data, potentially ingested from multiple, disparate external sources. This data can be either structured or unstructured data. Once the big data is stored in HDFS in the big data cluster, you can analyze and query the data and combine it with your relational data.
+
+   HDFS also provides data persistency, as HDFS data is spread across all the storage nodes in the SQL big data cluster. However, you can add external HDFS data sources to the HDFS cluster through tiering. With tiering, applications can seamlessly access data in a variety of external stores as though the data resides in the local HDFS. This allows you to interact with the files in Azure Data Lake Store Gen2 or Amazon S3 as if they were local files. Both options allow you to mount the data store using storage keys. However, with Azure Data Lake Store Gen 2, you can either use an Azure Storage access key or an Azure Active Directory User Account to gain permission to the files.
 
    ![Diagram of SQL Server 2019 Data Lake](media/sql-server-2019-data-lake.png)
 
-2. How will you enable a single data query to work across multiple, disparate data sources with the ability to join internal SQL server tables at scale?
+   **Data Pool**
 
-   With tiering, applications can seamlessly access data in a variety of external stores as though the data resides in the local HDFS. This allows you to interact with the files in Azure Data Lake Store Gen2 as if they were local files. You can either use an Azure Storage access key or an Azure Active Directory User Account to gain permission to the files.
+   This pool provides persistent SQL Server storage for the cluster through one or more SQL Server data pool instances. This pool is used to ingest data from SQL queries or Apache Spark jobs. When you have large data sets, you typically increase performance in one of two ways. Either by creating indexes on the data set, or by sharding the data across multiple instances, reducing the amount of data stored within each location. Since indexes can become quite large, causing both performance and storage impact when creating and updating the indexes, sharding is generally the preferred method for improving performance in these scenarios. However, sharding can be difficult to configure and manage. SQL Server 2019 handles this for you within the Data Pool, enabling you to continue querying your data as if the entire data set is stored in the same location.
 
-3. How will you provide a data mart to store denormalized and aggregated data while taking advantage of distributed storage?
+   **Compute Pool**
 
-4. What methods can be used to ensure the best performance when querying data?
+   The Compute Pool holds Kubernetes Nodes containing one or more Pods running SQL Server instances used for distributed processing, under the direction of the SQL Server Master Instance. It makes the calls out to the PolyBase connectors for a distributed Compute layer of the BDC.
+
+   **App Pool**
+
+   The App Pool is a set of Pods within a [Kubernetes Node](https://kubernetes.io/docs/concepts/architecture/nodes/) that hold multiple types of end-points into the system. SQL Server Integration Services lives in the App Pool, and other Job systems are possible. You could start a long-running job (such as IoT streaming) or Machine Learning (ML) endpoints used for scoring a prediction or returning a classification. The App Pool can be scaled out according to demand by adding or removing instances as needed.
+
+2. How will you enable a single data query to work across multiple, disparate data sources with the ability to join internal SQL Server tables at scale?
+
+   As detailed in the previous answer, data virtualization allows queries across relational and non-relational data without movement or replication. The enhanced PolyBase feature of SQL Server 2019 is able to connect to Hadoop clusters, Oracle, Teradata, MongoDB, HDFS (for flat files), and more. WWI would create external tables on one or more internal SQL Server 2019 databases, using data virtualization tools in Azure Data Studio or through T-SQL scripts. By doing this, they will create a single "virtual" data layer. The data remains in these external sources in their original location and format, removing the need for data movement. Thus, the delays inherent with extract, transform, load (ETL) are removed. These remote systems can hold extremely large sets of data. Since most queries will return a subset of that data, the results are all that are sent back over the network.
+
+   The queries for external tables hosted by remote systems, such as external relational databases, are "pushed down" (executed) by that remote system. For external tables pointing to files stored in HDFS, the SQL Server engine can natively read these by using SQL Server instances collocated on each of the HDFS data nodes within the Storage Pool. These nodes can filter and aggregate data locally in parallel across all of the HDFS data notes. The cross-partition aggregation and shuffling of the filtered query results are distributed to the Compute Pool, which contains Pods running SQL Server instances that work together. The distributed nature of these pools and their ability to work in parallel allow these queries to be run at scale.
+
+   Once these virtual tables have been added, WWI can join them to the internal SQL Server tables in a single query. Here is an example:
+
+   ```sql
+   SELECT i.i_item_sk AS ItemID, i.i_item_desc AS Item, c.c_first_name AS FirstName,
+   c.c_last_name AS LastName, s.QuantityOnHand, r.review AS Review, r.date_added AS DateReviewed
+   FROM dbo.item as i
+   JOIN dbo.Reviews AS r ON i.i_item_sk = r.product_id
+   JOIN dbo.customer AS c ON c.c_customer_sk = r.customer_id
+   JOIN dbo.stockitemholdings AS s ON i.i_item_sk = s.StockItemID
+   ```
+
+   In the example above, the `item` and `customer` tables are both internal SQL Server 2019 tables. The `Reviews` table is an external table located in an Azure SQL Database instance, and the `stockitemholdings` table points to CSV files hosted in an HDFS data store.
+
+3. How will you provide a data mart to store denormalized and aggregated data while taking advantage of distributed storage? Would you suggest using a data warehouse instead?
+
+4) What methods can be used to ensure the best performance when querying data?
 
    The [Intelligent Query Processing](https://docs.microsoft.com/en-us/sql/relational-databases/performance/intelligent-query-processing?view=sql-server-ver15) (QP) features of SQL Server 2019 and Azure SQL Database can be sued to improve the performance of existing workloads with minimal work. The key to enabling these features in SQL Server 2019 is to set the [database compatibility level](https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-database-transact-sql-compatibility-level?view=sql-server-ver15) to `150`.
 
    Performance of PolyBase queries in SQL Server 2019 big data clusters can be boosted further by distributing the cross-partition aggregation and shuffling of the filtered query results to “compute pools” comprised of multiple SQL Server instances that work together (this is similar to a PolyBase scale-out group).
 
    When you combine the enhanced PolyBase connectors with SQL Server 2019 big data clusters data pools, data from external data sources can be partitioned and cached across all the SQL Server instances in a data pool, creating a “scale-out data mart”. There can be more than one scale-out data mart in a given data pool, and a data mart can combine data from multiple external data sources and tables, making it easy to integrate and cache combined data sets from multiple external sources.
+
+5) How will the data systems scale to reach more consumers? Can this be done while minimizing code changes?
 
 _Deep analytics and AI_
 
