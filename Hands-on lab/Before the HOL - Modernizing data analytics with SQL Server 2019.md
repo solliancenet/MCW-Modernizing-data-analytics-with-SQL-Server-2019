@@ -60,8 +60,6 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 **L Series VMs** (required for SQL 2019 Big Data Clusters): East US 2, West US, West US 2, and a limited set of others worldwide
 
-**Azure Machine Learning service**: East US, East US 2, West US 2, West Central US, South Central US, and a limited set of others worldwide
-
 ## Before the hands-on lab
 
 Duration: 60 minutes

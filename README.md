@@ -1,44 +1,54 @@
-# Microsoft Cloud Workshop template *(replace with workshop name)*
-*Please provide an introduction to the workshop. For example:*
+# Microsoft Cloud Workshop template _(replace with workshop name)_
 
-Trey Research Inc. looks at the old way of doing things in retail and introduces innovative experiences that delight customers and drive sales. Their latest initiative focuses on intelligent vending machines that support commerce, engagement analytics, and intelligent promotions. 
+Businesses require near real-time insights from ever-larger sets of data. Large-scale data ingestion requires scale-out storage and processing in ways that allow fast response times. In addition to simply querying this data, organizations want full analysis and even predictive capabilities over their data.
+
+While solutions for large-scale data processing exist, they are often batch-based, which has a lag in the time from query to response. Also, batch systems such as Hadoop are complicated to set up and manage. Operational data is often stored in Relational Database systems on-premises, and joining that data to larger-scale cloud systems exposes security weaknesses and brittle architectures.
+
+Wide World Importers (WWI) is a traditional brick and mortar business with a long track record of success, generating profits through strong retail store sales of their unique offering of affordable products from around the world. They have a great training program for new employees, that focuses on connecting with their customers and providing great face-to-face customer service. This strong focus on customer relationships has helped set WWI apart from their competitors.
+
+Over the past few years, they have adopted an omni-channel strategy, meaning, different ways for consumers to purchase their products. These new platforms were added without integrating into the OLTP system data or Business Intelligence infrastructures. As a result, "silos" of data stores have developed.
+
+Now, WWI is trying to cope with difficulties in combining these disparate data sources in varying formats into a single location where they can analyze the data in near real-time, joining related information where needed. They also want to be able to leverage AI to help their business grow and cut down maintenance costs. They would like to have all of these capabilities rolled into a single system, while minimizing code changes across their domain.
 
 ## Target audience
-*Please list the target audience for this workshop. For example:*
--	Application developer
--	Infrastructure architect
--	Database administrator
--	AI developer
--	Data scientist
+
+- Database Administrator
+- Data Engineer
+- Data Scientist
+- Database Developer
+- Solution Architect
 
 ## Abstract
-*Please provide descriptions of the overall workshop, the whiteboard design session and hands on lab. For example:*
 
 ### Workshop
-In this workshop, you will look at the process of migrating an on-premises data warehouse to Azure SQL Data Warehouse. Throughout the whiteboard design session and hands-on lab, you will look at the planning process for data warehouse migration, identifying schema and data incompatibilities, efficiently migrating data from on-premises databases to the cloud, data distribution in Azure SQL Data Warehouse, migrating ETL jobs to Azure Data Factory, and supporting ad-hoc workloads in an Azure SQL Data Warehouse through Azure Analysis Services.
 
-At the end of this workshop, you will be better able to [deliver, demonstrate, solve, present, migrate, build, design, architect, construct, modify] ….
+In this workshop, you will gain a better understanding of how new features of SQL Server 2019 enables more Big Data and analytics capabilities through the use of Big Data Clusters, data virtualization and orchestration, query processing enhancements, and through better scalability through distributed storage and compute.
 
-### Whiteboard design session *(this will go in the readme and in the WDS document)*
-In this whiteboard design session, you will work in a group to look at the process of migrating an on-premises data warehouse to Azure SQL Data Warehouse. The design session will cover planning for a data warehouse migration, data and schema preparation, data loading, optimizing the data distribution, and building a solution to support ad-hoc queries.
+At the end of this workshop, you will be better able to configure and manage SQL Server 2019 Big Data Clusters so you can combine, query, and transform disparate data sources for AI and advanced analytics scenarios.
 
-At the end of this whiteboard design session, you will be better able to [deliver, demonstrate, solve, present, migrate, build, design, architect, construct, modify] ….
+### Whiteboard design session _(this will go in the readme and in the WDS document)_
 
-### Hands-on lab *(this will go in the readme and in the HOL document)*
-In this hands-on lab, you will migrate an existing on-premises enterprise data warehouse to the cloud. You will investigate the current data warehouse to identify any incompatibilities, you will export the data from the on-premises data warehouse and transfer it to Azure Blob Storage. Then you will load the data into the warehouse. Finally, you will integrate the warehouse by migrating ETL to Azure Data Factory and supporting ad-hoc access by implementing Azure Analysis Services.
+In this whiteboard design session, you will work with a group to design a solution for modernizing your large-scale data processing and machine learning capabilities through the use of SQL Server Big Data Clusters. You will evaluate the customer scenario and requirements to decide the best architecture that will meet their needs, while unifying data from disparate sources into a platform that help the customer gain business insights and apply advanced analytics at scale.
 
-At the end of this hands-on lab, you will be better able to [deliver, demonstrate, solve, present, migrate, build, design, architect, construct, modify] ….
+At the end of this whiteboard design session, you will be better able to design a modernization plan for performing Big Data analytics centered around SQL Server 2019 capabilities.
+
+### Hands-on lab _(this will go in the readme and in the HOL document)_
+
+In this hands-on lab, you will implement the steps to install and configure a SQL Server 2019 cluster to Linux-based containers in Azure. Using this cluster, you will use data virtualization to unify data from various sources, analyze the data, create and deploy a machine learning model, and finally detect and fix PII and GDPR compliance issues.
+
+At the end of this hands-on lab, you will be better able to build solutions for conducting advanced data analytics at scale with scalable SQL Server 2019 Big Data clusters.
 
 ## Azure services and related products
-*Please list the services and products that are highlighted in the workshop. For example:*
--	Azure SQL Data Warehouse
--	Azure Data Factory
--	Azure Analysis Services
--	Azure Storage
+
+- SQL Server 2019 Big Data Clusters (BDC)
+- Azure Kubernetes Service (AKS)
 
 ## Azure solutions
-*This is an internal reference and will be updated by project PM.*
+
+_This is an internal reference and will be updated by project PM._
 
 ## Related references
-*This should be a list of and links to prereqs, architectural diagrams, supporting docs, or briefing decks related to the material.* 
+
+_This should be a list of and links to prereqs, architectural diagrams, supporting docs, or briefing decks related to the material._
+
 - [MCW](https://github.com/Microsoft/MCW)
