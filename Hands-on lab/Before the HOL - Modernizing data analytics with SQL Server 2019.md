@@ -53,8 +53,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 8. [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-with-powershell-from-psgallery)
 9. [SQL Server Management Studio](https://go.microsoft.com/fwlink/?linkid=2078638) (SSMS) v18.0 or greater
 10. [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/download?view=sql-server-ver15)
-
-- [SQL Server 2019 extension](sql-vnext-0.10.2-win-x64.vsix)
+    - [SQL Server 2019 extension](https://docs.microsoft.com/en-us/sql/azure-data-studio/sql-server-2019-extension?view=sql-server-2017)
 
 ## Regional limitations
 
@@ -158,7 +157,7 @@ Download a starter project that includes a payment data generator that sends rea
 
 1. From your LabVM, download the starter files by downloading a .zip copy of the Cosmos DB real-time advanced analytics GitHub repo.
 
-2. In a web browser, navigate to the [Cosmos DB real-time advanced analytics MCW repo](https://github.com/solliancenet/MCW-Modernizing-data-analytics-with-SQL-Server-2019). TODO: UPDATE URL
+2. In a web browser, navigate to the [Modernizing data analytics with SQL Server 2019 MCW repo](https://github.com/solliancenet/MCW-Modernizing-data-analytics-with-SQL-Server-2019). TODO: UPDATE URL
 
 3. On the repo page, select **Clone or download**, then select **Download ZIP**.
 
