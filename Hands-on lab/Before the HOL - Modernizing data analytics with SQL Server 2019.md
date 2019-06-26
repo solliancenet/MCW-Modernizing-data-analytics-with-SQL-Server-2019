@@ -263,7 +263,7 @@ Open PowerShell and execute the following to deploy the clusters in preparation 
 4. Download the **upload-sample-files.cmd** command script for uploading additional lab files to HDFS on your cluster.
 
    ```bash
-   curl -o upload-sample-files.cmd "https://github.com/solliancenet/MCW-Modernizing-data-analytics-with-SQL-Server-2019/raw/master/Hands-on%20lab/Resources/upload-sample-files.cmd"
+   curl -o upload-sample-files.cmd "https://raw.githubusercontent.com/solliancenet/MCW-Modernizing-data-analytics-with-SQL-Server-2019/master/Hands-on%20lab/Resources/upload-sample-files.cmd"
    ```
 
 5. Run the bootstrap script. Substitute `<CLUSTER_NAMESPACE>`, `<SQL_MASTER_IP>`, `<SQL_MASTER_SA_PASSWORD>`, `<KNOX_IP>`, `<KNOX_PASSWORD>` with values output from the SQL Server 2019 cluster creation script above.
