@@ -413,7 +413,7 @@ The trucks have sensors that transmit data to a file location. The trips are als
 
 2. In the folder browser dialog, navigate to the `C:\MCW-Modernizing-data-analytics-with-SQL-Server-2019-master\Hands-on lab\Resources` folder and select **predict-battery-life-with-sqlbdc.ipynb**.
 
-3. Browse to **C:\lab-files\data\1**, select **predict-battery-life-with-sqlbdc.ipynb** and select `Open`.
+3. Click **Open**.
 
 4. Follow the instructions in the notebook and return to the next step after you have completed the notebook.
 
