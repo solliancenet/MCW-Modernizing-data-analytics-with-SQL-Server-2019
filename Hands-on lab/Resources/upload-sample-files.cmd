@@ -23,18 +23,22 @@ REM Create HDFS directories
 echo Creating HDFS directories to store file data...
 %DEBUG% curl -i -L -k -u root:%KNOX_PASSWORD% -X PUT "https://%KNOX_ENDPOINT%/gateway/default/webhdfs/v1/partner_customers?op=MKDIRS"
 %DEBUG% curl -i -L -k -u root:%KNOX_PASSWORD% -X PUT "https://%KNOX_ENDPOINT%/gateway/default/webhdfs/v1/partner_products?op=MKDIRS"
+%DEBUG% curl -i -L -k -u root:%KNOX_PASSWORD% -X PUT "https://%KNOX_ENDPOINT%/gateway/default/webhdfs/v1/web_logs?op=MKDIRS"
 
 REM Download source files
 echo Downloading source files...
 %DEBUG% curl -G "https://cs7a9736a9346a1x44c6xb00.blob.core.windows.net/backups/customers.csv" -o customers.csv
 %DEBUG% curl -G "https://cs7a9736a9346a1x44c6xb00.blob.core.windows.net/backups/stockitemholdings.csv" -o products.csv
+%DEBUG% curl -G "https://cs7a9736a9346a1x44c6xb00.blob.core.windows.net/backups/web_clickstreams.csv" -o web_clickstreams.cs
 
 REM Upload the data files to HDFS
 echo Uploading data files to HDFS...
 %DEBUG% curl -i -L -k -u root:%KNOX_PASSWORD% -X PUT "https://%KNOX_ENDPOINT%/gateway/default/webhdfs/v1/partner_customers/customers.csv?op=create&overwrite=true" -H "Content-Type: application/octet-stream" -T "customers.csv"
 %DEBUG% curl -i -L -k -u root:%KNOX_PASSWORD% -X PUT "https://%KNOX_ENDPOINT%/gateway/default/webhdfs/v1/partner_products/products.csv?op=create&overwrite=true" -H "Content-Type: application/octet-stream" -T "products.csv"
+%DEBUG% curl -i -L -k -u root:%KNOX_PASSWORD% -X PUT "https://%KNOX_ENDPOINT%/gateway/default/webhdfs/v1/web_logs/web_clickstreams.csv?op=create&overwrite=true" -H "Content-Type: application/octet-stream" -T "web_clickstreams.csv"
 :: del /q customers.*
 :: del /q products.*
+:: del /q web_clickstreams.*
 
 REM %DEBUG% del /q *.out *.err *.csv
 echo .
