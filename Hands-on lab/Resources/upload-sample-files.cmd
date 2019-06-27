@@ -29,7 +29,7 @@ REM Download source files
 echo Downloading source files...
 %DEBUG% curl -G "https://cs7a9736a9346a1x44c6xb00.blob.core.windows.net/backups/customers.csv" -o customers.csv
 %DEBUG% curl -G "https://cs7a9736a9346a1x44c6xb00.blob.core.windows.net/backups/stockitemholdings.csv" -o products.csv
-%DEBUG% curl -G "https://cs7a9736a9346a1x44c6xb00.blob.core.windows.net/backups/web_clickstreams.csv" -o web_clickstreams.cs
+%DEBUG% curl -G "https://cs7a9736a9346a1x44c6xb00.blob.core.windows.net/backups/web_clickstreams.csv" -o web_clickstreams.csv
 
 REM Upload the data files to HDFS
 echo Uploading data files to HDFS...
