@@ -708,21 +708,49 @@ Next, you will run a query to create a user-defined function (UDF) named `custom
    INNER JOIN @ItemClick AS c
      ON i.[i_item_sk] = c.[itemKey]
    WHERE i.[i_current_price] > 90
-   ORDER BY i.[i_current_price] DESC;
+   ORDER BY i.[i_current_price] DESC
+   OPTION (USE HINT('DISABLE_DEFERRED_COMPILATION_TV'));
    GO
    ```
 
    > The script above assigns a table variable, `@ItemClick`, storing the `itemKey` and `clickDate` fields from the `web_clickstreams` table to be used in an INNER JOIN below.
 
+   > The `DISABLE_DEFERRED_COMPILATION_TV` hint **disables** the table-deferred compilation feature.
+
    **Old method**
 
    In prior versions of SQL Server (compatibility level of 140 or lower), the table variable deferred compilation QP feature is not used (more on this below).
 
-   There are two plans. The one you want to observe is the second query plan. When we mouse over the INNER JOIN to view the estimated number of rows and the output list, which shows the join algorithm. The estimated number of rows is 1. Also, observe the execution time. In our case, it took 10 seconds to complete.
+   There are two plans. The one you want to observe is the second query plan. Because we disabled the table-deferred compilation feature with the `DISABLE_DEFERRED_COMPILATION_TV` hint, when we mouse over the INNER JOIN to view the estimated number of rows and the output list, which shows the join algorithm. The estimated number of rows is 1. Also, observe the execution time. In our case, it took 10 seconds to complete.
 
    ![This screenshot shows the query execution plan using the legacy method.](media/ssms-tvdc-old-method.png 'Query execution plan with old method')
 
    **New method**
+
+   Execute the following updated query, which removes the hint we used in the previous query to disable the table-deferred compilation feature:
+
+   ```sql
+   USE sales
+   GO
+
+   DECLARE @ItemClick TABLE (
+     [itemKey] BIGINT NOT NULL,
+     [clickDate] BIGINT NOT NULL
+   );
+
+   INSERT @ItemClick
+   SELECT [wcs_item_sk], [wcs_click_date_sk]
+   FROM [dbo].[web_clickstreams]
+
+   -- Look at estimated rows, speed, join algorithm
+   SELECT i.[i_item_sk], i.[i_current_price], c.[clickDate]
+   FROM dbo.item AS i
+   INNER JOIN @ItemClick AS c
+     ON i.[i_item_sk] = c.[itemKey]
+   WHERE i.[i_current_price] > 90
+   ORDER BY i.[i_current_price] DESC;
+   GO
+   ```
 
    After the query above executes, select the **Execution plan** tab once again. Since our database compatibility level is set to 150, notice that the join algorithm is a hash match, and that the overall query execution plan looks different. When you hover over the INNER JOIN, notice that there is a high value for estimated number of rows and that the output list shows the use of hash keys and an optimized join algorithm. Once again, observe the execution time. In our case, it took 6 seconds to complete, which is approximately half the time it took to execute without the table variable deferred compilation feature.
 
@@ -773,7 +801,11 @@ Next, you will run a query to create a user-defined function (UDF) named `custom
      AND ws.[ws_quantity] > 40;
    ```
 
-4. After the query executes, select the **Execution plan** tab. Hover over the Hash Match step of the execution plan. You should **no longer** see a warning about spilled data. Also observe the execution time. In our case, this query took 11 seconds to execute.
+4. After the query executes, select the **Execution plan** tab. Hover over the Hash Match step of the execution plan. You may no longer see a warning about spilled data. If you do, the **number of pages Hash wrote** should have decreased. This happens as the STATISTICS table is updated with each run.
+
+    ![The Hash Match dialog shows spilled data warnings, but with fewer written pages.](media/ssms-memory-grant-feedback-pages-decreased.png "Query execution plan showing fewer pages.")
+
+5. Execute the query 2-3 more times. Each time, select the **Execution plan** tab and hover over the Hash Match step of the execution plan. After a few executions, you should **no longer** see a warning about spilled data.
 
    ![The Hash Match dialog no longer contains spilled data warnings.](media/ssms-memory-grant-feedback-fix.png 'Query execution plan with no spilled data')
 
