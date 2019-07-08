@@ -28,6 +28,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 - [Modernizing data analytics with SQL Server 2019 before the hands-on lab setup guide](#Modernizing-data-analytics-with-SQL-Server-2019-before-the-hands-on-lab-setup-guide)
   - [Requirements](#Requirements)
+  - [Preview requirements](#Preview-requirements)
   - [Regional limitations](#Regional-limitations)
   - [Before the hands-on lab](#Before-the-hands-on-lab)
     - [Task 1: Install software on your own VM or system](#Task-1-Install-software-on-your-own-VM-or-system)
@@ -55,6 +56,16 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 10. [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/download?view=sql-server-ver15)
     - [SQL Server 2019 extension](https://docs.microsoft.com/en-us/sql/azure-data-studio/sql-server-2019-extension?view=sql-server-2017)
 
+## Preview requirements
+
+As of this writing, the SQL Server big data cluster feature is enabled for preview customers. You can request access at this site:
+
+<https://aka.ms/eapsignup>
+
+When you access that site, put the words **Purpose: SQL Server 2019 BDC Microsoft Cloud Workshop** in the _Please describe the specific application or workload that you will be testing with SQL Server 2019?_ box. You will be notified when approved. For the _Platform_, select **Azure Kubernetes Service (AKS)**.
+
+You will use these credentials in a subsequent step. It can take up to a week to receive your code.
+
 ## Regional limitations
 
 **L Series VMs** (required for SQL 2019 Big Data Clusters): East US 2, West US, West US 2, and a limited set of others worldwide
@@ -68,6 +79,8 @@ Duration: 60 minutes
 The instructions that follow are the same for either your own system (desktop or laptop), or a Virtual Machine. It's best to have at least 4MB of RAM on the management system, and these instructions assume that you are not planning to run the database server or any Containers on the workstation. It's also assumed that you are using a current version of Windows, either desktop or server.
 
 _(You can copy and paste all of the commands that follow in a PowerShell window that you run as the system Administrator)_
+
+> Since the SQL Server 2019 Big Data Clusters feature is in preview, please [refer to this link](https://docs.microsoft.com/en-us/sql/big-data-cluster/deploy-get-started?view=sqlallproducts-allversions) for the latest installation instructions if you have problems running the steps below.
 
 1. Ensure your system updates are current. Run from an Administrator-level PowerShell session (if running on a VM, you may safely ignore errors).
 
@@ -129,11 +142,7 @@ _(You can copy and paste all of the commands that follow in a PowerShell window 
    choco install sqlserver-cmdlineutils
    ```
 
-10. Run the following commands separately in a new Command Prompt window.
-
-    ```bash
-    REM setx path "%path%;C:\Users\\AppData\Roaming\Python\Python37\Scripts"
-    ```
+10. Run the following commands separately in a **new Command Prompt window**.
 
     ```bash
     choco upgrade kubernetes-cli
@@ -147,17 +156,17 @@ _(You can copy and paste all of the commands that follow in a PowerShell window 
     pip3 install -r  https://private-repo.microsoft.com/python/ctp3.0/mssqlctl/requirements.txt
     ```
 
-11. Install [SQL Server Management Studio](https://go.microsoft.com/fwlink/?linkid=2078638) (SSMS) v18.0 or greater.
+11. Download and install [SQL Server Management Studio](https://go.microsoft.com/fwlink/?linkid=2078638) (SSMS) v18.0 or greater.
 
-12. Install the [SQL Server 2019 extension](sql-vnext-0.10.2-win-x64.vsix).
+12. Install the [Azure Data Studio SQL Server 2019 extension](https://docs.microsoft.com/en-us/sql/azure-data-studio/sql-server-2019-extension?view=sql-server-2017).
 
 ### Task 2: Download lab files
 
-Download a starter project that includes a payment data generator that sends real-time payment data for processing by your lab solution, as well as data files used in the lab.
+Download a starter project that includes data files used in the lab.
 
-1. From your LabVM, download the starter files by downloading a .zip copy of the Cosmos DB real-time advanced analytics GitHub repo.
+1. Download the starter files by downloading a .zip copy of the Modernizing data analytics with SQL Server 2019 GitHub repo.
 
-2. In a web browser, navigate to the [Modernizing data analytics with SQL Server 2019 MCW repo](https://github.com/solliancenet/MCW-Modernizing-data-analytics-with-SQL-Server-2019). TODO: UPDATE URL
+2. In a web browser, navigate to the [Modernizing data analytics with SQL Server 2019 MCW repo](https://github.com/Microsoft/MCW-Modernizing-data-analytics-with-SQL-Server-2019).
 
 3. On the repo page, select **Clone or download**, then select **Download ZIP**.
 
@@ -203,18 +212,18 @@ Open PowerShell and execute the following to deploy the clusters in preparation 
 
 6. When prompted, enter the following information:
 
-   | Value                     | Description                                                                                                                                                                                                      |
-   | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Azure subscription ID** | The Azure subscription ID to use for AKS. You can list all of your subscriptions and their IDs by running `az account list` from another command line.                                                           |
-   | **Azure resource group**  | The Azure resource group name to create for the AKS cluster. (suggest **hands-on-lab-sql2019**)                                                                                                                  |
-   | **Docker username**       | The Docker username provided to you as part of the limited public preview.                                                                                                                                       |
-   | **Docker password**       | The Docker password provided to you as part of the limited public preview.                                                                                                                                       |
-   | **Azure region**          | The Azure region for the new AKS cluster (default **westus**).                                                                                                                                                   |
-   | **Machine size**          | Set to **Standard_L8s**.                                                                                                                                                                                         |
-   | **Worker nodes**          | Set the number of worker nodes in the AKS cluster to **3**.                                                                                                                                                      |
-   | **Cluster name**          | Enter a **unique name**. This sets the name of both the AKS cluster and the big data cluster. The name of the cluster must be only lower case alpha-numeric characters, and no spaces. For example: "sql2019mcw" |
-   | **Password**              | Password for the controller, HDFS/Spark gateway, and master instance (default **MySQLBigData2019**).                                                                                                             |
-   | **Controller user**       | Username for the controller user (default: **admin**).                                                                                                                                                           |
+   | Value                     | Description                                                                                                                                                                                                                            |
+   | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **Azure subscription ID** | The Azure subscription ID to use for AKS. You can list all of your subscriptions and their IDs by running `az account list` from another command line.                                                                                 |
+   | **Azure resource group**  | The Azure resource group name to create for the AKS cluster. (suggest **hands-on-lab-sql2019**)                                                                                                                                        |
+   | **Docker username**       | The Docker username provided to you as part of the limited public preview.                                                                                                                                                             |
+   | **Docker password**       | The Docker password provided to you as part of the limited public preview.                                                                                                                                                             |
+   | **Azure region**          | The Azure region for the new AKS cluster (default **westus**).                                                                                                                                                                         |
+   | **Machine size**          | Set to **Standard_L8s**.                                                                                                                                                                                                               |
+   | **Worker nodes**          | Set the number of worker nodes in the AKS cluster to **3**.                                                                                                                                                                            |
+   | **Cluster name**          | Enter a **unique name**. This sets the name of both the AKS cluster and the big data cluster. The name of the cluster must be only lower case alpha-numeric characters, and no spaces. For example: "sql2019mcwYOUR_INITIALS_OR_ALIAS" |
+   | **Password**              | Password for the controller, HDFS/Spark gateway, and master instance (default **MySQLBigData2019**).                                                                                                                                   |
+   | **Controller user**       | Username for the controller user (default: **admin**).                                                                                                                                                                                 |
 
    You can run the following at any time to get the status of the cluster:
 
@@ -334,11 +343,19 @@ In this lab, you will be using an Azure SQL Database as a source for virtual tab
 
 9. After the database is created, open it.
 
-10. Select **Query editor** from the left-hand menu. When prompted, type **ServerAdmin** for the Login name, and **MySQLBigData2019** for the password, then click **OK** to log in.
+10. On the Overview pane, select **Set server firewall** to add your IP address.
+
+    ![Set server firewall is highlighted on the Overview blade.](media/azure-sql-set-server-firewall-link.png 'Overview blade')
+
+11. Select **+ Add client IP** to automatically add your system's IP address, and make sure **Allow access to Azure services** is set to ON. Select **Save** to apply your changes.
+
+    ![The Add client IP and Allow access to Azure services buttons are highlighted.](media/azure-sql-set-server-firewall.png 'Firewall settings')
+
+12. Select **Query editor** from the left-hand menu. When prompted, type **ServerAdmin** for the Login name, and **MySQLBigData2019** for the password, then click **OK** to log in.
 
     ![The login form for the Query Editor is displayed.](media/azure-sql-query-editor-login.png 'Query editor')
 
-11. Paste the following into the query window, then execute. This creates a new Reviews table with data.
+13. Paste the following into the query window, then execute. This creates a new Reviews table with data.
 
     ```sql
     SET ANSI_NULLS ON

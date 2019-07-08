@@ -67,19 +67,44 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Abstract and learning objectives
 
-\[Insert what is trying to be solved for by using this workshop. . . \]
+Wide World Importers has a host of online stores for various product offerings, including traditional product catalogs offered by their physical storefronts, to specialized categories like automotive and consumer technology products. With this expansion, they have generated a significant amount of additional data, and data formats. These new platforms were added without integrating into the OLTP system data or Business Intelligence infrastructures. As a result, "silos" of data stores have developed. In addition to their desire to overcome fragmentation of their actionable insights due to these data silos, they wish to add AI capabilities to their toolset to help grow their business and reduce costs.
+
+In this hands-on lab, you will implement the steps to install and configure a SQL Server 2019 cluster to Linux-based containers in Azure. Using this cluster, you will use data virtualization to unify data from various sources, analyze the data, create and deploy a machine learning model, and finally detect and fix PII and GDPR compliance issues.
+
+At the end of this hands-on lab, you will be better able to build solutions for conducting advanced data analytics at scale with scalable SQL Server 2019 Big Data clusters.
 
 ## Overview
 
-\[insert your custom workshop content here . . . \]
+Businesses require near real-time insights from ever-larger sets of data. Large-scale data ingestion requires scale-out storage and processing in ways that allow fast response times. In addition to simply querying this data, organizations want full analysis and even predictive capabilities over their data.
+
+While solutions for large-scale data processing exist, they are often batch-based, which has a lag in the time from query to response. Also, batch systems such as Hadoop are complicated to set up and manage. Operational data is often stored in Relational Database systems on-premises, and joining that data to larger-scale cloud systems exposes security weaknesses and brittle architectures.
 
 ## Solution architecture
 
-\[Insert your end-solution architecture here. . .\]
+![Preferred solution.](../Media/preferred-solution.png 'Preferred solution diagram')
+
+   WWI's requirements can be fully met with SQL Server 2019 Big Data Clusters (BDC). Kubernetes is responsible for the state of the BDC, and it builds and configures the cluster nodes, assigns pods to nodes, and monitors the health of the cluster. The architecture is composed of an App Pool that hosts applications, an instance of Machine Learning Server, and SSIS packages. It has a Control Plane consisting of a SQL Server Master Instance, and components for managing access to the HDFS cluster, Spark jobs, and metadata. SQL Server instances are distributed within the Compute Pool, under direction of the SQL Server Master Instance. The Storage Pool consists of collocated instances of SQL Server, Apache Spark, and HDFS. These components of the storage pool can be combined to create a data lake to store big data in a highly available-distributed fashion. The Data Pool provides persistent SQL Server storage for the cluster, distributed into shards across the member SQL Server data pool instances.
+
+   This architecture enables line-of-business applications to query the SQL Server Master Instance without requiring code changes. Multiple data sources can be combined with internal SQL Server tables in single queries through either the use of Data Virtualization, enabled by enhanced PolyBase connectors and scaled out through the Compute Pool and other components, or cached and distributed across shards of the Data Pool, enabling a scale-out data mart. Advanced analytics and AI is enabled by Machine Learning Services as well as Apache Spark jobs executed through Jupyter notebooks and other data processing features.
+
+   SQL Server big data clusters architecture:
+
+   ![SQL Server big data clusters architecture diagram](../Whiteboard%20design%20session/media/common-scenario-1.png)
 
 ## Requirements
 
-1.  Number and insert your custom workshop content here . . .
+1. Microsoft Azure subscription must be pay-as-you-go or MSDN.
+   - Trial subscriptions will not work.
+2. PowerShell
+3. Python3
+4. curl
+5. sqlcmd
+6. [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest)
+7. [mssqlctl](https://docs.microsoft.com/en-us/sql/big-data-cluster/deploy-install-mssqlctl?view=sql-server-ver15)
+8. [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-with-powershell-from-psgallery)
+9. [SQL Server Management Studio](https://go.microsoft.com/fwlink/?linkid=2078638) (SSMS) v18.0 or greater
+10. [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/download?view=sql-server-ver15)
+    - [SQL Server 2019 extension](https://docs.microsoft.com/en-us/sql/azure-data-studio/sql-server-2019-extension?view=sql-server-2017)
 
 ## Before the hands-on lab
 
