@@ -170,7 +170,9 @@ When participants are doing activities, you can **look ahead to refresh your mem
 
 ## Abstract and learning objectives
 
-\[insert what is trying to be solved for by using this workshop. . . \]
+In this whiteboard design session, you will work with a group to design a solution for modernizing your large-scale data processing and machine learning capabilities through the use of SQL Server Big Data Clusters. You will evaluate the customer scenario and requirements to decide the best architecture that will meet their needs, while unifying data from disparate sources into a platform that help the customer gain business insights and apply advanced analytics at scale.
+
+At the end of this whiteboard design session, you will be better able to design a modernization plan for performing Big Data analytics centered around SQL Server 2019 capabilities.
 
 ## Step 1: Review the customer case study
 
@@ -261,6 +263,10 @@ There are two scenarios WWI is considering using AI to help grow their business 
 4. How can SQL Server 2019 help us protect PII data and remain GDPR compliant?
 
 ### Infographic for common scenarios
+
+The following infographic can be used as inspiration when designing your solution.
+
+![Infographic.](media/infographic-for-common-scenarios.png 'Infographic for common scenarios')
 
 ## Step 2: Design a proof of concept solution
 
